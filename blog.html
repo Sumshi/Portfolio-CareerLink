@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+<!--font awesome link for icons-->
+<!--font awesome link for icons must include this kit to prevent blank icons-->
+<script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+</head>
+
+<!--body begins-->
+<body>
+
+
+
+  <!--header section-->
+  <section class="sub-header">
+    <!--adding a nav to contain the logo and links like about, home-->
+    <nav>
+      <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
+      <!--creating a div to contain the links-->
+      <div class="nav-links" id="navLinks">
+        <!--close x icon-->
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="suite.html">SUITES</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+<!--menu icon-->
+<svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </nav><!--nav ends here-->
+    <h1>Our Blogs and Offers</h1>
+  </section>
+
+
+
+<!--blog page content-->
+<section class="blog-content">
+<div class="row">
+  <div class="blog-left"><!--left column-->
+    <img src="img/suite.jpg" alt="">
+    <h2><i>Our Luxury Suites</i></h2>
+      <p>Our luxury suites redefine the art of accommodation, offering a haven of comfort and style for the most discerning guests. Here's a glimpse into the world of our exquisite suites:</p>
+      <br>
+      <p>Grand Deluxe Suite<br>
+        Are you ready to immerse yourself in unparalleled luxury and opulence? Our Grand Deluxe Suite at sunset bay resort provides an extraordinary experience, combining spacious elegance with breathtaking views.
+      </p>
+      <p>In this extraordinary suite, you'll enjoy:
+        - A king-size bed with premium bedding for the most restful sleep.
+        - Expansive windows or a private balcony offering panoramic city or ocean views.
+        - A separate living area for relaxation and entertainment.
+        - A sumptuous bathroom with a deep soaking tub and rainfall shower.
+        - Complimentary high-speed Wi-Fi for seamless connectivity.
+        - 24/7 room service for dining convenience.
+      </p><br>
+      <p><em><strong>Why Choose Our Suite</em></strong></p>
+      <p>Exceptional Service: Our dedicated staff is committed to ensuring your stay is flawless, from arrival to departure.
+        Panoramic Views: Experience breathtaking city or ocean views from your private space.
+        Room Service: Enjoy the convenience of 24/7 room service for your dining needs.
+        Late Checkout: Make the most of your stay with a complimentary late checkout option.
+      </p><br>
+      <p>Indulge in the epitome of luxury and comfort with our Grand Deluxe Suite. Book your stay today and experience a world of opulence and relaxation at sunset bay resort</p>
+
+<!-- tells one to leave a comment
+<div class="comment-box">
+<h3>Leave a Comment</h3>
+<form class="comment-form">
+  <input type="text" placeholder="Enter Name">
+   <input type="email" placeholder="Enter Email">
+   <textarea rows="5" placeholder="your comment"></textarea>
+   <button type="submit" class="hero-btn red-btn">POST COMMENT</button>
+</form>
+</div> -->
+
+
+</div>
+
+
+    <div class="blog-right"><!--right column-->
+    <h3>50% Discount</h3>
+    <div>
+      <span>A king-size bed </span>
+    </div>
+
+        <div>
+      <span>Enjoy Ocean View</span>
+    </div>
+
+        <div>
+      <span>Spacious Living Area</span>
+    </div>
+
+        <div>
+      <span>Luxurious Bathroom</span>
+    </div>
+
+        <div>
+      <span>Mini-Bar</span>
+    </div>
+
+
+  </div>
+
+
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!--footer section, end of page-->
+
+<section class="footer">
+  <h4>About Us</h4>
+  <p>
+    With a legacy spanning over a century, sunset bay resort has consistently set high standards for hospitality and guest satisfaction.
+We take pride in our dedicated staff, exceptional guest experiences, and an unwavering commitment to creating memorable stays.
+Our commitment to excellence in service and comfort has made sunset bay resort a preferred destination for travelers seeking the utmost in luxury and relaxation. We invite you to be part of our legacy of unparalleled hospitality.
+  </p>
+       <br>
+     <p>Connect with us on:</p>
+  </p>
+  <div>
+    <i class="fa-brands fa-square-instagram"></i>
+    <i class="fa-brands fa-twitter"></i>
+    <i class="fa-brands fa-facebook"></i>
+    <i class="fa-brands fa-whatsapp"></i>
+  </div>
+  <p><em>Made with<i class="fa-solid fa-heart"></i>by Sumaya Ahmed</p></em>
+</section>
+
+
+
+
+
+
+  <!--javascript code for the clicking, toggling of the menu icon-->
+  <script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+      navLinks.style.right = "0";
+    }
+        function hideMenu(){
+      navLinks.style.right = "-200px";
+    }
+  </script>
+
+</body>
+</html>

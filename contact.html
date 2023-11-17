@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+<!--font awesome link for icons must include this kit to prevent blank icons-->
+<script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+</head>
+
+<!--body begins-->
+<body>
+
+
+
+  <!--header section-->
+  <section class="sub-header">
+    <!--adding a nav to contain the logo and links like about, home-->
+    <nav>
+      <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
+      <!--creating a div to contain the links-->
+      <div class="nav-links" id="navLinks">
+        <!--close x icon-->
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="job.html">JOBS</a></li>
+          <li><a href="#">SUITE</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+<!--menu icon-->
+<svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </nav><!--nav ends here-->
+    <h1>Contact Us</h1>
+  </section>
+
+
+
+
+
+<!--contact form section-->
+<section class="contact-us">
+  <div class="row">
+    <div class="contact-col">
+      <div>
+        <!--home icon-->
+        <i class="fa-solid fa-house"></i>
+        <span>
+          <h5>315 Greenfields Building</h5>
+          <p>Nairobi, Kenya</p>
+        </span>
+      </div>
+
+            <div>
+        <!--phone icon-->
+        <i class="fa-sharp fa-solid fa-phone"></i>
+        <span>
+          <h5>+254 78965432</h5>
+          <p>Monday to Sunday, 8am to 4pm</p>
+        </span>
+      </div>
+
+            <div>
+        <!--email icon-->
+        <i class="fa-solid fa-envelope"></i>
+        <span>
+          <h5>webdev@gmail.com</h5>
+          <p>Our Email</p>
+        </span>
+      </div>
+    </div>
+
+<div class="contact-col">
+
+  <form action="formhandler.php" method="post">
+    <input type="text" name="name" placeholder="Enter your name" required>
+    <input type="email" name="email" placeholder="Enter your email address" required>
+    <input type="text" name="subject" placeholder="Enter your subject" required>
+    <textarea rows="8" name="message" placeholder="message" required></textarea>
+      <button type="submit" class="hero-btn red-btn">Send message</button>
+  </form>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+  <!--contact us content-->
+<section class="location">
+<!--adding google map location 
+go to google map and select embedd map and copy and paste link here-->
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d127640.61268913189!2d36.9065984!3d-1.3139968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ske!4v1697187566765!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+
+<footer class="footer">
+  	 <div class="container">
+  	 	<div class="row">
+  	 		<div class="footer-col">
+  	 			<h4>company</h4>
+  	 			<ul>
+  	 				<li><a href="#">Cookie Policy</a></li>
+  	 				<li><a href="#">Terms of Use</a></li>
+  	 				<li><a href="#">privacy policy</a></li>
+  	 				<li><a href="#">affiliate program</a></li>
+            <li><a href="#">Accessibility</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>get help</h4>
+  	 			<ul>
+  	 				<li><a href="#">FAQ</a></li>
+  	 				<li><a href="#">Terms and Conditions</a></li>
+  	 				<li><a href="#">locate a service provider</a></li>
+  	 				<li><a href="#">Help</a></li>
+  	 				<li><a href="#">Report a problem</a></li>
+  	 			</ul>
+  	 		</div>
+
+  	 		<div class="footer-col">
+  	 			<h4>follow us</h4>
+  	 			<div class="social-links">
+  	 				<a href="#"><i class="fa-brands fa-facebook"></i></a>
+  	 				<a href="#"><i class="fa-brands fa-instagram"></i></a>
+  	 				<a href="#"><i class="fa-brands fa-twitter"></i></a>
+  	 				<a href="#"><i class="fa-brands fa-pinterest"></i></a>
+  	 			</div>
+  	 		</div>
+
+  	 	</div>
+  	 </div>
+     <hr>
+    <p class="copyright">© CareerLink 2023. All rights reserved</p>
+  </footer>
+
+  <!--javascript code for the clicking, toggling of the menu icon-->
+  <script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+      navLinks.style.right = "0";
+    }
+        function hideMenu(){
+      navLinks.style.right = "-200px";
+    }
+  </script>
+
+</body>
+</html>

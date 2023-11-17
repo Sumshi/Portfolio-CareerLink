@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="signUp.css">
+</head>
+<body>
+    <div class="sign-up-form">
+        <i class="fa-solid fa-user"></i>
+        <h1>Sign Up</h1>
+        <form action="formhandler.php" method="post">
+            <input type="email" class="input-box"
+            placeholder="Enter Your Email">
+            <input type="password" class="input-box"
+            placeholder="Enter Your Password">
+            <p><span><input type="checkbox"></span>I agree to the Terms and Conditions</p>
+            <button type="button" class="sign-btn">Sign Up</button>
+            <hr>
+            <p class="or">OR</p>
+            <button type="button" class="sign-btn">Log IN</button>
+            <p>Do you have an account ? <a href="#">Sign In</a></p>
+        </form>
+    </div>
+</body>
+</html>
