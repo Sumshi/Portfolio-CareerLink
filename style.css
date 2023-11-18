@@ -195,12 +195,12 @@ svg {
 }
 
 /*stying courses sectidon*/
-.course {
+/* .course {
     width: 80%;
     margin: auto;
     text-align: center;
     padding-top: 100px;
-}
+} */
 
 h1 {
     font-size: 30px;
@@ -224,84 +224,16 @@ p {
     justify-content: space-between;
 }
 
-.course-col {
-    flex-basis: 31%;
-    background: #fff3f3;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    padding: 20px 12px;
-    box-sizing: border-box;
-    transition: 0.5s;
-}
-
 h3 {
     text-align: center;
     font-weight: 600;
     margin: 10px 0;
 }
 
-.course-col:hover {
-    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
-}
-
-/*styling courses column for smaller screen*/
 @media(max-width:700px) {
     .row {
         flex-direction: column;
     }
-}
-
-/*styling campus section*/
-.campus {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    padding-top: 50px;
-}
-
-.campus-col {
-    flex-basis: 32%;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-.campus-col img {
-    width: 100%;
-    display: block;
-    border-radius: 5px;
-}
-
-.layer {
-    background: transparent;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: 0.5s;
-}
-
-.layer:hover {
-    background: rgba(56, 60, 71, 0.7);
-}
-
-.layer h3 {
-    width: 100%;
-    font-weight: 500;
-    color: white;
-    font-size: 26px;
-    bottom: 40px;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%);
-    opacity: 0.5s;
-}
-
-.layer:hover h3 {
-    bottom: 49%;
-    opacity: 1;
 }
 
 
@@ -399,54 +331,6 @@ h3 {
 
 .red-btn:hover {
     color: white;
-}
-
-
-/*------------------------BLOG PAGE STYLING----------------*/
-.blog-content {
-    width: 80%;
-    margin: auto;
-    padding: 60px 0;
-}
-
-.blog-left {
-    flex-basis: 65%;
-}
-
-.blog-left img {
-    width: 100%;
-}
-
-.blog-left h2 {
-    color: #222;
-    font-weight: 600;
-    margin: 30px 0;
-}
-
-.blog-left p {
-    color: #0f0f0f;
-    padding: 0;
-}
-
-.blog-right {
-    flex-basis: 32%;
-}
-
-.blog-right h3 {
-    background: #f44336;
-    color: white;
-    padding: 7px 0;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.blog-right div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #0f0f0f;
-    padding: 8px;
-    box-sizing: border-box;
 }
 
 
