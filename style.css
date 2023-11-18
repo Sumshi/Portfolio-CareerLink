@@ -194,14 +194,6 @@ svg {
     }
 }
 
-/*stying courses sectidon*/
-/* .course {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    padding-top: 100px;
-} */
-
 h1 {
     font-size: 30px;
     font-weight: 600;
@@ -216,7 +208,6 @@ p {
     padding: 10px;
 }
 
-/*styling courses div or section*/
 .row {
     margin: 5%;
     display: flex;
