@@ -3,6 +3,12 @@
     /* background: #f1f1f1; */
     /* color: #434343; */
     text-align: center;
+    transition: background-color 0.9s ease;
+    /* Smooth transition effect */
+}
+
+.testimonial:hover {
+    background-color: grey;
 }
 
 .inner {
