@@ -1,0 +1,10 @@
+-- Prepares MySQL Database and ×××-User for the Project
+
+DATABASE_NAME="careerLink_DB"
+ADMIN_USER="admin"
+ADMIN_PASSWORD="careerLink_password"
+
+CREATE DATABASE $DATABASE_NAME;
+CREATE USER '$ADMIN_USER'@'localhost' IDENTIFIED BY '$ADMIN_PASSWORD';
+GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$ADMIN_USER'@'localhost';
+FLUSH PRIVILEGES;
