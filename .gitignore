@@ -1,0 +1,5 @@
+createfile
+*.swp
+models/__pycache__/*
+models/engine/__pycache__/*
+test_*
