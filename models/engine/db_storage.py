@@ -18,6 +18,7 @@ class DBStorage():
     __session = None
 
     def __init__(self):
+        """ Initialize the DBStorage class """
         _user = "admin"
         _psswd = "careerLink_password"
         _host = "localhost"

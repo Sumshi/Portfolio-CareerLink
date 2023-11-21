@@ -1,8 +1,11 @@
 createfile
 *.swp
+__pycache__/*
 models/__pycache__/*
 models/engine/__pycache__/*
-test_*
+test_base_model_dict.py
+test_base_model.py*
+test_user.py*
 tests/__pycache__/*
 tests/test_models/__pycache__/*
 tests/test_models/test_engine/__pycache__/*
