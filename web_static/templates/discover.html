@@ -52,6 +52,7 @@
 <br>
 
 
+
     <script src="../static/scripts/swiper-bundle.min.js"></script>
     <script src="../static/scripts/script.js"></script>
 
@@ -94,50 +95,6 @@
       </div>
     </div>
 
-
-<div class="testimonials">
-      <div class="inner">
-        <h1>Healthcare</h1>
-        <div class="border"></div>
-        <div class="row">
-          <div class="col">
-            <div class="testimonial">
-              <img src="../static/images/childcare.jpg" alt="">
-              <!-- <div class="stars">
-                <i class="fa-regular fa-heart"></i>
-              </div> -->
-              <p>Johnson & Johnson</p>
-              <p>
-                Johnson & Johnson is a global healthcare company dedicated to improving the health and well-being of people around the world. With a focus on pharmaceuticals, medical devices, and consumer health products, Johnson & Johnson offers diverse career opportunities in the healthcare industry.
-              </p>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="testimonial">
-              <img src="../static/images/clinic.jpg" alt="">
-              <p>Mayo Clinic</p>
-              <p>
-                Mayo Clinic is a nonprofit American academic medical center focused on integrated clinical practice, education, and research. Join an organization dedicated to providing patient-centered care and advancing medical knowledge.
-                Contribute to medical research and advancements.
-              </p>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="testimonial">
-              <img src="../static/images/surgical.jpg" alt="">
-              <p>Medtronic</p>
-                <p>
-                  Medtronic is a global leader in medical technology, specializing in devices and therapies for a variety of medical conditions, including surgery. Join a company that aims to alleviate pain, restore health, and extend life through innovative surgical solutions.
-                </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
 <div class="testimonials">
       <div class="inner">
         <h1>Manufacturing and Production</h1>
@@ -176,6 +133,19 @@
     </div>
 
 
+<!-- Add a new section for job seekers to upload resumes -->
+  <section class="job-seekers-section">
+    <h2>Job Seekers</h2>
+    <!-- <p>Stand out to employers by uploading your resume. Fill out the form below:</p> -->
+    <p>Post your resume - Start your new career</p>
+
+    <!-- Resume upload form -->
+    <form id="resumeUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+      <label for="resume">Choose a file:</label>
+      <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
+      <button type="submit">Upload Resume</button>
+    </form>
+  </section>
 <br>
 <br>
 <br>

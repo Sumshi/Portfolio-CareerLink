@@ -446,3 +446,52 @@ h3 {
         display: none;
     }
 }
+
+/* Add styles for the job seekers section */
+.job-seekers-section {
+    /* background-color: gray; */
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.job-seekers-section h2 {
+    color: #333;
+}
+
+.job-seekers-section p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+#resumeUploadForm {
+    max-width: 400px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 30px;
+}
+
+button:hover {
+    background-color: #f44336;
+}
