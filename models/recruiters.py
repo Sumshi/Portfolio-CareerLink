@@ -11,7 +11,7 @@ class Recruiter(BaseModel, Base):
     __tablename__ = 'recruiters'
     company = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False)
-    pnone_number = Column(String(60), nullable=False)
+    phone_number = Column(String(60), nullable=False)
     username = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     country = Column(String(60), nullable=False)

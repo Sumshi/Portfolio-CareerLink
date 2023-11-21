@@ -2,7 +2,7 @@
 """ A module that dedines the database storage """
 
 from models.applications import Application
-from models.base_model import Base
+from models.base_model import BaseModel, Base
 from models.job_history import JobHistory
 from models.jobseeker import Jobseeker
 from models.jobs import Jobs
@@ -26,7 +26,7 @@ class DBStorage():
         self.__engine = create_engine(
             f"mysql+mysqldb://{_user}:{_psswd}@{_host}/{_db}",
             pool_pre_ping=True
-            )
+        )
 
     def all(self, cls=None):
         """ Query the database session """
@@ -61,8 +61,8 @@ class DBStorage():
         """
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
-                bind=self.__engine, expire_on_commit=False
-            )
+            bind=self.__engine, expire_on_commit=False
+        )
         Session = scoped_session(session_factory)
         self.__session = Session()
 
