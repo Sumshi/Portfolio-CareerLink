@@ -9,8 +9,6 @@ import json
 import pep8
 
 
-# @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-#                  'basemodel test not supported')
 class test_basemodel(unittest.TestCase):
     """ Defines test cases for the BaseModel class """
 
