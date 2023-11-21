@@ -10,12 +10,12 @@ from models.job_history import JobHistory
 from models.jobs import Jobs
 from models.jobseeker import Jobseeker
 from models.recruiters import Recruiter
-# from models import storage
+import re
 import shlex  # for splitting the line along spaces except in double quotes
 
 classes = {"Application": Application, "BaseModel": BaseModel, "Jobs": Jobs,
            "JobHistory": JobHistory, "Jobseeker": Jobseeker,
-           "Recruiters": Recruiter}
+           "Recruiter": Recruiter}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -39,31 +39,26 @@ class HBNBCommand(cmd.Cmd):
         """creates a dictionary from a list of strings"""
         new_dict = {}
         for arg in args:
-            if "=" in arg:
-                kvp = arg.split('=', 1)
-                key = kvp[0]
-                value = kvp[1]
-                if value[0] == value[-1] == '"':
-                    value = shlex.split(value)[0].replace('_', ' ')
-                else:
-                    try:
-                        value = int(value)
-                    except:
-                        try:
-                            value = float(value)
-                        except:
-                            continue
-                new_dict[key] = value
+            key = arg[0]
+            value = arg[1]
+            # strings with quotes
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1]  # removes the quotes start and end
+            # underscores must be replaced with space in keys
+            value = value.replace('_', ' ')
+            new_dict[key] = value
         return new_dict
 
     def do_create(self, arg):
         """Creates a new instance of a class"""
+        pattern = r'(\w+)=(\"[^\"]*\"|\S+)'
+        matches = re.findall(pattern, arg)
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
             return False
         if args[0] in classes:
-            new_dict = self._key_value_parser(args[1:])
+            new_dict = self._key_value_parser(matches)
             instance = classes[args[0]](**new_dict)
         else:
             print("** class doesn't exist **")
