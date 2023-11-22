@@ -2,15 +2,18 @@
 """
 unittests for db_storage module
 """
-import unittest
+from console import HBNBCommand
+from io import StringIO
 from models.engine.db_storage import DBStorage
 from models.engine import db_storage
 from models import storage, Jobs
 from os import getenv
 from models import Jobs, Recruiter
-from console import HBNBCommand
 import MySQLdb
 import pep8
+import sys
+import unittest
+from unittest.mock import patch
 
 # db = getenv("HBNB_TYPE_STORAGE")
 
@@ -37,10 +40,11 @@ class test_my_storage(unittest.TestCase):
 
     def setUp(self):
         """ create a MySQLdb connection """
-        uname = 'admin_test'
-        passw = 'careerLink_password_test'
-        dbhost = 'localhost'
-        dbname = 'careerLink_DB_test'
+        uname = getenv("PROJ_USER")
+        passw = getenv("PROJ_PWD")
+        dbhost = getenv("PROJ_HOST")
+        dbname = getenv("PROJ_DB")
+        # env = getenv("PROJ_ENV")
         self.test_engine = MySQLdb.connect(
             host=dbhost,
             user=uname,
@@ -102,98 +106,140 @@ class test_my_storage(unittest.TestCase):
         self.assertTrue(hasattr(new_obj, 'updated_at'))
         self.assertTrue(hasattr(new_obj, 'created_at'))
 
-    # def test_dbstorage_all(self):
-    #     """ Test the all method of DBStorage """
-    #     storage.reload()
+    def test_dbstorage_all(self):
+        """ Test the all method of DBStorage """
+        storage.reload()
 
-    #     # get the initial objects
-    #     result = storage.all()
-    #     cur = self.test_engine.cursor()
-    #     cur.execute("SELECT * FROM jobs;")
-    #     init_objs = cur.fetchall()
-    #     self.assertTrue(len(result) == len(init_objs))
+        # get the initial objects
+        result = storage.all(Jobs)
+        cur = self.test_engine.cursor()
+        cur.execute("SELECT * FROM jobs;")
+        init_objs = cur.fetchall()
+        self.assertTrue(len(result) == len(init_objs))
 
-    #     # create a new object and commit transaction to save the new object
-    #     self.command.onecmd(
-    #         'create Jobs recruiter_id="6789" title="Engineer"\
-    #         description="good job" application="send email"\
-    #         comapny="Career Link" contact="1023456" deadline="25-12-2023"\
-    #         country="Kenya" town="Nairobi"'
-    #     )
-    #     self.test_engine.commit()
+        # create a new object and commit transaction to save the new object
+        # Create a new object and capture the ID printed to stdout
+        with patch('sys.stdout', new=StringIO()) as fake_output:
+            self.command.onecmd(
+                'create Recruiter company="Soft dev" \
+                email="info@softdev.com" phone_number="0712345675" \
+                username="softdev" password="test_pwd" country="Kenya" \
+                state="Nairobi" address="00311" street="Juja Rd" \
+                zip_code="00200" profile_pic="present" about="Hardworking"'
+            )
+            self.test_engine.commit()
+            # Get the printed ID
+            created_output = fake_output.getvalue().strip()
 
-    #     # Retrieve the data
-    #     cur.execute("SELECT * FROM jobs;")
-    #     new_objs = cur.fetchall()
-    #     result = storage.all()
+        # Use the captured ID to create a Jobs object
+        if created_output:
+            with patch('sys.stdout', new=StringIO()):
+                self.command.onecmd(
+                    'create Jobs recruiters_id="{}" title="Engineer" \
+                    description="good job" application="send email" \
+                    company="Career Link" contact="1023456" \
+                    deadline="2023-12-15" country="Kenya" \
+                    town="Nairobi"'.format(created_output)
+                )
+                self.test_engine.commit()
 
-    #     # Confirm the results
-    #     self.assertTrue(len(result) == len(new_objs))
-    #     self.assertIsInstance(result, dict)
+                # Retrieve the data
+                cur.execute("SELECT * FROM jobs;")
+                new_objs = cur.fetchall()
+                result = storage.all(Jobs)
 
-    # def test_dbstorage_new(self):
-    #     """ Test the new method of DBStorage """
-    #     storage.all()
+                # Confirm the results
+                self.assertTrue(len(result) == len(new_objs))
+                self.assertIsInstance(result, dict)
+        else:
+            # Handle the case where the ID couldn't be captured
+            self.fail("Failed to capture the ID of the created object")
 
-    #     # confirm that no data in the tables
-    #     cur = self.test_engine.cursor()
-    #     cur.execute("SELECT * FROM jobs;")
-    #     objs = cur.fetchall()
-    #     self.assertTrue(len(objs), 0)
+    def test_dbstorage_new(self):
+        """ Test the new method of DBStorage """
+        storage.reload()
 
-    #     # create a new object
-    #     new_obj = Jobs(
-    #         recruiter_id="6789", title="Engineer", description="good job",
-    #         application="call", comapny="Career Link", contact="1023456",
-    #         deadline="25-12-2023", country="Kenya", town="Nairobi"
-    #     )
-    #     storage.new(new_obj)
-    #     cur.execute("SELECT * FROM jobs;")
-    #     objs = cur.fetchall()
-    #     self.assertGreater(len(objs), 0)
+        # confirm that no data in the tables
+        cur = self.test_engine.cursor()
+        cur.execute("SELECT * FROM recruiters;")
+        objs = cur.fetchall()
+        self.assertTrue(len(objs), 0)
 
-    # def test_dbstorage_delete(self):
-    #     """ Test the delete method of DBStorage """
-    #     storage.all()
+        # create a new object
+        new_obj = Recruiter(
+            company="Soft dev", email="info@softdev.com",
+            phone_number="0712345675", username="softdev",
+            password="test_pwd", country="Kenya", state="Nairobi",
+            address="00311", street="Juja Rd", zip_code="00200",
+            profile_pic="present", about="Hardworking"
+        )
+        storage.new(new_obj)
+        self.test_engine.commit()
+        cur.execute("SELECT * FROM recruiters;")
+        objs = cur.fetchall()
+        self.assertGreater(len(objs), 0)
 
-    #     # create new object and update
-    #     state = Jobs(name="California")
-    #     storage.new(state)
-    #     storage.save()
+    def test_dbstorage_delete(self):
+        """ Test the delete method of DBStorage """
+        storage.reload()
 
-    #     # confirm object added to the database
-    #     cur = self.test_engine.cursor()
-    #     cur.execute("SELECT * FROM states;")
-    #     objs = cur.fetchall()
-    #     self.assertTrue(len(objs), 1)
+        # create new object and update
+        new_obj = Recruiter(
+            company="Electromag", email="info@elemag.com",
+            phone_number="0712345691", username="emag",
+            password="test_pwd_1", country="Kenya", state="Nairobi",
+            address="00312", street="Juja Rd", zip_code="00200",
+            profile_pic="present", about="Electrical installation"
+        )
+        storage.new(new_obj)
+        storage.save()
+        self.test_engine.commit()
 
-    #     # delete the object and confirm no objects
-    #     storage.delete(state)
-    #     cur.execute("SELECT * FROM states;")
-    #     objs = cur.fetchall()
-    #     self.assertTrue(len(objs), 0)
+        # confirm object added to the database
+        cur = self.test_engine.cursor()
+        cur.execute("SELECT * FROM recruiters;")
+        objs = cur.fetchall()
+        self.assertTrue(len(objs), 1)
 
-    # def test_dbstorage_repr(self):
-    #     """ Test that objects are saved as a dict """
-    #     storage.reload()
+        # delete the object and confirm no objects
+        storage.delete(new_obj)
+        self.test_engine.commit()
+        cur.execute("SELECT * FROM recruiters;")
+        objs = cur.fetchall()
+        self.assertTrue(len(objs), 0)
 
-    #     # create objects
-    #     state = Jobs(name="California")
-    #     storage.new(state)
-    #     storage.save()
-    #     key = "{}.{}".format(state.__class__.__name__, state.id)
-    #     objs = storage.all()
-    #     self.assertIsInstance(objs, dict)
-    #     self.assertIs(objs[key], state)
+    def test_relationship(self):
+        """ Test relationship in DBStorage """
+        storage.reload()
+        # create Recruiter object
+        recruiter = Recruiter(
+            company="Builders", email="info@builders.com",
+            phone_number="0722345691", username="builders",
+            password="test_pwd_2", country="Kenya", state="Nairobi",
+            address="00313", street="Juja Rd", zip_code="00200",
+            profile_pic="present", about="Civil engineers"
+        )
+        storage.new(recruiter)
+        storage.save()
+        # self.test_engine.commit()
+        recruiter_id = recruiter.id
 
-    # def test_relationship(self):
-    #     """ Test relationship in DBStorage """
-    #     state = Jobs(name="California")
-    #     state_id = state.id
-    #     state.cities = [
-    #         City(name="San_Jose", state_id=state_id),
-    #         City(name="San_Francisco", state_id=state_id)
-    #     ]
+        # update the Recruiter relationship backref
+        job_1 = Jobs(
+            recruiters_id=recruiter_id, title="Engineer",
+            description="good job", application="send email",
+            company="Builders", contact="0722345691",
+            deadline="2023-12-15", country="Kenya", town="Nairobi"
+        )
+        storage.new(job_1)
+        job_2 = Jobs(
+            recruiters_id=recruiter_id, title="Technician",
+            description="good job", application="send email",
+            company="Builders", contact="0722345691",
+            deadline="2023-12-15", country="Kenya", town="Nairobi"
+        )
+        storage.new(job_2)
+        self.test_engine.commit()
 
     #     print("create a new city object")
 
@@ -207,17 +253,17 @@ class test_my_storage(unittest.TestCase):
 
     #     storage.save()
 
-    #     # confirm cities table updated
-    #     cur = self.test_engine.cursor()
-    #     cur.execute("SELECT * FROM cities;")
-    #     cities = cur.fetchall()
-    #     self.assertTrue(len(cities), 2)
+        # confirm jobs table updated
+        cur = self.test_engine.cursor()
+        cur.execute("SELECT * FROM jobs;")
+        job_lists = cur.fetchall()
+        self.assertTrue(len(job_lists), 2)
 
-    #     # check the relationship
-    #     # print("display the relationships")
-    #     # state_cities = state.cities
-    #     # self.assertIn(city1, state_cities)
-    #     # self.assertIn(city2, state_cities)
+        # check the relationship
+        print("display the relationships")
+        job_listing = recruiter.job_listings
+        self.assertIn(job_1, job_listing)
+        self.assertIn(job_2, job_listing)
 
     def test_documentation(self):
         """

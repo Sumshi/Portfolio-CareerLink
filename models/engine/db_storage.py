@@ -7,6 +7,7 @@ from models.job_history import JobHistory
 from models.jobseeker import Jobseeker
 from models.jobs import Jobs
 from models.recruiters import Recruiter
+from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -19,15 +20,19 @@ class DBStorage():
 
     def __init__(self):
         """ Initialize the DBStorage class """
-        _user = "admin"
-        _psswd = "careerLink_password"
-        _host = "localhost"
-        _db = "careerLink_DB"
+        _user = getenv("PROJ_USER")
+        _psswd = getenv("PROJ_PWD")
+        _host = getenv("PROJ_HOST")
+        _db = getenv("PROJ_DB")
+        _env = getenv("PROJ_ENV")
 
         self.__engine = create_engine(
             f"mysql+mysqldb://{_user}:{_psswd}@{_host}/{_db}",
             pool_pre_ping=True
         )
+
+        if _env == 'test':
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """ Query the database session """
