@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CareerLink</title>
-  <link rel="stylesheet" href="../static/styles/style.css">
-  <link rel="stylesheet" href="../static/styles/footer.css">
-  <link rel="stylesheet" href="../static/styles/testimonials.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/testimonials.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
-<!--font awesome link for icons-->
-<!--font awesome link for icons must include this kit to prevent blank icons-->
-<script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+  <!--font awesome link for icons-->
+  <!--font awesome link for icons must include this kit to prevent blank icons-->
+  <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+
 <div class="testimonials">
       <div class="inner">
         <h1>Why CareerLink?</h1>
@@ -26,9 +27,9 @@
               <div class="stars">
                 <i class="fa-solid fa-globe"></i>
               </div>
-            <p>
-              Our platform is designed with accessibility in mind, ensuring that everyone, regardless of abilities or disabilities, can easily navigate and utilize the features
-            </p>
+              <p>
+                Our platform is designed with accessibility in mind, ensuring that everyone, regardless of abilities or disabilities, can easily navigate and utilize the features
+              </p>
             </div>
           </div>
 
@@ -38,7 +39,6 @@
               <div class="stars">
                 <i class="fa-solid fa-users"></i>
               </div>
-
                <p>
                 Experience unparalleled support from our dedicated team, ready to assist you with any inquiries, technical issues, or guidance you may need during your journey.
                </p>
@@ -55,10 +55,9 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
               </div>
-
-                <p>
-                  We actively seek your feedback to enhance and improve our platform continually. Your input matters in shaping the future of CareerLink
-                </p>
+              <p>
+                We actively seek your feedback to enhance and improve our platform continually. Your input matters in shaping the future of CareerLink
+              </p>
             </div>
           </div>
         </div>
@@ -79,15 +78,14 @@
           Our mission is to create a haven of opportunity and genuine connections, where each user feels 
           valued, and every interaction becomes a chapter in a successful story of career advancement.
         </p>
-        <a href="../templates/index.html" class="hero-job">Back to home</a>
+        <a href="{{ url_for('home') }}" class="hero-job">Back to home</a>
       </div>
 
       <div class="about-col">
-        <img src="../static/images/home.jpg" alt="">
+        <img src="{{ url_for('static', filename='images/home.jpg') }}" alt="">
       </div>
     </div>
   </section>
-
 
 <div class="testimonials">
       <div class="inner">
@@ -97,7 +95,7 @@
         <div class="row">
           <div class="col">
             <div class="testimonial">
-              <img src="../static/images/eric.jpg" alt="">
+              <img src="{{ url_for('static', filename='images/eric.jpg') }}" alt="">
               <div class="name">ERIC UBAGA</div>
               <p>Backend developer</p>
               <p>
@@ -115,7 +113,7 @@
 
           <div class="col">
             <div class="testimonial">
-              <img src="../static/images/sumayapic.jpg" alt="">
+              <img src="{{ url_for('static', filename='images/sumayapic.jpg') }}" alt="">
               <div class="name">SUMAYA AHMED</div>
               <p>Frontend developer</p>
               <p>
@@ -131,7 +129,7 @@
 
           <div class="col">
             <div class="testimonial">
-              <img src="../static/images/leo.jpg" alt="">
+              <img src="{{ url_for('static', filename='images/leo.jpg') }}" alt="">
               <div class="name">ONABOWALE SIMEON</div>
               <p>Backend developer</p>
               <p>
@@ -185,17 +183,11 @@
   	 				<a href="#"><i class="fa-brands fa-pinterest"></i></a>
   	 			</div>
   	 		</div>
-
   	 	</div>
   	 </div>
      <hr>
     <p class="copyright">© CareerLink 2023. All rights reserved</p>
   </footer>
-
-
-
-
-
 
   <!--javascript code for the clicking, toggling of the menu icon-->
   <script>
@@ -203,7 +195,7 @@
     function showMenu(){
       navLinks.style.right = "0";
     }
-        function hideMenu(){
+    function hideMenu(){
       navLinks.style.right = "-200px";
     }
   </script>

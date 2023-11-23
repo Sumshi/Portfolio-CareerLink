@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CareerLink</title>
-  <link rel="stylesheet" href="../static/styles/style.css">
-  <link rel="stylesheet" href="../static/styles/footer.css">
-  <link rel="stylesheet" href="../static/styles/signUp.css">
-  <link rel="stylesheet" href="../static/styles/testimonials.css">
+  <!-- <title>CareerLink</title> -->
+   <title>{{ pageTitle }}</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/testimonials.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/signUp.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
 <!--include this kit to use font awesome icons-->
   <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="../static/styles/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/swiper-bundle.min.css') }}">
 
 </head>
 
@@ -22,34 +23,32 @@
 
   <div class="header-container">
     <nav>
-        <a href="index.html"><img src="../static/images/careerlogo.png" alt="logo"></a>
-        <div class="nav-links" id="navLinks">
-          <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-          <ul>
-          <li><a href="../templates/index.html">HOME</a></li>
-          <li><a href="../templates/about.html">ABOUT</a></li>
-          <li><a href="../templates/discover.html">JOBS</a></li>
-          <li><a href="../templates/contact.html">CONTACT</a></li>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/careerlogo.png') }}" alt="logo"></a>
+      <div class="nav-links" id="navLinks">
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <ul>
+          <li><a href="{{ url_for('home') }}">HOME</a></li>
+          <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+          <li><a href="{{ url_for('discover') }}">JOBS</a></li>
+          <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
+          <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
         </ul>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </nav>
-</div>
+  </div>
 
     <div class="sign-up-form">
         <i class="fa-solid fa-user"></i>
-        <h1>Sign In</h1>
-        <form action="formhandler.php" method="post">
-            <input type="email" class="input-box"
-            placeholder="Enter Your Email">
-            <input type="password" class="input-box"
-            placeholder="Enter Your Password">
+        <h1>{{ pageTitle }}</h1>
+        <form action="{{ formAction }}" method="{{ formMethod }}">
+            <input type="email" class="input-box" placeholder="Enter Your Email">
+            <input type="password" class="input-box" placeholder="Enter Your Password">
             <p><span><input type="checkbox"></span>I agree to the Terms and Conditions</p>
-            <button type="button" class="sign-btn">Log In</button>
+            <button type="button" class="sign-btn">{{ submitButtonText }}</button>
             <hr>
             <p class="or">OR</p>
-            <button type="button" class="sign-btn">Sign Up</button>
+            <button type="button" class="sign-btn">{{ alternateButtonText }}</button>
         </form>
     </div>
 
