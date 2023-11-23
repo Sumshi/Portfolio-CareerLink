@@ -8,7 +8,9 @@
 }
 
 .testimonial:hover {
-    background-color: grey;
+    /* background-color: grey; */
+    /* background-color: lightpink; */
+    background-color: #eee;
 }
 
 .inner {
@@ -76,3 +78,10 @@
         max-width: 100%;
     }
 }
+
+/* @media(max-width:768px) {
+    .testimonials {
+        flex-direction: column;
+        justify-content: center;
+    }
+} */
