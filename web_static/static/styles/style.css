@@ -154,7 +154,7 @@ svg {
 
 /*styling for smaller screens*/
 /*making the website responsive for all devices, using media queries*/
-@media(max-width:768px) {
+@media(max-width:700px) {
 
     /*applicable for devices with width 700px and less*/
     .text-box h1 {
@@ -221,11 +221,11 @@ h3 {
     margin: 10px 0;
 }
 
-@media(max-width:700px) {
+/* @media(max-width:700px) {
     .row {
         flex-direction: column;
     }
-}
+} */
 
 
 
@@ -247,13 +247,11 @@ h3 {
     padding: 0;
 }
 
-/*reducing text for smaller screen in contant*/
 @media(max-width: 700px) {
     .cta h1 {
         font-size: 24px;
     }
 }
-
 
 
 /* .footer {
