@@ -8,9 +8,16 @@ from models.jobseeker import Jobseeker
 from models.jobs import Jobs
 from models.recruiters import Recruiter
 from os import getenv
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import sqlalchemy
+import models
+from werkzeug.security import generate_password_hash
+
+
+classes = {"Application": Application, "BaseModel": BaseModel, "Jobs": Jobs,
+           "JobHistory": JobHistory, "Jobseeker": Jobseeker,
+           "Recruiter": Recruiter}
 
 
 class DBStorage():
@@ -47,7 +54,13 @@ class DBStorage():
         return {f"{type(obj).__name__}.{obj.id}": obj for obj in res}
 
     def new(self, obj):
-        """ Add obj to the current database session """
+        """ Add obj to the current database session
+        If obj is a Recruiter object, hash the password before adding it.
+        """
+        if (isinstance(obj, Recruiter) or isinstance(obj, Jobseeker)) and \
+                obj.password:
+            obj.password = self.hash_password(obj.password)
+
         self.__session.add(obj)
 
     def save(self):
@@ -78,3 +91,65 @@ class DBStorage():
             on the class Session tips
         """
         self.__session.close()
+
+    def get(self, cls, id):
+        """
+        Returns the object based on the class name and its ID, or
+        None if not found
+        """
+        if cls not in classes.values():
+            return None
+
+        all_cls = models.storage.all(cls)
+        for value in all_cls.values():
+            if (value.id == id):
+                return value
+
+        return None
+
+    def count(self, cls=None):
+        """
+        count the number of objects in storage
+        """
+        if cls is None:
+            return len(self.all())
+        else:
+            return len(self.all(cls))
+
+    def search_by_attribute(self, cls, attribute, value):
+        """
+        Returns a list of objects of class `cls` that match the given attribute and value
+        """
+        if not hasattr(cls, attribute):
+            return []  # Attribute doesn't exist in the class
+
+        query = self.__session.query(cls).filter(
+            getattr(cls, attribute) == value).all()
+        return query
+
+    def get_by_username(self, username):
+        """
+        Returns the Recruiter or Jobseeker object based on the username,
+        or None if not found
+        """
+        user = self.__session.query(Recruiter).filter_by(
+            username=username).first()
+        if not user:
+            user = self.__session.query(Jobseeker).filter_by(
+                username=username).first()
+        return user
+
+    def hash_password(self, password):
+        """
+        Hashes the provided password using Werkzeug's hashing algorithm.
+        """
+        return generate_password_hash(password)
+
+    def verify_password(self, username, password):
+        """
+        Verifies the password for a user given their username
+        """
+        user = self.get_by_username(username)
+        if user and user.check_recruiter_password(password):
+            return user
+        return None
