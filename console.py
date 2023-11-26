@@ -61,6 +61,7 @@ class HBNBCommand(cmd.Cmd):
             new_dict = self._key_value_parser(matches)
             instance = classes[args[0]](**new_dict)
         else:
+            print("class = {}".format(args[0]))
             print("** class doesn't exist **")
             return False
         print(instance.id)
@@ -91,9 +92,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif args[0] in classes:
             if len(args) > 1:
-                key = args[0] + "." + args[1]
-                if key in models.storage.all():
-                    models.storage.all().pop(key)
+                cls = classes[args[0]]
+                id = args[1]
+                obj = models.storage.get(cls=cls, id=id)
+                if obj:
+                    models.storage.delete(obj=obj)
                     models.storage.save()
                 else:
                     print("** no instance found **")

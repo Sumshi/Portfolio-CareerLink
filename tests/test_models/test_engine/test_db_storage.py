@@ -6,9 +6,9 @@ from console import HBNBCommand
 from io import StringIO
 from models.engine.db_storage import DBStorage
 from models.engine import db_storage
-from models import storage, Jobs
+from models import storage
 from os import getenv
-from models import Jobs, Recruiter
+from models import Jobs, Recruiter, Jobseeker
 import MySQLdb
 import pep8
 import sys
@@ -51,6 +51,8 @@ class test_my_storage(unittest.TestCase):
             password=passw,
             database=dbname
         )
+
+        storage.reload()
 
     def tearDown(self):
         """ close the db connection """
@@ -211,6 +213,7 @@ class test_my_storage(unittest.TestCase):
     def test_relationship(self):
         """ Test relationship in DBStorage """
         storage.reload()
+
         # create Recruiter object
         recruiter = Recruiter(
             company="Builders", email="info@builders.com",
@@ -240,18 +243,6 @@ class test_my_storage(unittest.TestCase):
         )
         storage.new(job_2)
         self.test_engine.commit()
-
-    #     print("create a new city object")
-
-    #     # city1 = City(name="San_Jose", state_id=state_id)
-    #     # storage.new(city1)
-    #     # city1_id = city1.id
-    #     # city2 = City(name="San_Francisco", state_id=state_id)
-    #     # storage.new(city2)
-    #     # city2_id = city2.id
-    #     storage.new(state)
-
-    #     storage.save()
 
         # confirm jobs table updated
         cur = self.test_engine.cursor()
@@ -299,3 +290,43 @@ class test_my_storage(unittest.TestCase):
         file = (["tests/test_models/test_engine/test_db_storage.py"])
         errors += style.check_files(file).total_errors
         self.assertEqual(errors, 0, 'Need to fix Pep8')
+
+    def test_get_db(self):
+        """ Tests method for obtaining an object instance in db storage"""
+        storage.reload()
+
+        instance = Recruiter(
+            company="Deenote", email="info@deenote.com",
+            phone_number="0722445691", username="dnote",
+            password="test_pwd_1", country="Kenya", state="Nairobi",
+            address="00312", street="Juja Rd", zip_code="00200",
+            profile_pic="present", about="Software development"
+        )
+        storage.new(instance)
+        storage.save()
+        get_instance = storage.get(Recruiter, instance.id)
+        self.assertEqual(get_instance, instance)
+
+    def test_count(self):
+        """ Tests count method db storage """
+        storage.reload()
+
+        dic = {
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "jndoe@gmail.com",
+            "phone_number": "0712345679",
+            "username": "jonydoe",
+            "password": "seeker1",
+            "country": "Kenya",
+            "state": "Nairobi",
+            "address": "224"
+        }
+        instance = Jobseeker(**dic)
+        storage.new(instance)
+        storage.save()
+
+        c = storage.count(Jobseeker)
+        self.assertEqual(len(storage.all(Jobseeker)), c)
+        c = storage.count()
+        self.assertEqual(len(storage.all()), c)

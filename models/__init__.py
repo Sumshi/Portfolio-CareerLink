@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+initialize the models package
+"""
 from models.applications import Application
 from models.base_model import Base, BaseModel
 from models.engine.db_storage import DBStorage
