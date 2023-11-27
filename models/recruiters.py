@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 """ defines the class Recruiter """
-import base64
-from datetime import datetime, timedelta
-from hashlib import md5
+from datetime import datetime
 # from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import relationship, backref
-from os import urandom
 
 
 class Recruiter(BaseModel, Base):
@@ -33,47 +30,51 @@ class Recruiter(BaseModel, Base):
         """initializes Recruiters"""
         super().__init__(*args, **kwargs)
 
-    # def __setattr__(self, name, value):
-    #     """sets a password with md5 encryption"""
-    #     if name == "password":
-    #         print("set password for {} is {}".format(self.username, value))
-    #         value = generate_password_hash(value)
-    #     super().__setattr__(name, value)
-    # def set_password(self, password):
-    #     """ Sets the password hash for the recruiter """
-    #     self.password = generate_password_hash(password)
+    # def set_password(self, password, new_obj=None):
+    #     """
+    #     Sets the password hash for the recruiter only for updated password
+    #     """
+    #     if new_obj:
+    #         pass    # do not do anything i.e maintain password
+    #     else:       # update the password
+    #         self.password = generate_password_hash(password)
 
-    def check_recruiter_password(self, passw):
-        print("chcheck_recruiter_password method called with password {}".format(passw))
-        res = check_password_hash(self.password, passw)
-        print("result of check_password = {}".format(res))
-        return res
+    # def check_recruiter_password(self, passw):
+    #     """ verifys the Recruiter object password """
+    #     return check_password_hash(self.password, passw)
 
-    def get_token(self, expires_in=3600):
-        from models import storage
-        print("get_token method called")
-        now = datetime.utcnow()
-        if self.token and self.token_expiration > now + timedelta(seconds=60):
-            return self.token
-        token = base64.b64encode(urandom(24)).decode('utf-8')
-        token_expiration = now + timedelta(seconds=expires_in)
-        self.__setattr__("token", token)
-        self.__setattr__("token_expiration", token_expiration)
-        storage.save()
-        return self.token
+    # def get_token(self, expires_in=3600):
+    #     """
+    #     returns a token for the user. The token is generated as a random
+    #     string that is encoded in base64
+    #     """
+    #     from models import storage
+    #     now = datetime.utcnow()
+    #     if self.token and self.token_expiration > now + timedelta(seconds=60):
+    #         return self.token
+    #     token = base64.b64encode(urandom(24)).decode('utf-8')
+    #     token_expiration = now + timedelta(seconds=expires_in)
+    #     self.__setattr__("token", token)
+    #     self.__setattr__("token_expiration", token_expiration)
+    #     storage.save()
+    #     return self.token
 
-    def revoke_token(self):
-        self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
+    # def revoke_token(self):
+    #     """
+    #     makes the token currently assigned to the user invalid, simply
+    #     by setting the expiration date to one second before the current time.
+    #     """
+    #     self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
 
     @staticmethod
     def check_token(token):
-        recruiter = Recruiter.query.filter_by(token=token).first()
+        """
+        static method that takes a token as input and returns the user this token
+        belongs to as a response. If the token is invalid or expired,
+        the method returns None
+        """
+        from models import storage
+        recruiter = storage.get_by_token(token=token)
         if recruiter is None or recruiter.token_expiration < datetime.utcnow():
             return None
         return recruiter
-
-    # def __setattr__(self, name, value):
-    #     """sets a password with md5 encryption"""
-    #     if name == "password":
-    #         value = md5(value.encode()).hexdigest()
-    #     super().__setattr__(name, value)

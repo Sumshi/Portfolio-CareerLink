@@ -54,11 +54,13 @@ class DBStorage():
         return {f"{type(obj).__name__}.{obj.id}": obj for obj in res}
 
     def new(self, obj):
-        """ Add obj to the current database session
+        """
+        Add obj to the current database session
         If obj is a Recruiter object, hash the password before adding it.
         """
         if (isinstance(obj, Recruiter) or isinstance(obj, Jobseeker)) and \
                 obj.password:
+            print("hashing the password{}".format(obj.password))
             obj.password = self.hash_password(obj.password)
 
         self.__session.add(obj)
@@ -139,6 +141,18 @@ class DBStorage():
                 username=username).first()
         return user
 
+    def get_by_token(self, token):
+        """
+        Returns the Recruiter or Jobseeker object based on the token,
+        or None if not found
+        """
+        user = self.__session.query(Recruiter).filter_by(
+            username=token).first()
+        if not user:
+            user = self.__session.query(Jobseeker).filter_by(
+                username=token).first()
+        return user
+
     def hash_password(self, password):
         """
         Hashes the provided password using Werkzeug's hashing algorithm.
@@ -150,6 +164,14 @@ class DBStorage():
         Verifies the password for a user given their username
         """
         user = self.get_by_username(username)
-        if user and user.check_recruiter_password(password):
-            return user
+
+        if user:
+            if isinstance(user, Recruiter) and \
+                    user.check_password(password):
+                return user
+            elif isinstance(user, Jobseeker) and \
+                    user.check_password(password):
+                return user
+            else:
+                return None
         return None

@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
             if value.startswith('"') and value.endswith('"'):
                 value = value[1:-1]  # removes the quotes start and end
             # underscores must be replaced with space in keys
-            value = value.replace('_', ' ')
+            # value = value.replace('_', ' ')
             new_dict[key] = value
         return new_dict
 
