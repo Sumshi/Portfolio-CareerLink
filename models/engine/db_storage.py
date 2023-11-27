@@ -129,6 +129,18 @@ class DBStorage():
             getattr(cls, attribute) == value).all()
         return query
 
+    def get_by_attribute(self, attribute, value):
+        """
+        Returns an object of class `cls` that matches the given attribute
+        """
+        for cls in classes.values():
+            if hasattr(cls, attribute):
+                query = self.__session.query(cls).filter(
+                    getattr(cls, attribute) == value).first()
+                if query:
+                    return query
+        return None
+
     def get_by_username(self, username):
         """
         Returns the Recruiter or Jobseeker object based on the username,
