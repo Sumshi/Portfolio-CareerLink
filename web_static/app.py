@@ -30,8 +30,8 @@ def login():
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('joblists'))
-    return render_template('signUp.html',
-                           pageTitle='Sign In',
+    return render_template('logIn.html',
+                           pageTitle='log In',
                            form=form
                            )
     # return render_template('signUp.html',
