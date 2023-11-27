@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """ defines the class jobseeker """
-from hashlib import md5
+from datetime import datetime
 # from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, UniqueConstraint
+from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import relationship, backref
 
 
@@ -14,9 +14,9 @@ class Jobseeker(BaseModel, Base):
     first_name = Column(String(128), nullable=False)
     middle_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=False)
-    email = Column(String(128), nullable=False)
-    phone_number = Column(String(60), nullable=False)
-    username = Column(String(128), nullable=False)
+    email = Column(String(128), index=True, unique=True, nullable=False)
+    phone_number = Column(String(60), unique=True, nullable=False)
+    username = Column(String(128), index=True, unique=True, nullable=False)
     password = Column(String(200), nullable=False)
     country = Column(String(60), nullable=False)
     state = Column(String(128), nullable=False)
@@ -27,22 +27,22 @@ class Jobseeker(BaseModel, Base):
     about = Column(String(600), nullable=True)
     resume = Column(String(200), nullable=True)
     application = relationship('Application', backref='my_jobs')
-
-    __table_args__ = (
-        UniqueConstraint('username'),
-        UniqueConstraint('email'),
-        UniqueConstraint('phone_number')
-    )
+    token = Column(String(32), index=True, unique=True)
+    token_expiration = Column(DateTime)
 
     def __init__(self, *args, **kwargs):
         """initializes jobseekers"""
         super().__init__(*args, **kwargs)
 
-    def __setattr__(self, name, value):
-        """sets a password with md5 encryption"""
-        if name == "password":
-            value = generate_password_hash(value)
-        super().__setattr__(name, value)
-
-    def check_jobseeker_password(self, passw):
-        return check_password_hash(self.password, passw)
+    @staticmethod
+    def check_token(token):
+        """
+        static method that takes a token as input and returns the user this token
+        belongs to as a response. If the token is invalid or expired,
+        the method returns None
+        """
+        from models import storage
+        jobseeker = storage.get_by_token(token=token)
+        if jobseeker is None or jobseeker.token_expiration < datetime.utcnow():
+            return None
+        return jobseeker
