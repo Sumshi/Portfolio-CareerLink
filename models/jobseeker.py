@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 """ defines the class jobseeker """
 from datetime import datetime
-# from flask_login import UserMixin
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import relationship, backref
 
 
-class Jobseeker(BaseModel, Base):
+class Jobseeker(BaseModel, UserMixin, Base):
     """ Represents a job seeker """
     __tablename__ = 'job_seekers'
     first_name = Column(String(128), nullable=False)
