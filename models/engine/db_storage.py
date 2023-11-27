@@ -147,10 +147,22 @@ class DBStorage():
         or None if not found
         """
         user = self.__session.query(Recruiter).filter_by(
-            username=token).first()
+            token=token).first()
         if not user:
             user = self.__session.query(Jobseeker).filter_by(
-                username=token).first()
+                token=token).first()
+        return user
+
+    def get_by_id(self, id):
+        """
+        Returns the Recruiter or Jobseeker object based on the id,
+        or None if not found
+        """
+        user = self.__session.query(Recruiter).filter_by(
+            id=id).first()
+        if not user:
+            user = self.__session.query(Jobseeker).filter_by(
+                id=id).first()
         return user
 
     def hash_password(self, password):

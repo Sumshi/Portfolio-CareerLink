@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 """ defines the class Recruiter """
 from datetime import datetime
-# from flask_login import UserMixin
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import relationship, backref
 
 
-class Recruiter(BaseModel, Base):
+class Recruiter(BaseModel, UserMixin, Base):
     """ Represents a recruiter """
     __tablename__ = 'recruiters'
     company = Column(String(128), index=True, unique=True, nullable=False)
