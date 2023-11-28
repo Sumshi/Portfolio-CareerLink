@@ -4,6 +4,7 @@ from flask_login import login_required
 from models import storage, Recruiter, Jobseeker, Application
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
+from web_static.forms import RecruiterEditProfileForm, JobseekerEditProfileForm
 from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
@@ -107,6 +108,62 @@ def recruiter_signup():
                            )
 
 
+@app.route('/recruiter/edit_profile', methods=['GET', 'POST'])
+@login_required
+def update_recruiter_profile():
+    """ Updates the profile of a recruiter """
+    form = RecruiterEditProfileForm()
+
+    if form.validate_on_submit():
+        # Process form data and update the profile
+        # Example: Get form data - form.company.data, form.username.data, etc.
+        # Update the profile details in the database
+
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.company = form.company.data
+        current_user.phone_number = form.phone_number.data
+        current_user.country = form.country.data
+        current_user.state = form.state.data
+        current_user.address = form.address.data
+        current_user.street = form.address.data
+        current_user.zip_code = form.zip_code.data
+        current_user.about = form.about.data
+        if form.profile_pic.data:
+            old_profile_pic = current_user.profile_pic
+            profile_pic = form.profile_pic.data
+            filename = secure_filename(profile_pic.filename)
+            filepath = os.path.join(PROFILES_FOLDER, filename)
+            profile_pic.save(filepath)
+            if os.path.exists(filepath):
+                if os.path.exists(old_profile_pic):
+                    os.remove(old_profile_pic)
+                current_user.profile_pic = filepath
+        storage.save()
+        # Redirect to profile page after update
+        return redirect(url_for('recruiter/profile'))
+    elif request.method == 'GET':
+        # Fetch the current user's profile data from the database
+        # Assuming current_user is from Flask-Login
+        # recruiter = storage.get_by_id(current_user.id)
+
+        # Populate the form fields with the current data from the database
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.company.data = current_user.company
+        form.phone_number.data = current_user.phone_number
+        form.country.data = current_user.country
+        form.state.data = current_user.state
+        form.address.data = current_user.address
+        form.address.data = current_user.street
+        form.zip_code.data = current_user.zip_code
+        form.about.data = current_user.about
+
+    return render_template('edit_recruiter_profile.html',
+                           pageTitle='Edit Profile',
+                           form=form)
+
+
 @app.route('/jobseeker_signup', methods=['GET', 'POST'])
 def jobseeker_signup():
     """ Sign up or register a new jobseeker user """
@@ -160,6 +217,77 @@ def jobseeker_signup():
                            form=form,
                            submitButtonText='Sign Up'
                            )
+
+
+@app.route('/jobseeker/edit_profile', methods=['GET', 'POST'])
+@login_required
+def update_jobseeker_profile():
+    """ Updates the profile of a jobseeker """
+    form = JobseekerEditProfileForm()
+
+    if form.validate_on_submit():
+        # Process form data and update the profile
+        # Example: Get form data - form.company.data, form.username.data, etc.
+        # Update the profile details in the database
+
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.middle_name = form.middle_name.data
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.phone_number = form.phone_number.data
+        current_user.country = form.country.data
+        current_user.state = form.state.data
+        current_user.address = form.address.data
+        current_user.street = form.address.data
+        current_user.zip_code = form.zip_code.data
+        current_user.about = form.about.data
+        if form.profile_pic.data:
+            old_profile_pic = current_user.profile_pic
+            profile_pic = form.profile_pic.data
+            filename = secure_filename(profile_pic.filename)
+            filepath = os.path.join(PROFILES_FOLDER, filename)
+            profile_pic.save(filepath)
+            if os.path.exists(filepath):
+                if os.path.exists(old_profile_pic):
+                    os.remove(old_profile_pic)
+                current_user.profile_pic = filepath
+        if form.resume.data:
+            old_resume = current_user.resume
+            resume = form.resume.data
+            filename = secure_filename(resume.filename)
+            filepath = os.path.join(RESUMES_FOLDER, filename)
+            resume.save(filepath)
+            if os.path.exists(filepath):
+                if os.path.exists(old_resume):
+                    os.remove(old_resume)
+                current_user.resume = filepath
+        storage.save()
+        # Redirect to profile page after update
+        return redirect(url_for('jobseeker/profile'))
+    elif request.method == 'GET':
+        # Fetch the current user's profile data from the database
+        # Assuming current_user is from Flask-Login
+        # recruiter = storage.get_by_id(current_user.id)
+
+        # Populate the form fields with the current data from the database
+        form.first_name.data = current_user.first_name
+        form.middle_name.data = current_user.middle_name
+        form.last_name.data = current_user.last_name
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.phone_number.data = current_user.phone_number
+        form.country.data = current_user.country
+        form.state.data = current_user.state
+        form.address.data = current_user.address
+        form.address.data = current_user.street
+        form.zip_code.data = current_user.zip_code
+        form.about.data = current_user.about
+
+    return render_template('edit_jobseeker_profile.html',
+                           pageTitle='Edit Profile',
+                           form=form)
+
 # @app.route('/signup')
 # def signUp():
 #     return render_template('signup.html')
