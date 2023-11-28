@@ -80,7 +80,8 @@ def recruiter_signup():
         return redirect(url_for('login'))
     return render_template('recruiter_signup.html',
                            pageTitle='Sign Up',
-                           form=form
+                           form=form,
+                           submitButtonText='Sign Up'
                            )
 
 
@@ -112,7 +113,8 @@ def jobseeker_signup():
         return redirect(url_for('login'))
     return render_template('jobseeker_signup.html',
                            pageTitle='Sign Up',
-                           form=form
+                           form=form,
+                           submitButtonText='Sign Up'
                            )
 # @app.route('/signup')
 # def signUp():
