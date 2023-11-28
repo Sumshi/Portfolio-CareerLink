@@ -24,8 +24,13 @@ class RecruiterSignUp(FlaskForm):
     company = StringField('Company name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    profile_pic = FileField('Profile picture', validators=[FileAllowed(
-        ['jpg', 'jpeg', 'png']), FileSize(max_size=(2 * 1024))])
+    profile_pic = FileField(
+        'Profile picture',
+        validators=[
+            FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!'),
+            FileSize(max_size=(2 * 1024))
+        ]
+    )
     phone_number = StringField('Phone No.', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
     password2 = StringField(
@@ -77,14 +82,26 @@ class RecruiterSignUp(FlaskForm):
             )
 
 
+class RecruiterEditProfileForm(RecruiterSignUp):
+    """ Form for editing the recruiter profile """
+
+    password = None  # Exclude password field from profile editing
+    submit = SubmitField('Update Profile')
+
+
 class JobseekerSignUp(FlaskForm):
     """ Implementation of a Jobseeker Sign Up or Register """
     first_name = StringField('First name', validators=[DataRequired()])
     middle_name = StringField('Middle name')
     last_name = StringField('Last name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
-    profile_pic = FileField('Profile picture', validators=[FileAllowed(
-        ['jpg', 'jpeg', 'png']), FileSize(max_size=(2 * 1024))])
+    profile_pic = FileField(
+        'Profile picture',
+        validators=[
+            FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!'),
+            FileSize(max_size=(2 * 1024))
+        ]
+    )
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('Phone No.', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
@@ -99,12 +116,17 @@ class JobseekerSignUp(FlaskForm):
     about = TextAreaField(
         ('About Me'), validators=[Length(min=0, max=300)]
     )
-    resume = FileField('Resume', validators=[FileAllowed(
-        ['pdf']), FileSize(max_size=(2 * 1024))])
+    resume = FileField(
+        'Resume',
+        validators=[
+            FileAllowed(['pdf']), FileSize(max_size=(2 * 1024))
+        ]
+    )
     submit = SubmitField('Sign Up')
 
     # When you add any methods that match the pattern validate_<field_name>,
-    # WTForms takes those as custom validators and invokes them in addition to the stock validators.
+    # WTForms takes those as custom validators and invokes them in addition
+    # to the stock validators.
     def validate_username(self, username):
         """ Ensure that username is not used i.e unique """
         user = storage.get_by_username(username)
@@ -130,5 +152,10 @@ class JobseekerSignUp(FlaskForm):
                 'Phone number "{}" already used. Pick another'.format(
                     phone_number.data)
             )
-    # profile_pic = Column(String(200), nullable=True)
-    # resume = Column(String(200), nullable=True)
+
+
+class JobseekerEditProfileForm(JobseekerSignUp):
+    """ Form for editing the job seeker profile """
+
+    password = None  # Exclude password field from profile editing
+    submit = SubmitField('Update Profile')
