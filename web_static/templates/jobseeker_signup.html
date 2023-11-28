@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>CareerLink</title> -->
     <title>{{ pageTitle }}</title>
     <link
       rel="stylesheet"
@@ -19,7 +18,7 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles/logIn.css') }}"
+      href="{{ url_for('static', filename='styles/jobseeker_signup.css') }}"
     />
     <link
       rel="stylesheet"
@@ -39,7 +38,6 @@
     />
   </head>
 
-  <!--body begins-->
   <body>
     <div class="header-container">
       <nav>
@@ -90,39 +88,72 @@
         </svg>
       </nav>
     </div>
-<!-- 
-    <div class="sign-up-form">
-        <i class="fa-solid fa-user"></i>
-        <h1>{{ pageTitle }}</h1>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <input type="username" class="input-box" placeholder="Enter Your Username">
-            <input type="password" class="input-box" placeholder="Enter Your Password">
-            <p><span><input type="checkbox"></span>I agree to the Terms and Conditions</p>
-            <button type="button" class="sign-btn">{{ submitButtonText }}</button>
-            <hr>
-            <p class="or">OR</p>
-            <button type="button" class="sign-btn">{{ alternateButtonText }}</button>
-        </form>
-    </div> -->
 
     <div class="sign-up-form">
       <i class="fa-solid fa-user"></i>
-        <h1>{{ pageTitle }}</h1>
-    <form action="" method="post" novalidate>
-      {{ form.hidden_tag() }}
-      <p>
-        {{ form.username.label }}<br />
-        {{ form.username(size=32) }}
-      </p>
-      <p>
-        {{ form.password.label }}<br />
-        {{ form.password(size=32) }}
-      </p>
-      <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-      <p>{{ form.submit() }}</p>
-    </form>
+      <h1>{{ pageTitle }}</h1>
+      <form action="{{ url_for('jobseeker_signup') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+          {{ form.first_name.label }}<br />
+          {{ form.first_name(size=32) }}
+        </p>
+        <p>
+          {{ form.middle_name.label }}<br />
+          {{ form.middle_name(size=32) }}
+        </p>
+        <p>
+          {{ form.last_name.label }}<br />
+          {{ form.last_name(size=32) }}
+        </p>
+        <p>
+          {{ form.username.label }}<br />
+          {{ form.username(size=32) }}
+        </p>
+        <p>
+          {{ form.email.label }}<br />
+          {{ form.email(size=32) }}
+        </p>
+        <p>
+          {{ form.phone_number.label }}<br />
+          {{ form.phone_number(size=32) }}
+        </p>
+        <p>
+          {{ form.password.label }}<br />
+          {{ form.password(size=32) }}
+        </p>
+        <p>
+          {{ form.password2.label }}<br />
+          {{ form.password2(size=32) }}
+        </p>
+        <p>
+          {{ form.country.label }}<br />
+          {{ form.country(size=32) }}
+        </p>
+        <p>
+          {{ form.state.label }}<br />
+          {{ form.state(size=32) }}
+        </p>
+        <p>
+          {{ form.address.label }}<br />
+          {{ form.address(size=32) }}
+        </p>
+        <p>
+          {{ form.street.label }}<br />
+          {{ form.street(size=32) }}
+        </p>
+        <p>
+          {{ form.zip_code.label }}<br />
+          {{ form.zip_code(size=32) }}
+        </p>
+        <p>
+          {{ form.about.label }}<br />
+          {{ form.about }}
+        </p>
+        <button type="submit" class="sign-btn">{{ submitButtonText }}</button>
+      </form>
     </div>
+
     <footer class="footer">
       <div class="container">
         <div class="row">
