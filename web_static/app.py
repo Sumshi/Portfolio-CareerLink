@@ -66,7 +66,7 @@ def login():
 def logout():
     """ logout a logged in user """
     logout_user()
-    redirect(url_for('index'))
+    redirect(url_for('home'))
 
 
 @app.route('/recruiter_signup', methods=['GET', 'POST'])
@@ -89,11 +89,11 @@ def recruiter_signup():
             zip_code=form.zip_code.data,
             about=form.about.data
         )
-        # if form.profile_pic.data:
-        #     profile_pic = form.profile_pic.data
-        #     filename = secure_filename(profile_pic.filename)
-        #     filepath = os.path.join(PROFILES_FOLDER, filename)
-        #     profile_pic.save(filepath)
+        if form.profile_pic.data:
+            profile_pic = form.profile_pic.data
+            filename = secure_filename(profile_pic.filename)
+            filepath = os.path.join(PROFILES_FOLDER, filename)
+            profile_pic.save(filepath)
         # user.set_password(form.password.data)
         user.save()
         flash('Congratulations, {} for registering!!'.format(user.username))
