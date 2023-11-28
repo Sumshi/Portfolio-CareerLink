@@ -5,15 +5,30 @@ from models import storage, Recruiter, Jobseeker, Application
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
 from urllib.parse import urlparse, urljoin
+import os
+from werkzeug.utils import secure_filename
+
+PROFILES_FOLDER = '/web_static/static/profile_pics'
+RESUMES_FOLDER = '/web_static/static/resumes'
+# PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'this a trial web app project'
+app.config['SECRET_KEY'] = os.environ.get(
+    'SECRET_KEY') or 'this is a trial web app project'
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['PROFILES_FOLDER'] = os.environ.get(
+    'PROFILES_FOLDER') or PROFILES_FOLDER
+app.config['RESUMES_FOLDER'] = os.environ.get(
+    'RESUMES_FOLDER') or RESUMES_FOLDER
 
 login = LoginManager(app)
 login.login_view = 'login'
 
+
+# def allowed_file(filename):
+#     """Provides for """
+#     return '.' in filename and filename.rsplit('.', 1)[1].lower() in PROFILES_EXTENSIONS
 
 @login.user_loader
 def load_user(id):
@@ -74,6 +89,11 @@ def recruiter_signup():
             zip_code=form.zip_code.data,
             about=form.about.data
         )
+        # if form.profile_pic.data:
+        #     profile_pic = form.profile_pic.data
+        #     filename = secure_filename(profile_pic.filename)
+        #     filepath = os.path.join(PROFILES_FOLDER, filename)
+        #     profile_pic.save(filepath)
         # user.set_password(form.password.data)
         user.save()
         flash('Congratulations, {} for registering!!'.format(user.username))
@@ -107,6 +127,28 @@ def jobseeker_signup():
             zip_code=form.zip_code.data,
             about=form.about.data
         )
+
+        # process the profile pic
+        if form.profile_pic.data:
+            # Retrieve the uploaded file object from form field
+            profile_pic = form.profile_pic.data
+            # Ensure the filename is secure
+            filename = secure_filename(profile_pic.filename)
+            filepath = os.path.join(PROFILES_FOLDER, filename)
+            # save the uploaded picture to the server's file system
+            profile_pic.save(filepath)
+            user.profile_pic = filepath
+
+        # process the resume
+        if form.resume.data:
+            # Retrieve the uploaded file object from form field
+            resume = form.profile_pic.data
+            # Ensure the filename is secure
+            filename = secure_filename(resume.filename)
+            filepath = os.path.join(RESUMES_FOLDER, filename)
+            # save the uploaded picture to the server's file system
+            resume.save(filepath)
+            user.resume = filepath
         # user.set_password(form.password.data)
         user.save()
         flash('Congratulations, {} for registering!!'.format(user.username))
@@ -146,6 +188,7 @@ def contact():
 
 
 @app.route('/joblists')
+@login_required
 def joblists():
     return render_template('joblists.html')
 
