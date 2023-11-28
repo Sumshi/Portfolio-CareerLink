@@ -3,6 +3,7 @@
 from collections.abc import Mapping, Sequence
 from typing import Any
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileSize
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms import TextAreaField
 from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
@@ -23,6 +24,8 @@ class RecruiterSignUp(FlaskForm):
     company = StringField('Company name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    profile_pic = FileField('Profile picture', validators=[FileAllowed(
+        ['jpg', 'jpeg', 'png']), FileSize(max_size=(2 * 1024))])
     phone_number = StringField('Phone No.', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
     password2 = StringField(
@@ -38,7 +41,7 @@ class RecruiterSignUp(FlaskForm):
     )
     submit = SubmitField('Sign Up')
 
-    def confirm_username(self, username):
+    def validate_username(self, username):
         """ Ensure that username is not used i.e unique """
         user = storage.get_by_username(username)
         if user:
@@ -47,7 +50,7 @@ class RecruiterSignUp(FlaskForm):
                     username.data)
             )
 
-    def confirm_email(self, email):
+    def validate_email(self, email):
         """ Ensure that email is not used i.e unique """
         user = storage.get_by_attribute("email", email.data)
         if user:
@@ -55,7 +58,7 @@ class RecruiterSignUp(FlaskForm):
                 'Email "{}" already used. Pick another'.format(email.data)
             )
 
-    def confirm_company(self, company):
+    def validate_company(self, company):
         """ Ensure that company name is not used i.e unique """
         user = storage.get_by_attribute("comapny", company.data)
         if user:
@@ -64,7 +67,7 @@ class RecruiterSignUp(FlaskForm):
                     company.data)
             )
 
-    def confirm_phone_number(self, phone_number):
+    def validate_phone_number(self, phone_number):
         """ Ensure that Phone Number is not used i.e unique """
         user = storage.get_by_attribute("phone_number", phone_number.data)
         if user:
@@ -80,6 +83,8 @@ class JobseekerSignUp(FlaskForm):
     middle_name = StringField('Middle name')
     last_name = StringField('Last name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
+    profile_pic = FileField('Profile picture', validators=[FileAllowed(
+        ['jpg', 'jpeg', 'png']), FileSize(max_size=(2 * 1024))])
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('Phone No.', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
@@ -94,9 +99,13 @@ class JobseekerSignUp(FlaskForm):
     about = TextAreaField(
         ('About Me'), validators=[Length(min=0, max=300)]
     )
+    resume = FileField('Resume', validators=[FileAllowed(
+        ['pdf']), FileSize(max_size=(2 * 1024))])
     submit = SubmitField('Sign Up')
 
-    def confirm_username(self, username):
+    # When you add any methods that match the pattern validate_<field_name>,
+    # WTForms takes those as custom validators and invokes them in addition to the stock validators.
+    def validate_username(self, username):
         """ Ensure that username is not used i.e unique """
         user = storage.get_by_username(username)
         if user:
@@ -105,7 +114,7 @@ class JobseekerSignUp(FlaskForm):
                     username.data)
             )
 
-    def confirm_email(self, email):
+    def validate_email(self, email):
         """ Ensure that email is not used i.e unique """
         user = storage.get_by_attribute("email", email.data)
         if user:
@@ -113,7 +122,7 @@ class JobseekerSignUp(FlaskForm):
                 'Email "{}" already used. Pick another'.format(email.data)
             )
 
-    def confirm_phone_number(self, phone_number):
+    def validate_phone_number(self, phone_number):
         """ Ensure that Phone Number is not used i.e unique """
         user = storage.get_by_attribute("phone_number", phone_number.data)
         if user:
