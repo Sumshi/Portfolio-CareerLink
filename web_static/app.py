@@ -50,7 +50,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         # register the user as logged in i.e any future pages the user navigates to
-        #  will have the current_user variable set to that user.
+        # will have the current_user variable set to that user.
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or urlparse(next_page).netloc != '':
