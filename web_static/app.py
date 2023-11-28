@@ -63,10 +63,11 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     """ logout a logged in user """
     logout_user()
-    redirect(url_for('home'))
+    return redirect(url_for('home'))
 
 
 @app.route('/recruiter_signup', methods=['GET', 'POST'])
