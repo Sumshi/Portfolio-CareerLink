@@ -43,6 +43,7 @@ def login():
     """
     if current_user.is_authenticated:
         redirect(url_for('joblists'))
+        # redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = storage.get_by_username(form.username.data)
@@ -110,7 +111,7 @@ def recruiter_signup():
 def jobseeker_signup():
     """ Sign up or register a new jobseeker user """
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('joblists'))
     form = JobseekerSignUp()
     if form.validate_on_submit():
         user = Jobseeker(
