@@ -91,7 +91,7 @@ class JobseekerSignUp(FlaskForm):
     street = StringField('Street')
     zip_code = StringField('Zip Code')
     about = TextAreaField(
-        ('About Company'), validators=[Length(min=0, max=300)]
+        ('About Me'), validators=[Length(min=0, max=300)]
     )
 
     def confirm_username(self, username):
