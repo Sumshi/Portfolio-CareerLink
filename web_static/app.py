@@ -54,11 +54,11 @@ def logout():
     redirect(url_for('index'))
 
 
-@app.route('/recruiter_signup')
+@app.route('/recruiter_signup', methods=['GET', 'POST'])
 def recruiter_signup():
     """ Sign up or register a new recruiter user """
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = RecruiterSignUp()
     if form.validate_on_submit():
         user = Recruiter(
@@ -78,17 +78,18 @@ def recruiter_signup():
         user.save()
         flash('Congratulations, {} for registering!!'.format(user.username))
         return redirect(url_for('login'))
-    return render_template('recruiter_signup',
+    return render_template('recruiter_signup.html',
                            pageTitle='Sign Up',
-                           form=form
+                           form=form,
+                           submitButtonText='Sign Up'
                            )
 
 
-@app.route('/jobseeker_signup')
+@app.route('/jobseeker_signup', methods=['GET', 'POST'])
 def jobseeker_signup():
     """ Sign up or register a new jobseeker user """
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = JobseekerSignUp()
     if form.validate_on_submit():
         user = Jobseeker(
@@ -110,9 +111,10 @@ def jobseeker_signup():
         user.save()
         flash('Congratulations, {} for registering!!'.format(user.username))
         return redirect(url_for('login'))
-    return render_template('recruiter_signup',
+    return render_template('jobseeker_signup.html',
                            pageTitle='Sign Up',
-                           form=form
+                           form=form,
+                           submitButtonText='Sign Up'
                            )
 # @app.route('/signup')
 # def signUp():
@@ -123,7 +125,7 @@ def jobseeker_signup():
 
 @app.route('/')
 @app.route('/home')
-@login_required
+# @login_required
 def home():
     return render_template('index.html')
 

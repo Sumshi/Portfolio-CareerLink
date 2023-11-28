@@ -36,6 +36,7 @@ class RecruiterSignUp(FlaskForm):
     about = TextAreaField(
         ('About Company'), validators=[Length(min=0, max=300)]
     )
+    submit = SubmitField('Sign Up')
 
     def confirm_username(self, username):
         """ Ensure that username is not used i.e unique """
@@ -76,7 +77,7 @@ class RecruiterSignUp(FlaskForm):
 class JobseekerSignUp(FlaskForm):
     """ Implementation of a Jobseeker Sign Up or Register """
     first_name = StringField('First name', validators=[DataRequired()])
-    middle_name = StringField('Middle name', validators=[DataRequired()])
+    middle_name = StringField('Middle name')
     last_name = StringField('Last name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -91,8 +92,9 @@ class JobseekerSignUp(FlaskForm):
     street = StringField('Street')
     zip_code = StringField('Zip Code')
     about = TextAreaField(
-        ('About Company'), validators=[Length(min=0, max=300)]
+        ('About Me'), validators=[Length(min=0, max=300)]
     )
+    submit = SubmitField('Sign Up')
 
     def confirm_username(self, username):
         """ Ensure that username is not used i.e unique """
