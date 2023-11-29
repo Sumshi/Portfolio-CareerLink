@@ -1,0 +1,342 @@
+/* import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: rgb(233, 233, 233);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* Change to column layout on small screens */
+    width: 100%;
+    /* Full width */
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Full width */
+    background: #fff;
+    z-index: 1000;
+    /* Ensure it's above other elements */
+}
+
+.navbar {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* Change to column layout on small screens */
+}
+
+.logo {
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center logo and text */
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.logo h1 {
+    margin-left: 1rem;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    /* Adjust font size for smaller screens */
+    text-align: center;
+    /* Center text */
+}
+
+ul {
+    margin: 0 auto;
+}
+
+li {
+    padding-bottom: 2rem;
+}
+
+li a {
+    font-size: 16px;
+    color: rgb(85, 83, 83);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center icon and text */
+}
+
+.nav-item {}
+
+nav i {
+    width: 50px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.logout {
+    position: absolute;
+    bottom: 20px;
+}
+
+/* Main Section */
+.main {
+    width: 100%;
+}
+
+.main-top {
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgb(43, 43, 43);
+}
+
+.main-body {
+    padding: 10px;
+}
+
+h1 {
+    margin: 20px 10px;
+    text-align: center;
+    /* Center heading */
+}
+
+.search_bar {
+    display: flex;
+    flex-direction: column;
+    /* Change to column layout on small screens */
+    padding: 10px;
+}
+
+.search_bar input {
+    width: 100%;
+    /* Full width */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid rgb(190, 190, 190);
+}
+
+.search_bar input:focus {
+    border: 1px solid blueviolet;
+}
+
+.search_bar select {
+    width: 100%;
+    /* Full width */
+    border: 1px solid rgb(19, 16, 16);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.search_bar .filter {
+    width: 100%;
+    /* Full width */
+}
+
+.tags_bar {
+    width: 100%;
+    /* Full width */
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow tags to wrap to the next line */
+    padding: 10px;
+}
+
+.tag {
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.tag i {
+    margin-right: 0.7rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    /* Change to column layout on small screens */
+    padding: 10px;
+    margin-top: 1.3rem;
+    justify-content: center;
+    /* Center content */
+}
+
+.row p {
+    color: rgb(54, 54, 54);
+    font-size: 15px;
+    text-align: center;
+    /* Center text */
+}
+
+.row p span {
+    color: #f44336;
+}
+
+.job_card {
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    /* Change to column layout on small screens */
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    border: 2px solid rgb(190, 190, 190);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+.job_details {
+    display: flex;
+    flex-direction: column;
+    /* Change to column layout on small screens */
+}
+
+.job_details .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.job_details .img i {
+    width: 70px;
+    font-size: 3rem;
+    margin-left: 1rem;
+    padding: 10px;
+    /* color: rgb(82, 22, 138); */
+    color: #f44336;
+    background: rgb(216, 205, 226);
+}
+
+.job_details .text {
+    margin-left: 0;
+    text-align: center;
+    /* Center text on small screens */
+}
+
+.job_details .text span {
+    color: rgb(116, 112, 112);
+    text-align: center;
+    /* Center text on small screens */
+}
+
+.job_salary {
+    text-align: center;
+    /* Center text on small screens */
+    color: rgb(54, 54, 54);
+}
+
+.job_card:active {
+    border: 2px solid blueviolet;
+    transition: 0.4s;
+}
+
+/* Media Queries */
+@media screen and (min-width: 600px) {
+    .container {
+        flex-direction: row;
+        /* Switch back to row layout for larger screens */
+    }
+
+    nav {
+        width: 280px;
+        height: 100vh;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+
+    .logo {
+        padding-bottom: 0;
+    }
+
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+
+    li a {
+        font-size: 18px;
+    }
+
+    .main-body {
+        padding-left: 20px;
+    }
+
+    h1 {
+        text-align: left;
+    }
+
+    .search_bar {
+        flex-direction: row;
+    }
+
+    .search_bar input {
+        margin-bottom: 0;
+        margin-right: 10px;
+    }
+
+    .tags_bar {
+        margin-bottom: 20px;
+    }
+
+    .row {
+        flex-direction: row;
+    }
+
+    .row p {
+        text-align: left;
+        margin-top: 0;
+    }
+
+    .job_card {
+        flex-direction: row;
+    }
+
+    .job_details {
+        flex-direction: row;
+    }
+
+    .job_details .text {
+        margin-left: 2.3rem;
+        text-align: left;
+    }
+
+    .job_details .text span {
+        text-align: left;
+    }
+
+    .job_salary {
+        text-align: right;
+    }
+}

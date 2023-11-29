@@ -324,6 +324,10 @@ def jobseekerProfile():
 def recruiterProfile():
     return render_template('recruiterProfile.html')
 
+@app.route('/userDashboard')
+def userDashboard():
+    return render_template('userDashboard.html')
+
 
 @app.route('/joblists')
 @login_required
