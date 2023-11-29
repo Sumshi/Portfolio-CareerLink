@@ -159,7 +159,7 @@ def update_recruiter_profile():
         form.zip_code.data = current_user.zip_code
         form.about.data = current_user.about
 
-    return render_template('edit_recruiter_profile.html',
+    return render_template('recruiterProfile.html',
                            pageTitle='Edit Profile',
                            form=form)
 
@@ -315,6 +315,10 @@ def discover():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/jobseekerProfile')
+def jobseekerProfile():
+    return render_template('jobseekerProfile.html')
 
 
 @app.route('/joblists')
