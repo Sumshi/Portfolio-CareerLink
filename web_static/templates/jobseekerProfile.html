@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLink</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/discover.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header-container">
+        <nav>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/careerlogo.png') }}" alt="logo"></a>
+      <div class="nav-links" id="navLinks">
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <ul>
+          <li><a href="{{ url_for('home') }}">HOME</a></li>
+          <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+          <li><a href="{{ url_for('discover') }}">JOBS</a></li>
+          <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
+          <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+        </ul>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </nav>
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class="profile-container">
+        <h1>Mike`s Profile</h1>
+
+        <div class="profile-info">
+            <div class="profile-pic">
+                <img src="{{ url_for('static', filename='images/user0.jpg') }}" alt="">
+            </div>
+
+            <div class="user-details">
+                <p><b>Name</b>: Mike</p>
+                <p><b>Email</b>: mike@gmail.com</p>
+                <p><b>Phone</b>: +1234567890</p>
+                <p><b>Country</b>: Kenya</p>
+                <p><b>Address</b>: 1234-southfields</p>
+                <!-- Add more user details as needed -->
+            </div>
+        </div>
+
+        <!-- <div class="resume-section">
+            <h2>Resume</h2>
+            <a href="path/to/user/resume.pdf" target="_blank">View Resume</a>
+        </div> -->
+
+
+        <!-- Add a new section for job seekers to upload resumes -->
+      <section class="job-seekers-section">
+        <h2>Resume</h2>
+        <p>Post your resume - Start your new career</p>
+
+        <!-- Resume upload form -->
+        <!-- Resume upload form -->
+          <form id="resumeUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="resume">Choose a file:</label>
+            <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
+            <!-- <button type="submit">Upload Resume</button> -->
+            <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job">Upload Resume</a>
+          </form>
+      </section>
+        <br>
+        <br>
+
+
+<!-- Update Profile -->
+<section class="job-seekers-section">
+    <h2>Update Profile</h2>
+    <p>Keep your information up to date</p>
+
+    <!-- Profile update form -->
+   <form id="profileUpdateForm" action="{{ url_for('update_jobseeker_profile') }}" method="post" enctype="multipart/form-data">
+        <label for="profilePic">Profile Picture:</label>
+        <input type="file" id="profilePic" name="profile_pic" accept=".jpg, .jpeg, .png">
+        <br>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required value="{% if form %}{{ form.username.data }}{% endif %}">
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required value="{% if form %}{{ form.email.data }}{% endif %}">
+        <br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required value="{% if form %}{{ form.phone_number.data }}{% endif %}">
+        <br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="{% if form %}{{ form.country.data }}{% endif %}">
+        <br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{% if form %}{{ form.address.data }}{% endif %}">
+        <br>
+        <br>
+        <br>
+        <!-- <button type="submit">Update Profile</button> -->
+        <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job">Update Profile</a>
+    </form>
+
+
+  </section>
+
+  
+        <!-- Add Job History section here -->
+        <div class="job-history-section">
+            <h3>Job History</h3>
+            <ul>
+                {% for job in job_history %}
+                    <li>
+                        <h4><b>Job Title:</b> {{ job.title }}</h4>
+                        <p><b>Company:</b> {{ job.company }}</p>
+                        <p><b>Location:</b> {{ job.location }}</p>
+                        <!-- Add more job details as needed -->
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- <br>
+         <a href="{{ url_for('login') }}" class="hero-job">Update Profile</a> -->
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                        <li><a href="#">locate a service provider</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Report a problem</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© CareerLink 2023. All rights reserved</p>
+    </footer>
+
+  <script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+      navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+      navLinks.style.right = "-200px";
+    }
+  </script>
+</body>
+</html>
