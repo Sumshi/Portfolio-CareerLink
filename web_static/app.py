@@ -316,13 +316,31 @@ def discover():
 def contact():
     return render_template('contact.html')
 
+
 @app.route('/jobseekerProfile')
+@login_required
 def jobseekerProfile():
-    return render_template('jobseekerProfile.html')
+    """ Display the current logged in User progile """
+    user = storage.get_by_id(current_user.id)
+    job_history = user.prev_jobs
+    return render_template('jobseekerProfile.html',
+                           name=user.username,
+                           user=user,
+                           job_history=job_history
+                           )
+
 
 @app.route('/recruiterProfile')
+@login_required
 def recruiterProfile():
-    return render_template('recruiterProfile.html')
+    """ Display the current logged in User profile """
+    user = storage.get_by_id(current_user.id)
+    jobs = user.job_listings
+    return render_template('recruiterProfile.html',
+                           name=user.username,
+                           user=user,
+                           jobs=jobs
+                           )
 
 @app.route('/userDashboard')
 def userDashboard():
