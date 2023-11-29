@@ -222,9 +222,16 @@
         <ul>
           {% if job_history %} {% for job in job_history %}
           <li>
-            <h4><b>Job Title:</b> {{ job.title }}</h4>
-            <p><b>Company:</b> {{ job.company }}</p>
-            <p><b>Location:</b> {{ job.location }}</p>
+            <h4><b>Job Title:</b> {{ job.job_title }}</h4>
+            <p>
+              <b>From:</b> {{ job.start_date }} <b>To:</b> {{ job.end_date }}
+            </p>
+            <p><b>Company:</b> {{ job.company_name }}</p>
+            <p><b>Description:</b> {{ job.job_description }}</p>
+            <p><b>Location:</b> {{ job.state }}, {{ job.country }}</p>
+            {% if job.salary %}
+            <p><b>Salary:</b> {{ job.salary }}</p>
+            {%endif%}
             <!-- Add more job details as needed -->
           </li>
           {% endfor %} {% else %}
