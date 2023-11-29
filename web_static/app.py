@@ -320,6 +320,10 @@ def contact():
 def jobseekerProfile():
     return render_template('jobseekerProfile.html')
 
+@app.route('/recruiterProfile')
+def recruiterProfile():
+    return render_template('recruiterProfile.html')
+
 
 @app.route('/joblists')
 @login_required

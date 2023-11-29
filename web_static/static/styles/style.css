@@ -24,6 +24,10 @@
     position: relative;
 }
 
+.header .text-box h1 {
+    color: white;
+}
+
 /* .header-container img {
     width: 50px;
     height: 50px;
