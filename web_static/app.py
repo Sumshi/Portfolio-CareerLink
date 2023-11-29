@@ -9,7 +9,7 @@ from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
 
-PROFILES_FOLDER = '/web_static/static/profile_pics'
+PROFILES_FOLDER = '/web_static/static/images/profile_pics'
 RESUMES_FOLDER = '/web_static/static/resumes'
 # PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
@@ -108,7 +108,7 @@ def recruiter_signup():
                            )
 
 
-@app.route('/recruiter/edit_profile', methods=['GET', 'POST'])
+@app.route('/recruiter/edit_profile', methods=['GET', 'PUT'])
 @login_required
 def update_recruiter_profile():
     """ Updates the profile of a recruiter """
@@ -219,7 +219,7 @@ def jobseeker_signup():
                            )
 
 
-@app.route('/jobseeker/edit_profile', methods=['GET', 'POST'])
+@app.route('/jobseeker/edit_profile', methods=['GET', 'PUT'])
 @login_required
 def update_jobseeker_profile():
     """ Updates the profile of a jobseeker """
@@ -317,7 +317,7 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/jobseekerProfile')
+@app.route('/jobseekerProfile', methods=['GET'])
 @login_required
 def jobseekerProfile():
     """ Display the current logged in User progile """
@@ -330,7 +330,7 @@ def jobseekerProfile():
                            )
 
 
-@app.route('/recruiterProfile')
+@app.route('/recruiterProfile', methods=['GET'])
 @login_required
 def recruiterProfile():
     """ Display the current logged in User profile """
@@ -342,7 +342,9 @@ def recruiterProfile():
                            jobs=jobs
                            )
 
-@app.route('/userDashboard')
+
+@app.route('/userDashboard', methods=['GET'])
+@login_required
 def userDashboard():
     return render_template('userDashboard.html')
 
@@ -351,7 +353,7 @@ def recruiterDashboard():
     return render_template('recruiterDashboard.html')
 
 
-@app.route('/joblists')
+@app.route('/joblists', methods=['GET'])
 @login_required
 def joblists():
     return render_template('joblists.html')

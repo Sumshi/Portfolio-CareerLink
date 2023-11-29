@@ -13,7 +13,7 @@ class JobHistory(BaseModel, Base):
         'job_seekers.id'), nullable=False)
     company_name = Column(String(128), nullable=False)
     start_date = Column(Date, nullable=False)
-    end_date = Column(DateTime, default=datetime.utcnow)
+    end_date = Column(Date, default=date.today())
     job_title = Column(String(128), nullable=False)
     job_description = Column(String(1000), nullable=False)
     country = Column(String(60), nullable=False)
