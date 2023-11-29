@@ -1,7 +1,7 @@
 <span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>User Dashboard</title>
+  <title>Recruiter Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/userDashboard.css') }}">
    <link rel="stylesheet" href="{{ url_for('static', filename='styles/joblists.css') }}">
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/userDashboard.css') }}"> -->
@@ -14,8 +14,8 @@
     <nav>
       <div class="navbar">
         <div class="logo">
-            <img src="{{ url_for('static', filename='images/user0.jpg') }}" alt="">
-          <h1>jobs</h1>
+            <img src="{{ url_for('static', filename='images/user1.jpg') }}" alt="">
+          <h1>jobs<br>Posted</h1>
           <!-- <p>Mike's dashboard</p> -->
         </div>
         <ul>
@@ -24,22 +24,22 @@
             <span class="nav-item">Dashboard</span>
           </a>
           </li>
-          <li><a href="{{ url_for('discover') }}">
+          <li><a href="{{ url_for('home') }}">
             <i class="fas fa-chart-bar"></i>
-            <span class="nav-item">Discover</span>
+            <span class="nav-item">Home</span>
           </a>
           </li>
           <li><a href="{{ url_for('joblists') }}">
             <i class="fas fa-tasks"></i>
-            <span class="nav-item">Jobs Board</span>
+            <span class="nav-item">jobs posted</span>
           </a>
           </li>
-          <li><a href="{{ url_for('jobseekerProfile') }}">
+          <!-- <li><a href="{{ url_for('jobseekerProfile') }}">
             <i class="fa-solid fa-file"></i>
             <span class="nav-item">Resume</span>
           </a>
           </li>
-    
+     -->
           <li><a href="#">
             <i class="fas fa-question-circle"></i>
             <span class="nav-item">Help</span>
@@ -52,13 +52,13 @@
 
     <section class="main">
       <div class="main-top">
-        <p>Explore available Jobs!</p>
+        <p>Post Jobs!</p>
       </div>
       <div class="main-body">
-        <h1>Recent Jobs</h1>
+        <h1>Here are the Jobs you have posted</h1>
       
       <div class="search_bar">
-        <input type="search" placeholder="Search job here...">
+        <!-- <input type="search" placeholder="Search job here..."> -->
         <select name="" id="">
           <option>Category</option>
           <option>Web Design</option>
@@ -90,7 +90,7 @@
       </div>
 
       <div class="row">
-        <p>There are more than <span>400</span> Jobs</p>
+        <!-- <p>There are more than <span>400</span> Jobs</p> -->
         <a href="#">See all</a>
       </div>
 
@@ -98,12 +98,12 @@
         <div class="job_details">
           <div class="img">
             <!-- <i class="fab fa-google-drive"></i> -->
-            <i class="fa-brands fa-square-instagram"></i>
+            <!-- <i class="fa-brands fa-square-instagram"></i> -->
             <img src="" alt="">
           </div>
           <div class="text">
-            <h2>UX Designer</h2>
-            <span>Instagram - Junior Post</span>
+            <h2>Nurse</h2>
+            <span>Kenyatta Hospital</span>
           </div>
         </div>
         <div class="job_salary">
@@ -115,10 +115,10 @@
       <div class="job_card">
         <div class="job_details">
           <div class="img">
-            <i class="fa-brands fa-linkedin"></i>
+            <!-- <i class="fa-brands fa-linkedin"></i> -->
           </div>
           <div class="text">
-            <h2>JavaScript Developer</h2>
+            <h2>React Developer</h2>
             <span>linkedin - Senior Post</span>
           </div>
         </div>
@@ -131,10 +131,10 @@
       <div class="job_card">
         <div class="job_details">
           <div class="img">
-            <i class="fab fa-facebook"></i>
+            <!-- <i class="fab fa-facebook"></i> -->
           </div>
           <div class="text">
-            <h2>Product Developer</h2>
+            <h2>Accountant</h2>
             <span>Facbook - Manager Post</span>
           </div>
         </div>
@@ -147,11 +147,11 @@
       <div class="job_card">
         <div class="job_details">
           <div class="img">
-            <i class="fab fa-git-alt"></i>
+            <!-- <i class="fab fa-git-alt"></i> -->
           </div>
           <div class="text">
             <h2>Programmer</h2>
-            <span>Github - Juni Post</span>
+            <span>Andela</span>
           </div>
         </div>
         <div class="job_salary">
@@ -163,11 +163,11 @@
       <div class="job_card">
         <div class="job_details">
           <div class="img">
-            <i class="fab fa-youtube"></i>
+            <!-- <i class="fab fa-youtube"></i> -->
           </div>
           <div class="text">
-            <h2>React.js Expert</h2>
-            <span>Youtube - VIP</span>
+            <h2>DevOps Engineer</h2>
+            <span>Safaricom</span>
           </div>
         </div>
         <div class="job_salary">

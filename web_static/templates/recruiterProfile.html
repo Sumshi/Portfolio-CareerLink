@@ -43,7 +43,7 @@
     <br>
     <br>
     <div class="profile-container">
-        <h1>Jane's Profile</h1>
+        <h1>{{ name }}`s Profile</h1>
 
         <div class="profile-info">
             <div class="profile-pic">
@@ -51,13 +51,13 @@
             </div>
 
             <div class="user-details">
-                <p><b>Name</b>: Jane</p>
-                <p><b>Email</b>: jane@gmail.com</p>
-                <p><b>Phone</b>: +25474176542</p>
-                <p><b>Country</b>: Rwanda</p>
-                <p><b>Address</b>: 22-8000 Savannah Field</p>
-                <!-- Add more user details as needed -->
-            </div>
+          <p><b>Name</b>: {{ name }}</p>
+          <p><b>Email</b>: {{ user.email }}</p>
+          <p><b>Phone</b>: {{ user.phone_number }}</p>
+          <p><b>Country</b>: {{ user.country }}</p>
+          <p><b>Address</b>: {{ user.address }}</p>
+          <!-- Add more user details as needed -->
+        </div>
         </div>
 
         <!-- Resume upload form -->
@@ -119,17 +119,19 @@
 
         <!-- Add Job History section here -->
         <div class="job-history-section">
-            <h3>Job History</h3>
-            <ul>
-                {% for job in job_history %}
-                    <li>
-                        <h4><b>Job Title:</b> {{ job.title }}</h4>
-                        <p><b>Company:</b> {{ job.company }}</p>
-                        <p><b>Location:</b> {{ job.location }}</p>
-                        <!-- Add more job details as needed -->
-                    </li>
-                {% endfor %}
-            </ul>
+             <h3>Job History</h3>
+        <ul>
+          {% if job_history %} {% for job in job_history %}
+          <li>
+            <h4><b>Job Title:</b> {{ job.title }}</h4>
+            <p><b>Company:</b> {{ job.company }}</p>
+            <p><b>Location:</b> {{ job.location }}</p>
+            <!-- Add more job details as needed -->
+          </li>
+          {% endfor %} {% else %}
+          <p>No job history available. Please update.</p>
+          {% endif %}
+        </ul>
         </div>
     </div>
     <br>
