@@ -20,7 +20,9 @@ class Jobs(BaseModel, Base):
     deadline = Column(Date, nullable=False)
     country = Column(String(60), nullable=False)
     town = Column(String(128), nullable=False)
-    salary = Column(Integer, nullable=True)
+    salary = Column(String(32), nullable=True)
+    open_position = Column(String(32), default='1', nullable=True)
+    date_posted = Column(Date, default=date.today())
     recruiter = relationship('Recruiter', backref=backref(
         'job_listings', cascade="all, delete"))
     job_seeker = relationship('Application', backref='applicants')
