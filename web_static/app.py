@@ -348,15 +348,27 @@ def recruiterProfile():
 def userDashboard():
     return render_template('userDashboard.html')
 
-@app.route('/recruiterDashboard')
+
+@app.route('/recruiterDashboard', methods=['GET'])
+@login_required
 def recruiterDashboard():
-    return render_template('recruiterDashboard.html')
+    """ Route to display dashboard for a recruiter page """
+    recruiter = storage.get_by_id(current_user.id)
+    my_jobs = recruiter.job_listings
+    return render_template('recruiterDashboard.html',
+                           my_jobs=my_jobs,
+                           recruiter=recruiter)
 
 
 @app.route('/joblists', methods=['GET'])
 @login_required
 def joblists():
-    return render_template('joblists.html')
+    """ Route to display all the jobs posted """
+    jobs = []
+    for job in storage.all(Jobs).values():
+        jobs.append(job.to_dict())
+    return render_template('joblists.html',
+                           jobs=jobs)
 
 
 if __name__ == '__main__':
