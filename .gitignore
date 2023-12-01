@@ -13,3 +13,5 @@ api/__pycache__/*
 api/v1/__pycache__/*
 api/views/__pycache__/*
 web_static/__pycache__/*
+alembic/__pycache__/*
+alembic/versions/__pycache__/*
