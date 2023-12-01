@@ -371,5 +371,41 @@ def joblists():
                            jobs=jobs)
 
 
+@app.route('/posted_jobs', methods=['GET'])
+@login_required
+def my_posted_jobs():
+    """ Route to retrieve a recruiter's posted jobs """
+    recruiter = storage.get_by_id(current_user.id)
+    my_jobs = recruiter.job_listings
+    return render_template('jobs.html',
+                           my_jobs=my_jobs,
+                           recruiter=recruiter)
+
+
+@app.route('/applied_jobs', methods=['GET'])
+@login_required
+def my_applied_jobs():
+    """ Route to retrieve a jobseeker's applied jobs """
+    user = storage.get_by_id(current_user.id)
+    applied_jobs = user.application
+    return render_template('appliedJobs.html',
+                           applied_jobs=applied_jobs,
+                           user=user)
+
+
+@app.route('/job/<text>', methods=['GET'])
+@login_required
+def job_details(job_id):
+    """ Retrieve details for a specific job """
+    job = storage.get_by_id(job_id)
+    applicants = job.job_seeker
+    recruiter = job.recruiter
+    return render_template('job.html',
+                           applicants=applicants,
+                           job=job,
+                           recruiter=recruiter,
+                           user=current_user)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
