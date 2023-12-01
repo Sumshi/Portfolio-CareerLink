@@ -377,18 +377,18 @@ def my_posted_jobs():
     """ Route to retrieve a recruiter's posted jobs """
     recruiter = storage.get_by_id(current_user.id)
     my_jobs = recruiter.job_listings
-    return render_template('jobs.html',
+    return render_template('posted_jobs.html',
                            my_jobs=my_jobs,
                            recruiter=recruiter)
 
-
+# jobseeker
 @app.route('/applied_jobs', methods=['GET'])
 @login_required
 def my_applied_jobs():
     """ Route to retrieve a jobseeker's applied jobs """
     user = storage.get_by_id(current_user.id)
     applied_jobs = user.application
-    return render_template('appliedJobs.html',
+    return render_template('applied_jobs.html',
                            applied_jobs=applied_jobs,
                            user=user)
 

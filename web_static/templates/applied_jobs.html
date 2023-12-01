@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Applications</title>
+    <!-- <link rel="stylesheet" href="../static/styles/applied_jobs.css"> -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='styles/applied_jobs.css') }}">
+     <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<h3>Here are the jobs you have applied to</h3>
+
+<div class="job-container">
+    <div class="job">
+        <div class="job-title">Web Developer</div>
+        <div class="company-name">Tech Solutions Inc.</div>
+        <div class="job-description">
+            We are seeking a skilled web developer to join our dynamic team. The ideal candidate will have experience
+            in front-end and back-end development using modern web technologies.
+            <ul>
+                    <li>Hybrid: Full-time</li>
+                    <li>501-1,000 employees · Financial Services</li>
+                    <li>Skills: Back-End Web Development, Software Development</li>
+            </ul>
+        </div>
+        <a href="#" class="apply-button">Applied</a>
+    </div>
+
+    <div class="job">
+        <div class="job-title">UX/UI Designer</div>
+        <div class="company-name">Creative Designs Co.</div>
+        <div class="job-description">
+            Creative Designs Co. is looking for a talented UX/UI designer to create visually appealing and
+            user-friendly interfaces. If you have a passion for design and a keen eye for detail, we want to hear from you.
+            <ul>
+                    <li>Full-time</li>
+                    <li>501-1,000 employees · Financial Services</li>
+                    <li>Skills: User interface, user design</li>
+            </ul>
+        </div>
+        <a href="#" class="apply-button">Applied</a>
+    </div>
+
+    <div class="job">
+        <div class="job-title">Software Engineer</div>
+        <div class="company-name">Innovate Tech Solutions</div>
+        <div class="job-description">
+            Innovate Tech Solutions is hiring a software engineer with strong problem-solving skills and expertise in
+            building scalable and maintainable software solutions.
+            <ul>
+                    <li>Hybrid: Full-time</li>
+                    <li>501-1,000 employees · Financial Services</li>
+                    <li>Skills: Back-End Web Development, Software Development</li>
+            </ul>
+        </div>
+        <a href="#" class="apply-button">Applied</a>
+    </div>
+
+    <div class="job">
+        <div class="job-title">Data Scientist</div>
+        <div class="company-name">Data Insights Corporation</div>
+        <div class="job-description">
+            Data Insights Corporation is seeking a data scientist to analyze and interpret complex data sets. If you
+            have a background in data analysis and machine learning, apply now!
+            <ul>
+                    <li>Hybrid: Full-time</li>
+                    <li>501-1,000 employees · Financial Services</li>
+                    <li>Skills: Back-End Web Development, Software Development</li>
+            </ul>
+        </div>
+        <a href="#" class="apply-button">Applied</a>
+    </div>
+</div>
+
+
+<div class="job-container">
+    {% for job in jobs %}
+        <div class="job">
+            <div class="job-title">{{ job['title'] }}</div>
+            <div class="company-name">{{ job['company'] }}</div>
+            <div class="job-description">
+                {{ job['description'] }}
+                <ul>
+                    {% for detail in job['details'] %}
+                        <li>{{ detail }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="#" class="apply-button">{{ job['status'] }}</a>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
