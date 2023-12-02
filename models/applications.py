@@ -13,6 +13,10 @@ class Application(BaseModel, Base):
         'job_seekers.id'), nullable=False)
     job_id = Column(String(60), ForeignKey(
         'jobs.id'), nullable=False)
+    first_name = Column(String(128), nullable=False)
+    middle_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=False)
+    email = Column(String(128), index=True, nullable=False)
     resume = Column(String(200), nullable=False)
     cover_letter = Column(String(200), nullable=False)
 
