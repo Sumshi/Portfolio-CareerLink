@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Form</title>
+    <!-- <link rel="stylesheet" href="../static/styles/application_form.css"> -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles/application_form.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Job Application Form</h2>
+    <form action="/submit_application" method="post">
+        <!-- Job Seeker Information -->
+        <label for="job_seeker_name">Full Name:</label>
+        <input type="text" id="job_seeker_name" name="job_seeker_name" required>
+
+        <label for="job_seeker_email">Email:</label>
+        <input type="email" id="job_seeker_email" name="job_seeker_email" required>
+
+        <!-- Job Information -->
+        <label for="job_title">Job Title:</label>
+        <input type="text" id="job_title" name="job_title" required>
+
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required>
+
+        <!-- Resume and Cover Letter -->
+        <label for="resume">Resume (PDF, Doc):</label>
+        <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
+
+        <label for="cover_letter">Cover Letter:</label>
+        <textarea id="cover_letter" name="cover_letter" rows="5" required></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Application</button>
+    </form>
+</div>
+
+</body>
+</html>

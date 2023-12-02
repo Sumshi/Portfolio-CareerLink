@@ -348,6 +348,11 @@ def recruiterProfile():
 def userDashboard():
     return render_template('userDashboard.html')
 
+@app.route('/applicationForm', methods=['GET'])
+@login_required
+def pplicationForm():
+    return render_template('application_form.html')
+
 
 @app.route('/recruiterDashboard', methods=['GET'])
 @login_required
