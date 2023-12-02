@@ -67,7 +67,7 @@
           <ul>
             <li><a href="{{ url_for('home') }}">HOME</a></li>
             <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('discover') }}">JOBS</a></li>
+            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
             <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
             <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
           </ul>
@@ -90,7 +90,7 @@
         </svg>
       </nav>
     </div>
-<!-- 
+    <!-- 
     <div class="sign-up-form">
         <i class="fa-solid fa-user"></i>
         <h1>{{ pageTitle }}</h1>
@@ -108,20 +108,20 @@
 
     <div class="sign-up-form">
       <i class="fa-solid fa-user"></i>
-        <h1>{{ pageTitle }}</h1>
-    <form action="" method="post" novalidate>
-      {{ form.hidden_tag() }}
-      <p>
-        {{ form.username.label }}<br />
-        {{ form.username(size=32) }}
-      </p>
-      <p>
-        {{ form.password.label }}<br />
-        {{ form.password(size=32) }}
-      </p>
-      <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-      <p>{{ form.submit() }}</p>
-    </form>
+      <h1>{{ pageTitle }}</h1>
+      <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+          {{ form.username.label }}<br />
+          {{ form.username(size=32) }}
+        </p>
+        <p>
+          {{ form.password.label }}<br />
+          {{ form.password(size=32) }}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+      </form>
     </div>
     <footer class="footer">
       <div class="container">
