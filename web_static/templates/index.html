@@ -34,7 +34,7 @@
     </nav>
   </div>
 
-  <section class="header">
+  <!-- <section class="header">
     <div class="text-box">
       <h1>Discover Exciting Opportunities</h1>
       <p>
@@ -49,9 +49,49 @@
       <br>
       <a href="{{ url_for('login') }}" class="hero-btn">Log In</a>
     </div>
-  </section>
+  </section> -->
+
+  <section class="header">
+    <div class="text-box">
+        <h1>Discover Exciting Opportunities</h1>
+        <p>
+            Absolutely delighted to welcome you to CareerLink your gateway to a world of exciting opportunities!
+            As you navigate through our platform, you're not just exploring a place to find a job;
+            you're entering a dynamic realm where career paths unfold and possibilities abound.
+            Tap into our Talent Pool
+        </p>
+
+        <!-- <div class="button-container">
+            <div class="button-box">
+                <p>For Job Seekers</p>
+                <a href="{{ url_for('jobseeker_signup') }}" class="hero-btn">Sign Up</a>
+            </div>
+            <div class="button-box">
+                <p>For Recruiters</p>
+                <a href="{{ url_for('recruiter_signup') }}" class="hero-btn">Sign Up</a>
+            </div>
+        </div> -->
+
+        <br>
+        <br>
+        <br>
+
+        <a href="{{ url_for('login') }}" class="hero-btn">Log In</a>
+    </div>
+</section>
+
 
  
+    <div class="button-container">
+            <div class="button-box">
+                <p>For Job Seekers</p>
+                <a href="{{ url_for('jobseeker_signup') }}" class="hero-btn">Sign Up</a>
+            </div>
+            <div class="button-box">
+                <p>For Recruiters</p>
+                <a href="{{ url_for('recruiter_signup') }}" class="hero-btn">Sign Up</a>
+            </div>
+        </div>
 
   <!--br to create space, u can also us nbsp-->
     <br>

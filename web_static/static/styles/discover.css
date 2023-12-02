@@ -496,13 +496,13 @@ button:hover {
     background-color: #f44336;
 }
 
-/*fitting the image for smaller screen*/
-/* @media(max-width: 700px) {
+/* fitting the image for smaller screen */
+@media(max-width: 700px) {
     .testimonial-col img {
         margin-left: 0px;
         margin-right: 15px;
     }
-} */
+}
 
 .testimonials {
     padding: 40px 0;
@@ -571,12 +571,12 @@ button:hover {
 }
 
 /*fitting the image for smaller screen*/
-@media(max-width: 700px) {
+/* @media(max-width: 700px) {
     .testimonial-col img {
         margin-left: 0px;
         margin-right: 15px;
     }
-}
+} */
 
 
 @media screen and (max-width:960px) {
@@ -592,10 +592,3 @@ button:hover {
         max-width: 100%;
     }
 }
-
-/* @media(max-width:768px) {
-    .testimonials {
-        flex-direction: column;
-        justify-content: center;
-    }
-} */

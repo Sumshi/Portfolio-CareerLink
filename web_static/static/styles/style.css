@@ -469,11 +469,6 @@ h1 {
     text-align: center;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
-
 .profile-container {
     max-width: 800px;
     margin: 20px auto;
@@ -507,4 +502,40 @@ h2 {
 
 .resume-section {
     margin-top: 20px;
+}
+
+
+
+
+/*---------------------------------Home signup styling-------------------------------------------*/
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-box {
+    width: 48%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.button-box p {
+    margin-bottom: 10px;
+}
+
+.hero-btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+    /* background-color: #45a049; */
+    background-color: #f44336;
 }
