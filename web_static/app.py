@@ -364,7 +364,7 @@ def applicationForm(id):
                                'last_name', 'email', 'cover_letter']
             if not all(field in request.form for field in required_fields):
                 flash('All fields are required')
-                return redirect(url_for('applicationForm', id=id))
+                return redirect(url_for('application_form', id=id))
             user = storage.get_by_id(current_user.id)
             application = Application(
                 job_seeker_id=user.id,
@@ -466,6 +466,11 @@ def my_applied_jobs():
 @login_required
 def job_details(id):
     """ Retrieve details for a specific job """
+    # check if it is a recruiter
+    is_recruiter = False
+    user = storage.get_by_id(current_user.id)
+    if isinstance(user, Recruiter):
+        is_recruiter = True
     job = storage.get(Jobs, id)
     applicants = job.job_seeker
     recruiter = job.recruiter
@@ -473,7 +478,7 @@ def job_details(id):
                            applicants=applicants,
                            job=job,
                            recruiter=recruiter,
-                           user=current_user)
+                           is_recruiter=is_recruiter)
 
 
 if __name__ == '__main__':

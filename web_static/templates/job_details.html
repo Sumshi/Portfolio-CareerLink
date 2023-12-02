@@ -1,76 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Details</title>
-    <link rel="stylesheet" href="../static/styles/job_details.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../static/styles/job_details.css" />
+  </head>
+  <body>
+    <div class="job-details-container">
+      <h1>{{ job.title }}</h1>
+      <p class="company">{{ job.company }}.</p>
+      <p class="location">{{ job.town }}, {{ job.country }}</p>
 
-<div class="job-details-container">
-    <h1>Web Developer</h1>
-    <p class="company">Tech Solutions Inc.</p>
-    <p class="location">City, Country</p>
+      <div class="job-description">
+        <h2>Job Description</h2>
+        <p>{{ job.description }}</p>
 
-    <div class="job-description">
+        <h2>Job Details</h2>
+        <ul>
+          <li>Employment Type: {{ job.type }}</li>
+          <li>Open Positions: {{ job.open_position }}</li>
+          <li>Contact: {{ job.contact }}</li>
+          <li>Application deadline: {{ job.deadline }}</li>
+          <li>Date Posted: {{ job.date_posted }}</li>
+          {% if job.salary %}
+          <li>Salary: {{ job.salary }}</li>
+          {% endif %}
+        </ul>
+
+        <h2>How to Apply</h2>
+        <p>{{ job.application }}</p>
+
+        {% if is_recruiter %}
+        <a href="{{ url_for ('posted_jobs') }}" class="apply-button">My Jobs</a>
+        {% else %}
+        <a
+          href="{{ url_for ('applicationForm', id=job['id']) }}"
+          class="apply-button"
+          >Apply Now</a
+        >
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="job-details-container">
+      <h1>UX/UI Designer</h1>
+      <p class="company">Creative Designs Co.</p>
+      <p class="location">Nairobi, Kenya</p>
+
+      <div class="job-description">
         <h2>Job Description</h2>
         <p>
-            We are seeking a skilled web developer to join our dynamic team. The ideal candidate will have experience
-            in front-end and back-end development using modern web technologies.
+          Creative Designs Co. is looking for a talented UX/UI designer to
+          create visually appealing and user-friendly interfaces. If you have a
+          passion for design and a keen eye for detail, we want to hear from
+          you.
         </p>
 
         <h2>Job Details</h2>
         <ul>
-            <li>Position: Web Developer</li>
-            <li>Company: Tech Solutions Inc.</li>
-            <li>Location: City, Country</li>
-            <li>Employment Type: Full-time</li>
-            <li>Company Size: 501-1,000 employees</li>
-            <li>Industry: Financial Services</li>
-            <li>Skills: Back-End Web Development, Software Development</li>
+          <li>Position: UX/UI Designer</li>
+          <li>Company: Creative Designs Co.</li>
+          <li>Location: Nairobi, Kenya</li>
+          <li>Employment Type: Full-time</li>
+          <li>Company Size: 501-1,000 employees</li>
+          <li>Industry: Financial Services</li>
+          <li>Skills: User interface, user design</li>
         </ul>
 
         <h2>How to Apply</h2>
         <p>
-            To apply for this position, please click the "Apply Now" button below and submit your resume and cover letter.
+          To apply for this position, please click the "Apply Now" button below
+          and submit your resume and cover letter.
         </p>
 
         <a href="application_form.html" class="apply-button">Apply Now</a>
+      </div>
     </div>
-</div>
-
-<div class="job-details-container">
-    <h1>UX/UI Designer</h1>
-    <p class="company">Creative Designs Co.</p>
-    <p class="location">Nairobi, Kenya</p>
-
-    <div class="job-description">
-        <h2>Job Description</h2>
-        <p>
-            Creative Designs Co. is looking for a talented UX/UI designer to create visually appealing and
-            user-friendly interfaces. If you have a passion for design and a keen eye for detail, we want to hear from you.
-        </p>
-
-        <h2>Job Details</h2>
-        <ul>
-            <li>Position: UX/UI Designer</li>
-            <li>Company: Creative Designs Co.</li>
-            <li>Location: Nairobi, Kenya</li>
-            <li>Employment Type: Full-time</li>
-            <li>Company Size: 501-1,000 employees</li>
-            <li>Industry: Financial Services</li>
-            <li>Skills: User interface, user design</li>
-        </ul>
-
-        <h2>How to Apply</h2>
-        <p>
-            To apply for this position, please click the "Apply Now" button below and submit your resume and cover letter.
-        </p>
-
-        <a href="application_form.html" class="apply-button">Apply Now</a>
-    </div>
-</div>
-
-</body>
+  </body>
 </html>
