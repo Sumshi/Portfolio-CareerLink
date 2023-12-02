@@ -11,6 +11,7 @@ from werkzeug.utils import secure_filename
 
 PROFILES_FOLDER = '/web_static/static/images/profile_pics'
 RESUMES_FOLDER = '/web_static/static/resumes'
+COVER_LETTER_FOLDER = '/web_static/static/cover_letters'
 # PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
 app = Flask(__name__)
@@ -22,6 +23,8 @@ app.config['PROFILES_FOLDER'] = os.environ.get(
     'PROFILES_FOLDER') or PROFILES_FOLDER
 app.config['RESUMES_FOLDER'] = os.environ.get(
     'RESUMES_FOLDER') or RESUMES_FOLDER
+app.config['COVER_LETTER_FOLDER'] = os.environ.get(
+    'COVER_LETTER_FOLDER') or RESUMES_FOLDER
 
 login = LoginManager(app)
 login.login_view = 'login'
@@ -349,10 +352,42 @@ def userDashboard():
     return render_template('userDashboard.html')
 
 
-@app.route('/applicationForm', methods=['GET'])
+@app.route('/applicationForm/<string:id>', methods=['GET', 'POST'])
 @login_required
-def applicationForm():
+def applicationForm(id):
     """ To apply for a job """
+    job = storage.get(Jobs, id)
+    if job:
+        if request.method == 'POST':
+            # Ensure the required form fields are present
+            required_fields = ['first_name',
+                               'last_name', 'email', 'cover_letter']
+            if not all(field in request.form for field in required_fields):
+                flash('All fields are required')
+                return redirect(url_for('applicationForm', id=id))
+            user = storage.get_by_id(current_user.id)
+            application = Application(
+                job_seeker_id=user.id,
+                job_id=job.id,
+                first_name=request.form['first_name'],
+                middle_name=request.form.get('middle_name', ''),
+                last_name=request.form['last_name'],
+                email=request.form['email'],
+                resume=user.resume,
+            )
+            # process the cover letter
+            if 'cover_letter' in request.files:
+                cover_letter = request.files['cover_letter']
+                # Save the resume file to a folder
+                cover_letter_name = secure_filename(cover_letter.filename)
+                file_path = os.path.join(
+                    app.config['COVER_LETTER_FOLDER'], cover_letter_name)
+                cover_letter.save(file_path)
+                application.cover_letter = file_path
+            application.save()
+
+            return redirect(url_for('joblists'))
+
     return render_template('application_form.html')
 
 

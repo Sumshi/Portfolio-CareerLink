@@ -20,7 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.add_column('jobs', sa.Column('date_posted', sa.Date(), nullable=True, default=date.today()))
+    pass
 
 
 def downgrade() -> None:
