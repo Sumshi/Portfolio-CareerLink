@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Posting Form</title>
+    <!-- <link rel="stylesheet" href="../static/styles/job_posting_form.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/job_posting_form.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Job Posting Form</h2>
+    <form action="/submit_job_posting" method="post">
+        <!-- Job Information -->
+        <label for="job_title">Job Title:</label>
+        <input type="text" id="job_title" name="job_title" required>
+
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required>
+
+        <label for="job_description">Job Description:</label>
+        <textarea id="job_description" name="job_description" rows="5" required></textarea>
+
+        <label for="employment_type">Employment Type:</label>
+        <select id="employment_type" name="employment_type" required>
+            <option value="full_time">Full-time</option>
+            <option value="part_time">Part-time</option>
+            <option value="contract">Contract</option>
+        </select>
+
+        <label for="company_size">Company Size:</label>
+        <input type="text" id="company_size" name="company_size" required>
+
+        <label for="skills_required">Skills Required:</label>
+        <input type="text" id="skills_required" name="skills_required" required>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Job Posting</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job History Form</title>
+    <!-- <link rel="stylesheet" href="../static/styles/job_history.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/job_history.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Job History Form</h2>
+    <form action="/submit_job_history" method="post">
+        <!-- Job Seeker Information -->
+        <label for="job_seeker_id">Job Seeker ID:</label>
+        <input type="text" id="job_seeker_id" name="job_seeker_id" required>
+
+        <!-- Job History Information -->
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+
+        <label for="job_title">Job Title:</label>
+        <input type="text" id="job_title" name="job_title" required>
+
+        <label for="job_description">Job Description:</label>
+        <textarea id="job_description" name="job_description" rows="5" required></textarea>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required>
+
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary">
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Job History</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -350,9 +350,18 @@ def userDashboard():
 
 @app.route('/applicationForm', methods=['GET'])
 @login_required
-def pplicationForm():
+def applicationForm():
     return render_template('application_form.html')
 
+@app.route('/jobHistory', methods=['GET'])
+@login_required
+def jobHistory():
+    return render_template('job_history.html')
+
+@app.route('/jobPosting', methods=['GET'])
+@login_required
+def jobPosting():
+    return render_template('job_posting_form.html')
 
 @app.route('/recruiterDashboard', methods=['GET'])
 @login_required
