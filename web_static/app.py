@@ -348,20 +348,27 @@ def recruiterProfile():
 def userDashboard():
     return render_template('userDashboard.html')
 
+
 @app.route('/applicationForm', methods=['GET'])
 @login_required
 def applicationForm():
+    """ To apply for a job """
     return render_template('application_form.html')
+
 
 @app.route('/jobHistory', methods=['GET'])
 @login_required
 def jobHistory():
+    """ Route to display Job seeker's history """
     return render_template('job_history.html')
 
-@app.route('/jobPosting', methods=['GET'])
+
+@app.route('/jobPosting', methods=['GET', 'POST'])
 @login_required
 def jobPosting():
+    """ Route to post a new job by recruiter """
     return render_template('job_posting_form.html')
+
 
 @app.route('/recruiterDashboard', methods=['GET'])
 @login_required
@@ -396,6 +403,8 @@ def my_posted_jobs():
                            recruiter=recruiter)
 
 # jobseeker
+
+
 @app.route('/applied_jobs', methods=['GET'])
 @login_required
 def my_applied_jobs():
@@ -414,7 +423,7 @@ def job_details(job_id):
     job = storage.get_by_id(job_id)
     applicants = job.job_seeker
     recruiter = job.recruiter
-    return render_template('job.html',
+    return render_template('job_details.html',
                            applicants=applicants,
                            job=job,
                            recruiter=recruiter,
