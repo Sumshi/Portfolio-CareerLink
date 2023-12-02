@@ -445,17 +445,28 @@ def my_posted_jobs():
 def my_applied_jobs():
     """ Route to retrieve a jobseeker's applied jobs """
     user = storage.get_by_id(current_user.id)
-    applied_jobs = user.application
+    applications = user.application
+    jobs = []
+    for aplic in applications:
+        job = storage.get(Jobs, aplic.job_id)
+        if job:
+            jobs.append(job)
+    for job in jobs:
+        print("current job id is: {}".format(job.id))
+
+    print(jobs)
+    num = len(jobs)
     return render_template('applied_jobs.html',
-                           applied_jobs=applied_jobs,
-                           user=user)
+                           jobs=jobs,
+                           user=user,
+                           num=num)
 
 
-@app.route('/job/<text>', methods=['GET'])
+@app.route('/job/<string:id>', methods=['GET'])
 @login_required
-def job_details(job_id):
+def job_details(id):
     """ Retrieve details for a specific job """
-    job = storage.get_by_id(job_id)
+    job = storage.get(Jobs, id)
     applicants = job.job_seeker
     recruiter = job.recruiter
     return render_template('job_details.html',
