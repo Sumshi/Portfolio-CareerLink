@@ -310,9 +310,9 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/discover')
-def discover():
-    return render_template('discover.html')
+# @app.route('/discover')
+# def discover():
+#     return render_template('discover.html')
 
 
 @app.route('/contact')
