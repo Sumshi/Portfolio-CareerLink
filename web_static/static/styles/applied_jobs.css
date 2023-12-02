@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-}
+} */
 
 h1 {
     color: #333;
@@ -51,15 +51,15 @@ h1 {
     display: block;
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #3498db;
+    background-color: #023047;
     color: #fff;
     text-decoration: none;
     border: none;
-    border-radius: 4px;
+    border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .apply-button:hover {
-    background-color: #2980b9;
+    background-color: #f44336;
 }

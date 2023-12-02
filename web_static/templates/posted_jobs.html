@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Applications</title>
-    <!-- <link rel="stylesheet" href="../static/styles/applied_jobs.css"> -->
-      <link rel="stylesheet" href="{{ url_for('static', filename='styles/applied_jobs.css') }}">
-     <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLink</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/applied_jobs.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+  <!-- Include this kit to use Font Awesome icons -->
+  <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/swiper-bundle.min.css') }}">
 </head>
 <body>
+  <div class="header-container">
+    <nav>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/careerlogo.png') }}" alt="logo"></a>
+      <div class="nav-links" id="navLinks">
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <ul>
+          <li><a href="{{ url_for('home') }}">HOME</a></li>
+          <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+          <li><a href="{{ url_for('discover') }}">JOBS</a></li>
+          <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
+          <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+        </ul>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </nav>
+  </div>
 
-<h3>Here are the jobs you have posted</h3>
+<h3>Here are the jobs that you have posted</h3>
 
 <div class="job-container">
     <div class="job">
@@ -21,11 +42,10 @@
             in front-end and back-end development using modern web technologies.
             <ul>
                     <li>Hybrid: Full-time</li>
-                    <li>501-1,000 employees · Financial Services</li>
                     <li>Skills: Back-End Web Development, Software Development</li>
             </ul>
         </div>
-        <a href="#" class="apply-button">Posted</a>
+        <a href="https://www.linkedin.com/jobs/view/3750189433/?alternateChannel=search&refId=19jIzKrnRT7UtOMcJ%2F34YQ%3D%3D&trackingId=cF1%2BaObOg2Guc375GoLI0g%3D%3D" class="apply-button">More details</a>
     </div>
 
     <div class="job">
@@ -36,11 +56,10 @@
             user-friendly interfaces. If you have a passion for design and a keen eye for detail, we want to hear from you.
             <ul>
                     <li>Full-time</li>
-                    <li>501-1,000 employees · Financial Services</li>
                     <li>Skills: User interface, user design</li>
             </ul>
         </div>
-        <a href="#" class="apply-button">posted</a>
+        <a href="#" class="apply-button">More Details</a>
     </div>
 
     <div class="job">
@@ -51,11 +70,10 @@
             building scalable and maintainable software solutions.
             <ul>
                     <li>Hybrid: Full-time</li>
-                    <li>501-1,000 employees · Financial Services</li>
                     <li>Skills: Back-End Web Development, Software Development</li>
             </ul>
         </div>
-        <a href="#" class="apply-button">posted</a>
+        <a href="#" class="apply-button">More Details</a>
     </div>
 
     <div class="job">
@@ -66,11 +84,10 @@
             have a background in data analysis and machine learning, apply now!
             <ul>
                     <li>Hybrid: Full-time</li>
-                    <li>501-1,000 employees · Financial Services</li>
                     <li>Skills: Back-End Web Development, Software Development</li>
             </ul>
         </div>
-        <a href="#" class="apply-button">posted</a>
+        <a href="#" class="apply-button">More Details</a>
     </div>
 </div>
 
@@ -92,7 +109,63 @@
         </div>
     {% endfor %}
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                        <li><a href="#">locate a service provider</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Report a problem</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© CareerLink 2023. All rights reserved</p>
+    </footer>
+
+  <!-- JavaScript code for clicking, toggling of the menu icon -->
+  <script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+      navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+      navLinks.style.right = "-200px";
+    }
+  </script>
 </body>
 </html>
-
-
