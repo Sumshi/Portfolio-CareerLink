@@ -35,7 +35,7 @@
         <a href="{{ url_for ('posted_jobs') }}" class="apply-button">My Jobs</a>
         {% else %}
         <a
-          href="{{ url_for ('applicationForm', id=job['id']) }}"
+          href="{{ url_for('applicationForm', id=job['id']) }}"
           class="apply-button"
           >Apply Now</a
         >

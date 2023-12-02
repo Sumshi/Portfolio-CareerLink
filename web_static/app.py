@@ -9,9 +9,9 @@ from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
 
-PROFILES_FOLDER = '/web_static/static/images/profile_pics'
-RESUMES_FOLDER = '/web_static/static/resumes'
-COVER_LETTER_FOLDER = '/web_static/static/cover_letters'
+PROFILES_FOLDER = 'web_static/static/images/profile_pics'
+RESUMES_FOLDER = 'web_static/static/resumes'
+COVER_LETTER_FOLDER = 'web_static/static/cover_letters'
 # PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
 app = Flask(__name__)
@@ -24,7 +24,7 @@ app.config['PROFILES_FOLDER'] = os.environ.get(
 app.config['RESUMES_FOLDER'] = os.environ.get(
     'RESUMES_FOLDER') or RESUMES_FOLDER
 app.config['COVER_LETTER_FOLDER'] = os.environ.get(
-    'COVER_LETTER_FOLDER') or RESUMES_FOLDER
+    'COVER_LETTER_FOLDER') or COVER_LETTER_FOLDER
 
 login = LoginManager(app)
 login.login_view = 'login'
@@ -358,13 +358,15 @@ def applicationForm(id):
     """ To apply for a job """
     job = storage.get(Jobs, id)
     if job:
+        print("job object available")
         if request.method == 'POST':
+            print("POST request made")
             # Ensure the required form fields are present
             required_fields = ['first_name',
-                               'last_name', 'email', 'cover_letter']
+                               'last_name', 'email']
             if not all(field in request.form for field in required_fields):
                 flash('All fields are required')
-                return redirect(url_for('application_form', id=id))
+                return redirect(url_for('applicationForm', id=id))
             user = storage.get_by_id(current_user.id)
             application = Application(
                 job_seeker_id=user.id,
@@ -373,22 +375,38 @@ def applicationForm(id):
                 middle_name=request.form.get('middle_name', ''),
                 last_name=request.form['last_name'],
                 email=request.form['email'],
-                resume=user.resume,
             )
+            # process the resume
+            if user.resume:
+                application.resume = user.resume
+            else:
+                application.resume = 'not available'
             # process the cover letter
-            if 'cover_letter' in request.files:
+            if 'cover_letter' in request.files and request.files['cover_letter']:
+                print("cover letter in request.files")
                 cover_letter = request.files['cover_letter']
                 # Save the resume file to a folder
                 cover_letter_name = secure_filename(cover_letter.filename)
                 file_path = os.path.join(
-                    app.config['COVER_LETTER_FOLDER'], cover_letter_name)
+                    COVER_LETTER_FOLDER, cover_letter_name)
+                print("cover_letter file path = {}".format(file_path))
                 cover_letter.save(file_path)
                 application.cover_letter = file_path
-            application.save()
+            else:
+                print("cover letter not in request.files")
 
-            return redirect(url_for('joblists'))
+            # Save the application if cover letter exists or has content
+            if getattr(application, 'cover_letter', None):
+                application.save()
+                print("job application submitted")
+                return redirect(url_for('joblists'))
+            else:
+                print("cover letter not in application!!")
+                flash('Cover letter is required')
+                return redirect(url_for('applicationForm', id=id))
 
-    return render_template('application_form.html')
+    return render_template('application_form.html',
+                           job=job)
 
 
 @app.route('/jobHistory', methods=['GET'])
