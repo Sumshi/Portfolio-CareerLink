@@ -65,7 +65,7 @@
           <ul>
             <li><a href="{{ url_for('home') }}">HOME</a></li>
             <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('discover') }}">JOBS</a></li>
+            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
             <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
             <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
           </ul>
@@ -184,35 +184,39 @@
           {{ form.about.label }}<br />
           {{ form.about }}
         </p>
-        <br>
-        <br>
+        <br />
+        <br />
         <section class="job-seekers-section">
-        <!-- <h2>Resume</h2>
+          <!-- <h2>Resume</h2>
         <p>Post your resume - Start your new career</p> -->
 
-        <!-- Resume upload form -->
-        <!-- Resume upload form -->
-        <form
-          id="resumeUploadForm"
-          action="/upload"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <label for="resume">Choose a profile picture:</label>
-          <input
-            type="file"
-            id="resume"
-            name="resume"
-            accept=".pdf, .doc, .docx"
-            required
-          />
+          <!-- Resume upload form -->
+          <!-- Resume upload form -->
+          <!-- <form
+            id="resumeUploadForm"
+            action="url_for('jobseeker_signup')"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <label for="resume">Choose a profile picture:</label>
+            <input
+              type="file"
+              id="resume"
+              name="resume"
+              accept=".pdf, .doc, .docx"
+              required
+            /> -->
           <!-- <button type="submit">Upload Resume</button> -->
           <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
             >Upload Resume</a
           > -->
-        </form>
-      </section>
 
+          <!-- </form> -->
+          <p>
+            {{ form.profile_pic.label }}<br />
+            {{ form.profile_pic }}
+          </p>
+        </section>
         <button type="submit" class="sign-btn">{{ submitButtonText }}</button>
       </form>
     </div>

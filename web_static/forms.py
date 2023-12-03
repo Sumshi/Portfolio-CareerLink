@@ -5,7 +5,7 @@ from typing import Any
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileSize
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms import TextAreaField
+from wtforms import TextAreaField, EmailField
 from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
 from wtforms.validators import Length
 from models import storage
@@ -23,7 +23,7 @@ class RecruiterSignUp(FlaskForm):
     """ Implementation of a Recruiter Sign Up or Register """
     company = StringField('Company name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
     profile_pic = FileField(
         'Profile picture',
         validators=[
@@ -32,8 +32,8 @@ class RecruiterSignUp(FlaskForm):
         ]
     )
     phone_number = StringField('Phone No.', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
-    password2 = StringField(
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField(
         'Confirm Password', validators=[DataRequired(), EqualTo('password')]
     )
     country = StringField('Country', validators=[DataRequired()])
@@ -102,10 +102,10 @@ class JobseekerSignUp(FlaskForm):
             FileSize(max_size=(2 * 1024))
         ]
     )
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('Phone No.', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
-    password2 = StringField(
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField(
         'Confirm Password', validators=[DataRequired(), EqualTo('password')]
     )
     country = StringField('Country', validators=[DataRequired()])
