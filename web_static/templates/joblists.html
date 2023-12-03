@@ -179,7 +179,10 @@
         navLinks.style.right = "-200px";
       }
     </script>
-    <script src="../static/scripts/swiper-bundle.min.js" defer></script>
+    <script
+      src="{{ url_for('static', filename='scripts/swiper-bundle.min.js') }}"
+      defer
+    ></script>
     <script
       src="{{ url_for('static', filename='scripts/script.js') }}"
       defer
