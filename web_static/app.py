@@ -121,7 +121,7 @@ def recruiter_signup():
                            )
 
 
-@app.route('/recruiter/edit_profile', methods=['GET', 'PUT'])
+@app.route('/recruiterProfile', methods=['GET', 'PUT'])
 @login_required
 def update_recruiter_profile():
     """ Updates the profile of a recruiter """
@@ -154,26 +154,27 @@ def update_recruiter_profile():
                 current_user.profile_pic = filepath
         storage.save()
         # Redirect to profile page after update
-        return redirect(url_for('recruiter/profile'))
+        return redirect(url_for('recruiterProfile.html'))
     elif request.method == 'GET':
         # Fetch the current user's profile data from the database
         # Assuming current_user is from Flask-Login
         # recruiter = storage.get_by_id(current_user.id)
 
         # Populate the form fields with the current data from the database
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-        form.company.data = current_user.company
-        form.phone_number.data = current_user.phone_number
-        form.country.data = current_user.country
-        form.state.data = current_user.state
-        form.address.data = current_user.address
-        form.address.data = current_user.street
-        form.zip_code.data = current_user.zip_code
-        form.about.data = current_user.about
+        request.form['username'] = current_user.username
+        request.form['email'] = current_user.email
+        request.form['company'] = current_user.company
+        request.form['phone_number']  = current_user.phone_number
+        request.form['country']= current_user.country
+        request.form['state'] = current_user.state
+        request.form['address'] = current_user.address
+        request.form['street'] = current_user.street
+        request.form['zip_code'] = current_user.zip_code
+        request.form['about'] = current_user.about
+
 
     return render_template('recruiterProfile.html',
-                           pageTitle='Edit Profile',
+                           pageTitle='Recruiter Profile',
                            form=form)
 
 
@@ -336,17 +337,17 @@ def jobseekerProfile():
                            )
 
 
-@app.route('/recruiterProfile', methods=['GET'])
-@login_required
-def recruiterProfile():
-    """ Display the current logged in User profile """
-    user = storage.get_by_id(current_user.id)
-    jobs = user.job_listings
-    return render_template('recruiterProfile.html',
-                           name=user.username,
-                           user=user,
-                           jobs=jobs
-                           )
+# @app.route('/recruiterProfile', methods=['GET'])
+# @login_required
+# def recruiterProfile():
+#     """ Display the current logged in User profile """
+#     user = storage.get_by_id(current_user.id)
+#     jobs = user.job_listings
+#     return render_template('recruiterProfile.html',
+#                            name=user.username,
+#                            user=user,
+#                            jobs=jobs
+#                            )
 
 
 @app.route('/userDashboard', methods=['GET'])

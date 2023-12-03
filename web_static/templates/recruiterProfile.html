@@ -84,6 +84,7 @@
     <br />
     <br />
     <div class="profile-container">
+      <div id="test">
       <h1>{{ name }}`s Profile</h1>
 
       <div class="profile-info">
@@ -94,7 +95,7 @@
           />
         </div>
 
-        <div class="user-details">
+        <!-- <div class="user-details">
           <p><b>Name</b>: {{ name }}</p>
           <p><b>Company Name</b>: {{ user.company }}</p>
           <p><b>Email</b>: {{ user.email }}</p>
@@ -102,8 +103,10 @@
           <p><b>Country</b>: {{ user.country }}</p>
           <p><b>State</b>: {{ user.state }}</p>
           <p><b>Address</b>: {{ user.address }}</p>
-          <!-- Add more user details as needed -->
-        </div>
+        </div> -->
+        
+
+
       </div>
 
       <!-- Resume upload form -->
@@ -121,18 +124,19 @@
       <br />
 
       <!-- Update Profile -->
-      <section class="job-seekers-section">
-        <h2>Update Profile</h2>
-        <p>Keep your information up to date</p>
 
-        <!-- Profile update form -->
+
+        <div class="test">
+      <div class="job-seekers-section">
+        <p>Keep your information up to date</p>
         <form
           id="profileUpdateForm"
           action="{{ url_for('update_recruiter_profile') }}"
           method="post"
           enctype="multipart/form-data"
         >
-          <label for="profilePic">Profile Picture:</label>
+        <div class="input-container">
+          <label for="profilePic" id="file">Profile Picture:</label>
           <input
             type="file"
             id="profilePic"
@@ -140,7 +144,7 @@
             accept=".jpg, .jpeg, .png"
           />
           <br />
-
+          </div>
           <label for="username">Username:</label>
           <input
             type="text"
@@ -190,13 +194,12 @@
           <br />
           <br />
           <br />
-          <!-- <button type="submit">Update Profile</button> -->
           <a href="{{ url_for('update_recruiter_profile') }}" class="hero-job"
             >Update Profile</a
           >
         </form>
-      </section>
-
+      </div>
+    </div>
       <!-- Add Job History section here -->
       <!-- <div class="job-history-section">
              <h3>Job History</h3>
@@ -212,6 +215,7 @@
           {% endif %}
         </ul>
         </div> -->
+    </div>
     </div>
     <br />
     <br />
