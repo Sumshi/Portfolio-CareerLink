@@ -67,6 +67,8 @@ class DBStorage():
 
     def save(self):
         """ Commits all changes to current database session """
+        print("session commit called!!")
+        # self.__session.commit()
         try:
             self.__session.commit()
         except Exception as e:
