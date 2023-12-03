@@ -86,6 +86,7 @@ class RecruiterEditProfileForm(RecruiterSignUp):
     """ Form for editing the recruiter profile """
 
     password = None  # Exclude password field from profile editing
+    password2 = None
     submit = SubmitField('Update Profile')
 
 

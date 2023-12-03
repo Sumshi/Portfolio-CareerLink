@@ -121,27 +121,37 @@ def recruiter_signup():
                            )
 
 
-@app.route('/recruiterProfile', methods=['GET', 'PUT'])
+@app.route('/recruiterProfile', methods=['GET', 'POST'])
 @login_required
 def update_recruiter_profile():
     """ Updates the profile of a recruiter """
+    user = storage.get_by_id(current_user.id)
+    jobs = user.job_listings
     form = RecruiterEditProfileForm()
 
     if form.validate_on_submit():
         # Process form data and update the profile
         # Example: Get form data - form.company.data, form.username.data, etc.
         # Update the profile details in the database
+        form_data = ['username', 'email', 'company',
+                     'phone_number', 'country', 'state',
+                     'address', 'street', 'zip_code', 'about']
+        print("Form validated")
+        for elem in form_data:
+            print(form.elem.data)
+            if user.elem is not form.elem.data:
+                user.elem = form.elem.data
 
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        current_user.company = form.company.data
-        current_user.phone_number = form.phone_number.data
-        current_user.country = form.country.data
-        current_user.state = form.state.data
-        current_user.address = form.address.data
-        current_user.street = form.address.data
-        current_user.zip_code = form.zip_code.data
-        current_user.about = form.about.data
+        # current_user.username = form.username.data
+        # current_user.email = form.email.data
+        # current_user.company = form.company.data
+        # current_user.phone_number = form.phone_number.data
+        # current_user.country = form.country.data
+        # current_user.state = form.state.data
+        # current_user.address = form.address.data
+        # current_user.street = form.street.data
+        # current_user.zip_code = form.zip_code.data
+        # current_user.about = form.about.data
         if form.profile_pic.data:
             old_profile_pic = current_user.profile_pic
             profile_pic = form.profile_pic.data
@@ -153,29 +163,31 @@ def update_recruiter_profile():
                     os.remove(old_profile_pic)
                 current_user.profile_pic = filepath
         storage.save()
+        print('POST HTTPS request called')
         # Redirect to profile page after update
-        return redirect(url_for('recruiterProfile.html'))
+        return redirect(url_for('update_recruiter_profile'))
     elif request.method == 'GET':
         # Fetch the current user's profile data from the database
         # Assuming current_user is from Flask-Login
         # recruiter = storage.get_by_id(current_user.id)
 
         # Populate the form fields with the current data from the database
-        request.form['username'] = current_user.username
-        request.form['email'] = current_user.email
-        request.form['company'] = current_user.company
-        request.form['phone_number']  = current_user.phone_number
-        request.form['country']= current_user.country
-        request.form['state'] = current_user.state
-        request.form['address'] = current_user.address
-        request.form['street'] = current_user.street
-        request.form['zip_code'] = current_user.zip_code
-        request.form['about'] = current_user.about
-
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.company.data = current_user.company
+        form.phone_number.data = current_user.phone_number
+        form.country.data = current_user.country
+        form.state.data = current_user.state
+        form.address.data = current_user.address
+        form.street.data = current_user.street
+        form.zip_code.data = current_user.zip_code
+        form.about.data = current_user.about
 
     return render_template('recruiterProfile.html',
-                           pageTitle='Recruiter Profile',
-                           form=form)
+                           user=user,
+                           name=user.username,
+                           form=form,
+                           jobs=jobs)
 
 
 @app.route('/jobseeker_signup', methods=['GET', 'POST'])
