@@ -179,9 +179,19 @@
         navLinks.style.right = "-200px";
       }
     </script>
+    <script src="../static/scripts/swiper-bundle.min.js" defer></script>
+    <script
+      src="{{ url_for('static', filename='scripts/script.js') }}"
+      defer
+    ></script>
 
     <script src="../static/scripts/main.js"></script>
-    <script src="{{ url_for('static', filename='scripts/swiper-bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    <!-- Pass the jobs data to your main.js script -->
+    <script>
+      const jobs = {{ jobs | tojson | safe }};
+      if (window.location.pathname === '/joblists') {
+        mainJSFunction(jobs); // Call a function in main.js passing the 'jobs' data
+      }
+    </script>
   </body>
 </html>
