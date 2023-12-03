@@ -66,6 +66,16 @@ def login():
                            form=form
                            )
 
+# displays home page
+
+
+@app.route('/')
+@app.route('/home')
+# @login_required
+def home():
+    """ Route to display the home page """
+    return render_template('index.html')
+
 
 @app.route('/logout')
 @login_required
@@ -198,6 +208,7 @@ def jobseeker_signup():
             filename = secure_filename(profile_pic.filename)
             filepath = os.path.join(PROFILES_FOLDER, filename)
             # save the uploaded picture to the server's file system
+            print("profile pic filepath = {}".format(filepath))
             profile_pic.save(filepath)
             user.profile_pic = filepath
 
@@ -213,8 +224,9 @@ def jobseeker_signup():
             user.resume = filepath
         # user.set_password(form.password.data)
         user.save()
-        flash('Congratulations, {} for registering!!'.format(user.username))
-        return redirect(url_for('login'))
+        if storage.get_by_username(user.username):
+            flash('Congratulations, {} for registering!!'.format(user.username))
+            return redirect(url_for('login'))
     return render_template('jobseeker_signup.html',
                            pageTitle='Sign Up',
                            form=form,
@@ -294,15 +306,6 @@ def update_jobseeker_profile():
 # @app.route('/signup')
 # def signUp():
 #     return render_template('signup.html')
-
-# displays home page
-
-
-@app.route('/')
-@app.route('/home')
-# @login_required
-def home():
-    return render_template('index.html')
 
 
 @app.route('/about')
@@ -393,15 +396,15 @@ def applicationForm(id):
                 cover_letter.save(file_path)
                 application.cover_letter = file_path
             else:
-                print("cover letter not in request.files")
+                flash('Cover letter is required')
+                return redirect(url_for('applicationForm', id=id))
 
             # Save the application if cover letter exists or has content
             if getattr(application, 'cover_letter', None):
                 application.save()
-                print("job application submitted")
+                flash("job application submitted")
                 return redirect(url_for('joblists'))
             else:
-                print("cover letter not in application!!")
                 flash('Cover letter is required')
                 return redirect(url_for('applicationForm', id=id))
 

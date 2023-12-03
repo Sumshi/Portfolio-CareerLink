@@ -32,7 +32,9 @@
         <p>{{ job.application }}</p>
 
         {% if is_recruiter %}
-        <a href="{{ url_for ('posted_jobs') }}" class="apply-button">My Jobs</a>
+        <a href="{{ url_for ('my_posted_jobs') }}" class="apply-button"
+          >My Jobs</a
+        >
         {% else %}
         <a
           href="{{ url_for('applicationForm', id=job['id']) }}"
