@@ -35,8 +35,8 @@
 }
 
 .jobs-list-container .open-positions {
-  position: absolute;
-  margin-top: 10px;
+  /* position: absolute; */
+  /* margin-top: 10px; */
   top: 40px;
   right: 24px;
   color: #e63946;
