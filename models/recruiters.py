@@ -20,7 +20,7 @@ class Recruiter(BaseModel, UserMixin, Base):
     state = Column(String(128), nullable=False)
     address = Column(String(128), nullable=False)
     street = Column(String(128), nullable=True)
-    zip_code = Column(Integer, nullable=True)
+    zip_code = Column(String(32), nullable=True)
     profile_pic = Column(String(200), nullable=True)
     about = Column(String(600), nullable=True)
     token = Column(String(32), index=True, unique=True)
