@@ -11,8 +11,10 @@ body {
     text-align: center;
     padding: 20px;
     margin: 8% auto 0;
-    background: #fff;
+    /* background: #fff; */
+    background: linear-gradient(45deg, #a889f7, #322d24);
     margin-bottom: 50px;
+    /* border-radius: 50px; */
 }
 
 .sign-up-form h1 {
