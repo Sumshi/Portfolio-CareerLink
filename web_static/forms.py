@@ -2,6 +2,7 @@
 """ Module to implement forms to pass data to application """
 from collections.abc import Mapping, Sequence
 from typing import Any
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileSize
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
@@ -28,7 +29,7 @@ class RecruiterSignUp(FlaskForm):
         'Profile picture',
         validators=[
             FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!'),
-            FileSize(max_size=(2 * 1024))
+            FileSize(max_size=(2 * 1024 * 1024))
         ]
     )
     phone_number = StringField('Phone No.', validators=[DataRequired()])
@@ -48,7 +49,7 @@ class RecruiterSignUp(FlaskForm):
 
     def validate_username(self, username):
         """ Ensure that username is not used i.e unique """
-        user = storage.get_by_username(username)
+        user = storage.get_by_attribute('username', username.data)
         if user:
             raise ValidationError(
                 'Username "{}" already used. Pick another'.format(
@@ -82,12 +83,76 @@ class RecruiterSignUp(FlaskForm):
             )
 
 
-class RecruiterEditProfileForm(RecruiterSignUp):
+class RecruiterEditProfileForm(FlaskForm):
     """ Form for editing the recruiter profile """
-
-    password = None  # Exclude password field from profile editing
-    password2 = None
+    company = StringField('Company name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
+    profile_pic = FileField(
+        'Profile picture',
+        validators=[
+            FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!'),
+            FileSize(max_size=(2 * 1024 * 1024))
+        ]
+    )
+    phone_number = StringField('Phone No.', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired()])
+    state = StringField('State', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    street = StringField('Street')
+    zip_code = StringField('Zip Code')
+    about = TextAreaField(
+        ('About Company'), validators=[Length(min=0, max=300)]
+    )
     submit = SubmitField('Update Profile')
+
+    def validate_username(self, username):
+        """ Ensure that username is not used i.e unique """
+        # print("Username validation method called!!")
+        if username.data != current_user.username:
+            user = storage.get_by_attribute('username', username.data)
+            if user:
+                raise ValidationError(
+                    'Username "{}" already used. Pick another'.format(
+                        username.data)
+                )
+
+    def validate_email(self, email):
+        """ Ensure that email is not used i.e unique """
+        # print("Email validation method called!!")
+        if email.data != current_user.email:
+            user = storage.get_by_attribute("email", email.data)
+            if user is not None:
+                raise ValidationError(
+                    'Email "{}" already used. Pick another'.format(email.data)
+                )
+
+    def validate_company(self, company):
+        """ Ensure that company name is not used i.e unique """
+        # print("Company name validation method called!!")
+        if company.data != current_user.company:
+            user = storage.get_by_attribute("comapny", company.data)
+            if user is not None:
+                raise ValidationError(
+                    'Company name "{}" already used. Pick another'.format(
+                        company.data)
+                )
+
+    def validate_phone_number(self, phone_number):
+        """ Ensure that Phone Number is not used i.e unique """
+        # print("Phone number validation method called!!")
+        if phone_number.data != current_user.phone_number:
+            user = storage.get_by_attribute("phone_number", phone_number.data)
+            if user is not None:
+                raise ValidationError(
+                    'Phone number "{}" already used. Pick another'.format(
+                        phone_number.data)
+                )
+
+    def validate_profile_pic(self, profile_pic):
+        """ Set and save the profile pic """
+        # print("Profile pic validation method called")
+        pass
 
 
 class JobseekerSignUp(FlaskForm):

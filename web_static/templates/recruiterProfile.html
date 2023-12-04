@@ -89,10 +89,7 @@
 
         <div class="profile-info">
           <div class="profile-pic">
-            <img
-              src="{{ url_for('static', filename='images/user3.jpg') }}"
-              alt=""
-            />
+            <img src="{{ user.profile_pic }}" alt="" />
           </div>
 
           <!-- <div class="user-details">
@@ -124,74 +121,104 @@
 
         <div class="test">
           <div class="job-seekers-section">
-            <p>Keep your information up to date</p>
+            <p><h4>Keep your information up to date</h4></p>
             <form
               id="profileUpdateForm"
               action="{{ url_for('update_recruiter_profile') }}"
               method="POST"
+              enctype="multipart/form-data"
               novalidate
             >
               {{ form.hidden_tag() }}
               <div class="input-container">
-                {{ form.profile_pic.label }} {{ form.profile_pic }} {% for error
-                in form.profile_pic.errors %}
+                {{ form.profile_pic.label }} {{ form.profile_pic }} <br />
+                {% for error in form.profile_pic.errors %}
                 <span style="color: red">[{{ error }}]</span>
                 {% endfor %}
               </div>
               <br />
               <div class="company">
-                {{ form.company.label }} {{ form.company(size=32) }} {% for
-                error in form.company.errors %}
+                {{ form.company.label }} {{ form.company(size=32) }} <br />
+                {% for error in form.company.errors %}
                 <span style="color: red">[{{ error }}]</span>
                 {% endfor %}
               </div>
               <br />
               <div class="username">
-                {{ form.username.label }} {{ form.username(size=32) }}
+                {{ form.username.label }} {{ form.username(size=32) }} <br />
+                {% for error in form.username.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="email">
-                {{ form.email.label }} {{ form.email(size=32) }}
+                {{ form.email.label }} {{ form.email(size=32) }} <br />
+                {% for error in form.email.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="phone">
                 {{ form.phone_number.label }} {{ form.phone_number(size=32) }}
+                <br />
+                {% for error in form.phone_number.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="country">
-                {{ form.country.label }} {{ form.country(size=32) }}
+                {{ form.country.label }} {{ form.country(size=32) }} <br />
+                {% for error in form.country.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="state">
-                {{ form.state.label }} {{ form.state(size=32) }}
+                {{ form.state.label }} {{ form.state(size=32) }} <br />
+                {% for error in form.state.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="address">
-                {{ form.address.label }} {{ form.address(size=32) }}
+                {{ form.address.label }} {{ form.address(size=32) }} <br />
+                {% for error in form.address.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="zip_code">
-                {{ form.zip_code.label }} {{ form.zip_code(size=32) }}
+                {{ form.zip_code.label }} {{ form.zip_code(size=32) }} <br />
+                {% for error in form.zip_code.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
               <div class="street">
-                {{ form.street.label }} {{ form.street(size=32) }}
+                {{ form.street.label }} {{ form.street(size=32) }} <br />
+                {% for error in form.street.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
               </div>
               <br />
 
-              <div class="about">{{ form.about.label }} {{ form.about }}</div>
+              <div class="about">
+                {{ form.about.label }} {{ form.about }} <br />
+                {% for error in form.about.errors %}
+                <span style="color: red">[{{ error }}]</span>
+                {% endfor %}
+              </div>
               <br />
               <br />
               <!-- <a href="{{ url_for('update_recruiter_profile') }}" class="hero-job"
             >Update Profile</a -->
-              >
               <button type="submit">Update Profile</button>
             </form>
           </div>

@@ -9,9 +9,9 @@ from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
 
-PROFILES_FOLDER = 'web_static/static/images/profile_pics'
-RESUMES_FOLDER = 'web_static/static/resumes'
-COVER_LETTER_FOLDER = 'web_static/static/cover_letters'
+PROFILES_FOLDER = 'static/images/profile_pics'
+RESUMES_FOLDER = 'static/resumes'
+COVER_LETTER_FOLDER = 'static/cover_letters'
 # PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
 app = Flask(__name__)
@@ -133,34 +133,30 @@ def update_recruiter_profile():
         # Process form data and update the profile
         # Example: Get form data - form.company.data, form.username.data, etc.
         # Update the profile details in the database
-        form_data = ['username', 'email', 'company',
-                     'phone_number', 'country', 'state',
-                     'address', 'street', 'zip_code', 'about']
-        print("Form validated")
-        for elem in form_data:
-            print(form.elem.data)
-            if user.elem is not form.elem.data:
-                user.elem = form.elem.data
-
-        # current_user.username = form.username.data
-        # current_user.email = form.email.data
-        # current_user.company = form.company.data
-        # current_user.phone_number = form.phone_number.data
-        # current_user.country = form.country.data
-        # current_user.state = form.state.data
-        # current_user.address = form.address.data
-        # current_user.street = form.street.data
-        # current_user.zip_code = form.zip_code.data
-        # current_user.about = form.about.data
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.company = form.company.data
+        current_user.phone_number = form.phone_number.data
+        current_user.country = form.country.data
+        current_user.state = form.state.data
+        current_user.address = form.address.data
+        current_user.street = form.street.data
+        current_user.zip_code = form.zip_code.data
+        current_user.about = form.about.data
+        print("Start processing profile pic data")
         if form.profile_pic.data:
+            # print("data in profile pic")
             old_profile_pic = current_user.profile_pic
             profile_pic = form.profile_pic.data
-            filename = secure_filename(profile_pic.filename)
+            filename = current_user.id + '_' + \
+                secure_filename(profile_pic.filename)
             filepath = os.path.join(PROFILES_FOLDER, filename)
-            profile_pic.save(filepath)
-            if os.path.exists(filepath):
-                if os.path.exists(old_profile_pic):
-                    os.remove(old_profile_pic)
+            save_filepath = os.path.join('web_static/', filepath)
+            # print("new file path = {}".format(filepath))
+            profile_pic.save(save_filepath)
+            if os.path.exists(save_filepath):
+                if os.path.exists('web_static/' + old_profile_pic):
+                    os.remove('web_static/' + old_profile_pic)
                 current_user.profile_pic = filepath
         storage.save()
         print('POST HTTPS request called')
