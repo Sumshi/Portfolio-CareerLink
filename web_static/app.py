@@ -143,7 +143,6 @@ def update_recruiter_profile():
         current_user.street = form.street.data
         current_user.zip_code = form.zip_code.data
         current_user.about = form.about.data
-        print("Start processing profile pic data")
         if form.profile_pic.data:
             # print("data in profile pic")
             old_profile_pic = current_user.profile_pic
@@ -155,7 +154,8 @@ def update_recruiter_profile():
             # print("new file path = {}".format(filepath))
             profile_pic.save(save_filepath)
             if os.path.exists(save_filepath):
-                if os.path.exists('web_static/' + old_profile_pic):
+                if old_profile_pic and os.path.exists('web_static/' +
+                                                      old_profile_pic):
                     os.remove('web_static/' + old_profile_pic)
                 current_user.profile_pic = filepath
         storage.save()
@@ -243,10 +243,12 @@ def jobseeker_signup():
                            )
 
 
-@app.route('/jobseeker/edit_profile', methods=['GET', 'PUT'])
+@app.route('/jobseekerProfile', methods=['GET', 'POST'])
 @login_required
 def update_jobseeker_profile():
     """ Updates the profile of a jobseeker """
+    user = storage.get_by_id(current_user.id)
+    job_history = user.prev_jobs
     form = JobseekerEditProfileForm()
 
     if form.validate_on_submit():
@@ -263,32 +265,47 @@ def update_jobseeker_profile():
         current_user.country = form.country.data
         current_user.state = form.state.data
         current_user.address = form.address.data
-        current_user.street = form.address.data
+        current_user.street = form.street.data
         current_user.zip_code = form.zip_code.data
         current_user.about = form.about.data
+
+        # process the profile picture
         if form.profile_pic.data:
+            # print("data in profile pic")
             old_profile_pic = current_user.profile_pic
             profile_pic = form.profile_pic.data
-            filename = secure_filename(profile_pic.filename)
+            filename = current_user.id + '_' + \
+                secure_filename(profile_pic.filename)
             filepath = os.path.join(PROFILES_FOLDER, filename)
-            profile_pic.save(filepath)
-            if os.path.exists(filepath):
-                if os.path.exists(old_profile_pic):
-                    os.remove(old_profile_pic)
+            save_filepath = os.path.join('web_static/', filepath)
+            # print("new file path = {}".format(filepath))
+            profile_pic.save(save_filepath)
+            if os.path.exists(save_filepath):
+                if old_profile_pic and os.path.exists('web_static/' +
+                                                      old_profile_pic):
+                    os.remove('web_static/' + old_profile_pic)
                 current_user.profile_pic = filepath
+
+        # process the resume
         if form.resume.data:
             old_resume = current_user.resume
             resume = form.resume.data
-            filename = secure_filename(resume.filename)
+            filename = current_user.id + '_' + \
+                secure_filename(resume.filename)
             filepath = os.path.join(RESUMES_FOLDER, filename)
-            resume.save(filepath)
-            if os.path.exists(filepath):
-                if os.path.exists(old_resume):
-                    os.remove(old_resume)
+            save_filepath = os.path.join('web_static/', filepath)
+            resume.save(save_filepath)
+            if os.path.exists(save_filepath):
+                if old_resume and os.path.exists('web_static/' +
+                                                 old_resume):
+                    os.remove('web_static/' + old_resume)
                 current_user.resume = filepath
+
+        # save the new information in database
         storage.save()
+        print('POST HTTPS request called')
         # Redirect to profile page after update
-        return redirect(url_for('jobseeker/profile'))
+        return redirect(url_for('update_jobseeker_profile'))
     elif request.method == 'GET':
         # Fetch the current user's profile data from the database
         # Assuming current_user is from Flask-Login
@@ -304,12 +321,14 @@ def update_jobseeker_profile():
         form.country.data = current_user.country
         form.state.data = current_user.state
         form.address.data = current_user.address
-        form.address.data = current_user.street
+        form.street.data = current_user.street
         form.zip_code.data = current_user.zip_code
         form.about.data = current_user.about
 
-    return render_template('edit_jobseeker_profile.html',
-                           pageTitle='Edit Profile',
+    return render_template('jobseekerProfile.html',
+                           name=user.username,
+                           user=user,
+                           job_history=job_history,
                            form=form)
 
 # @app.route('/signup')
@@ -332,17 +351,17 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/jobseekerProfile', methods=['GET'])
-@login_required
-def jobseekerProfile():
-    """ Display the current logged in User progile """
-    user = storage.get_by_id(current_user.id)
-    job_history = user.prev_jobs
-    return render_template('jobseekerProfile.html',
-                           name=user.username,
-                           user=user,
-                           job_history=job_history
-                           )
+# @app.route('/jobseekerProfile', methods=['GET'])
+# @login_required
+# def jobseekerProfile():
+#     """ Display the current logged in User progile """
+#     user = storage.get_by_id(current_user.id)
+#     job_history = user.prev_jobs
+#     return render_template('jobseekerProfile.html',
+#                            name=user.username,
+#                            user=user,
+#                            job_history=job_history
+#                            )
 
 
 # @app.route('/recruiterProfile', methods=['GET'])

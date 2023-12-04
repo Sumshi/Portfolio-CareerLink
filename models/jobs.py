@@ -23,6 +23,7 @@ class Jobs(BaseModel, Base):
     salary = Column(String(32), nullable=True)
     open_position = Column(String(32), default='1', nullable=True)
     date_posted = Column(Date, default=date.today())
+    skills_required = Column(String(200), default="No skills needed")
     recruiter = relationship('Recruiter', backref=backref(
         'job_listings', cascade="all, delete"))
     job_seeker = relationship('Application', backref='applicants')

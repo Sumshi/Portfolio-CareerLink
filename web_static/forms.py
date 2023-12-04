@@ -19,10 +19,11 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember me')
     submit = SubmitField('Log In')
 
+# A general class to implement a Sign Up
 
-class RecruiterSignUp(FlaskForm):
-    """ Implementation of a Recruiter Sign Up or Register """
-    company = StringField('Company name', validators=[DataRequired()])
+
+class SignUp(FlaskForm):
+    """ Implementation of a Sign Up or Register """
     username = StringField('Username', validators=[DataRequired()])
     email = EmailField('Email', validators=[DataRequired(), Email()])
     profile_pic = FileField(
@@ -64,14 +65,14 @@ class RecruiterSignUp(FlaskForm):
                 'Email "{}" already used. Pick another'.format(email.data)
             )
 
-    def validate_company(self, company):
-        """ Ensure that company name is not used i.e unique """
-        user = storage.get_by_attribute("comapny", company.data)
-        if user:
-            raise ValidationError(
-                'Company name "{}" already used. Pick another'.format(
-                    company.data)
-            )
+    # def validate_company(self, company):
+    #     """ Ensure that company name is not used i.e unique """
+    #     user = storage.get_by_attribute("comapny", company.data)
+    #     if user:
+    #         raise ValidationError(
+    #             'Company name "{}" already used. Pick another'.format(
+    #                 company.data)
+    #         )
 
     def validate_phone_number(self, phone_number):
         """ Ensure that Phone Number is not used i.e unique """
@@ -83,9 +84,10 @@ class RecruiterSignUp(FlaskForm):
             )
 
 
-class RecruiterEditProfileForm(FlaskForm):
-    """ Form for editing the recruiter profile """
-    company = StringField('Company name', validators=[DataRequired()])
+# A general class to implement a Profile Edit
+class EditProfileForm(FlaskForm):
+    """ Form for editing the profile """
+    # company = StringField('Company name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     email = EmailField('Email', validators=[DataRequired(), Email()])
     profile_pic = FileField(
@@ -108,7 +110,7 @@ class RecruiterEditProfileForm(FlaskForm):
 
     def validate_username(self, username):
         """ Ensure that username is not used i.e unique """
-        # print("Username validation method called!!")
+        print("Username validation method called!!")
         if username.data != current_user.username:
             user = storage.get_by_attribute('username', username.data)
             if user:
@@ -119,7 +121,7 @@ class RecruiterEditProfileForm(FlaskForm):
 
     def validate_email(self, email):
         """ Ensure that email is not used i.e unique """
-        # print("Email validation method called!!")
+        print("Email validation method called!!")
         if email.data != current_user.email:
             user = storage.get_by_attribute("email", email.data)
             if user is not None:
@@ -127,20 +129,20 @@ class RecruiterEditProfileForm(FlaskForm):
                     'Email "{}" already used. Pick another'.format(email.data)
                 )
 
-    def validate_company(self, company):
-        """ Ensure that company name is not used i.e unique """
-        # print("Company name validation method called!!")
-        if company.data != current_user.company:
-            user = storage.get_by_attribute("comapny", company.data)
-            if user is not None:
-                raise ValidationError(
-                    'Company name "{}" already used. Pick another'.format(
-                        company.data)
-                )
+    # def validate_company(self, company):
+    #     """ Ensure that company name is not used i.e unique """
+    #     # print("Company name validation method called!!")
+    #     if company.data != current_user.company:
+    #         user = storage.get_by_attribute("comapny", company.data)
+    #         if user is not None:
+    #             raise ValidationError(
+    #                 'Company name "{}" already used. Pick another'.format(
+    #                     company.data)
+    #             )
 
     def validate_phone_number(self, phone_number):
         """ Ensure that Phone Number is not used i.e unique """
-        # print("Phone number validation method called!!")
+        print("Phone number validation method called!!")
         if phone_number.data != current_user.phone_number:
             user = storage.get_by_attribute("phone_number", phone_number.data)
             if user is not None:
@@ -155,73 +157,60 @@ class RecruiterEditProfileForm(FlaskForm):
         pass
 
 
-class JobseekerSignUp(FlaskForm):
+# A class that implements a Recruiter Sign Up & Inherits from SignUp class
+class RecruiterSignUp(SignUp, FlaskForm):
+    """ Implementation of a Recruiter Sign Up or Register """
+    company = StringField('Company name', validators=[DataRequired()])
+
+    def validate_company(self, company):
+        """ Ensure that company name is not used i.e unique """
+        user = storage.get_by_attribute("comapny", company.data)
+        if user:
+            raise ValidationError(
+                'Company name "{}" already used. Pick another'.format(
+                    company.data)
+            )
+
+
+class RecruiterEditProfileForm(EditProfileForm, FlaskForm):
+    """ Form for editing the recruiter profile """
+    company = StringField('Company name', validators=[DataRequired()])
+
+    def validate_company(self, company):
+        """ Ensure that company name is not used i.e unique """
+        print("Company name validation method called!!")
+        if company.data != current_user.company:
+            user = storage.get_by_attribute("comapny", company.data)
+            if user is not None:
+                raise ValidationError(
+                    'Company name "{}" already used. Pick another'.format(
+                        company.data)
+                )
+
+# A class that implements a Jobseeker Sign Up & Inherits from SignUp class
+
+
+class JobseekerSignUp(SignUp, FlaskForm):
     """ Implementation of a Jobseeker Sign Up or Register """
     first_name = StringField('First name', validators=[DataRequired()])
     middle_name = StringField('Middle name')
     last_name = StringField('Last name', validators=[DataRequired()])
-    username = StringField('Username', validators=[DataRequired()])
-    profile_pic = FileField(
-        'Profile picture',
-        validators=[
-            FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!'),
-            FileSize(max_size=(2 * 1024))
-        ]
-    )
-    email = EmailField('Email', validators=[DataRequired(), Email()])
-    phone_number = StringField('Phone No.', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Confirm Password', validators=[DataRequired(), EqualTo('password')]
-    )
-    country = StringField('Country', validators=[DataRequired()])
-    state = StringField('State', validators=[DataRequired()])
-    address = StringField('Address', validators=[DataRequired()])
-    street = StringField('Street')
-    zip_code = StringField('Zip Code')
-    about = TextAreaField(
-        ('About Me'), validators=[Length(min=0, max=300)]
-    )
     resume = FileField(
         'Resume',
         validators=[
-            FileAllowed(['pdf']), FileSize(max_size=(2 * 1024))
+            FileAllowed(['pdf']), FileSize(max_size=(2 * 1024 * 1024))
         ]
     )
-    submit = SubmitField('Sign Up')
-
-    # When you add any methods that match the pattern validate_<field_name>,
-    # WTForms takes those as custom validators and invokes them in addition
-    # to the stock validators.
-    def validate_username(self, username):
-        """ Ensure that username is not used i.e unique """
-        user = storage.get_by_username(username)
-        if user:
-            raise ValidationError(
-                'Username "{}" already used. Pick another'.format(
-                    username.data)
-            )
-
-    def validate_email(self, email):
-        """ Ensure that email is not used i.e unique """
-        user = storage.get_by_attribute("email", email.data)
-        if user:
-            raise ValidationError(
-                'Email "{}" already used. Pick another'.format(email.data)
-            )
-
-    def validate_phone_number(self, phone_number):
-        """ Ensure that Phone Number is not used i.e unique """
-        user = storage.get_by_attribute("phone_number", phone_number.data)
-        if user:
-            raise ValidationError(
-                'Phone number "{}" already used. Pick another'.format(
-                    phone_number.data)
-            )
 
 
-class JobseekerEditProfileForm(JobseekerSignUp):
+class JobseekerEditProfileForm(EditProfileForm, FlaskForm):
     """ Form for editing the job seeker profile """
-
-    password = None  # Exclude password field from profile editing
-    submit = SubmitField('Update Profile')
+    first_name = StringField('First name', validators=[DataRequired()])
+    middle_name = StringField('Middle name')
+    last_name = StringField('Last name', validators=[DataRequired()])
+    resume = FileField(
+        'Resume',
+        validators=[
+            FileAllowed(['pdf']), FileSize(max_size=(2 * 1024 * 1024))
+        ]
+    )

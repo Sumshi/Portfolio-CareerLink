@@ -88,20 +88,16 @@
 
       <div class="profile-info">
         <div class="profile-pic">
-          <img
-            src="{{ url_for('static', filename='images/user0.jpg') }}"
-            alt=""
-          />
+          <img src="{{ user.profile_pic }}" alt="" />
         </div>
 
-        <div class="user-details">
+        <!-- <div class="user-details">
           <p><b>Name</b>: {{ name }}</p>
           <p><b>Email</b>: {{ user.email }}</p>
           <p><b>Phone</b>: {{ user.phone_number }}</p>
           <p><b>Country</b>: {{ user.country }}</p>
           <p><b>Address</b>: {{ user.address }}</p>
-          <!-- Add more user details as needed -->
-        </div>
+        </div> -->
       </div>
 
       <!-- <div class="resume-section">
@@ -110,13 +106,12 @@
         </div> -->
 
       <!-- Add a new section for job seekers to upload resumes -->
-      <section class="job-seekers-section">
+      <!-- <section class="job-seekers-section">
         <h2>Resume</h2>
-        <p>Post your resume - Start your new career</p>
+        <p>Post your resume - Start your new career</p> -->
 
-        <!-- Resume upload form -->
-        <!-- Resume upload form -->
-        <form
+      <!-- Resume upload form -->
+      <!-- <form
           id="resumeUploadForm"
           action="/upload"
           method="post"
@@ -130,47 +125,145 @@
             accept=".pdf, .doc, .docx"
             required
           />
-          <button type="submit">Upload Resume</button>
-          <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
+          <button type="submit">Upload Resume</button> -->
+      <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
             >Upload Resume</a
           > -->
-        </form>
-      </section>
+      <!-- </form>
+      </section> -->
       <br />
       <br />
-
-      <!-- Update Profile -->
-      <section class="job-seekers-section">
-        <h2>Update Profile</h2>
-        <p>Keep your information up to date</p>
-
-        <!-- Profile update form -->
+      <div class="job-seekers-section">
         <form
           id="profileUpdateForm"
           action="{{ url_for('update_jobseeker_profile') }}"
-          method="post"
+          method="POST"
           enctype="multipart/form-data"
+          novalidate
         >
-          <label for="profilePic">Profile Picture:</label>
-          <input
-            type="file"
-            id="profilePic"
-            name="profile_pic"
-            accept=".jpg, .jpeg, .png"
-          />
+          {{ form.hidden_tag() }}
+          <!-- Resume upload form -->
+          <h2>Resume</h2>
+          <h4>Post your resume - Start your new career</h4>
+          <div class="input-container">
+            {{ form.resume.label }} {{ form.resume }} <br />
+            {% for error in form.resume.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+          <a href="{{ user.resume }}" target="_blank">View Resume</a>
+          <!-- Update Profile -->
+          <h2>Update Profile</h2>
+          <h4>Keep your information up to date</h4>
+
+          <!-- Profile update form -->
+          <div class="input-container">
+            {{ form.profile_pic.label }} {{ form.profile_pic }} <br />
+            {% for error in form.profile_pic.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
           <br />
 
-          <label for="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            value="{% if form %}{{ form.username.data }}{% endif %}"
-          />
+          <div class="first_name">
+            {{ form.first_name.label }} {{ form.first_name(size=32) }} <br />
+            {% for error in form.first_name.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
           <br />
 
-          <label for="email">Email:</label>
+          <div class="middle_name">
+            {{ form.middle_name.label }} {{ form.middle_name(size=32) }} <br />
+            {% for error in form.middle_name.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="last_name">
+            {{ form.last_name.label }} {{ form.last_name(size=32) }} <br />
+            {% for error in form.last_name.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="username">
+            {{ form.username.label }} {{ form.username(size=32) }} <br />
+            {% for error in form.username.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+          <div class="email">
+            {{ form.email.label }} {{ form.email(size=32) }} <br />
+            {% for error in form.email.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="phone">
+            {{ form.phone_number.label }} {{ form.phone_number(size=32) }}
+            <br />
+            {% for error in form.phone_number.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="country">
+            {{ form.country.label }} {{ form.country(size=32) }} <br />
+            {% for error in form.country.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="state">
+            {{ form.state.label }} {{ form.state(size=32) }} <br />
+            {% for error in form.state.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="address">
+            {{ form.address.label }} {{ form.address(size=32) }} <br />
+            {% for error in form.address.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="zip_code">
+            {{ form.zip_code.label }} {{ form.zip_code(size=32) }} <br />
+            {% for error in form.zip_code.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="street">
+            {{ form.street.label }} {{ form.street(size=32) }} <br />
+            {% for error in form.street.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+
+          <div class="about">
+            {{ form.about.label }} {{ form.about }} <br />
+            {% for error in form.about.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <br />
+          <br />
+          <button type="submit">Update Profile</button>
+          <!-- <label for="email">Email:</label>
           <input
             type="email"
             id="email"
@@ -209,12 +302,17 @@
           <br />
           <br />
           <br />
-          <button type="submit">Update Profile</button>
+          <button type="submit">Update Profile</button> -->
           <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
             >Update Profile</a
           > -->
         </form>
-      </section>
+      </div>
+      <div class="job-history-section">
+        <a href="{{ url_for('my_applied_jobs') }}" class="hero-job"
+          >My Applications</a
+        >
+      </div>
 
       <!-- Add Job History section here -->
       <div class="job-history-section">
