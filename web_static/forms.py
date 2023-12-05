@@ -6,7 +6,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileSize
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms import TextAreaField, EmailField
+from wtforms import TextAreaField, EmailField, DateField, SelectField
 from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
 from wtforms.validators import Length
 from models import storage
@@ -192,9 +192,9 @@ class RecruiterEditProfileForm(EditProfileForm, FlaskForm):
 
 class JobseekerSignUp(SignUp, FlaskForm):
     """ Implementation of a Jobseeker Sign Up or Register """
-    first_name = StringField('First name', validators=[DataRequired()])
-    middle_name = StringField('Middle name')
-    last_name = StringField('Last name', validators=[DataRequired()])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    middle_name = StringField('Middle Name')
+    last_name = StringField('Last Name', validators=[DataRequired()])
     resume = FileField(
         'Resume',
         validators=[
@@ -205,12 +205,46 @@ class JobseekerSignUp(SignUp, FlaskForm):
 
 class JobseekerEditProfileForm(EditProfileForm, FlaskForm):
     """ Form for editing the job seeker profile """
-    first_name = StringField('First name', validators=[DataRequired()])
-    middle_name = StringField('Middle name')
-    last_name = StringField('Last name', validators=[DataRequired()])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    middle_name = StringField('Middle Name')
+    last_name = StringField('Last Name', validators=[DataRequired()])
     resume = FileField(
         'Resume',
         validators=[
             FileAllowed(['pdf']), FileSize(max_size=(2 * 1024 * 1024))
         ]
     )
+
+
+# class to implement job posting
+class PostJob(FlaskForm):
+    """ Implements job posting form """
+    title = StringField('Job Title', validators=[DataRequired()])
+    description = TextAreaField("Job Description", validators=[
+                                DataRequired(), Length(max=1000)])
+    type = SelectField('Job Type', choices=[
+                       'Full Time', 'Part Time', 'Contract', 'Remote Work'])
+    application = TextAreaField('Application Instruction', validators=[
+                                DataRequired(), Length(max=500)])
+    company = StringField('Company Name', validators=[DataRequired()])
+    contact = StringField('Contact Info', validators=[DataRequired()])
+    deadline = DateField('Application Deadline', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired()])
+    town = StringField('City/State', validators=[DataRequired()])
+    salary = StringField('Salary', default='0', validators=[DataRequired()])
+    open_position = StringField(
+        'Open Positions', default='1', validators=[DataRequired()])
+    skills_required = TextAreaField(
+        'Skills Needed', default="No skillls needed", validators=[DataRequired()])
+    submit = SubmitField('Post Job')
+
+    def validate_company(self, company):
+        """ Validate the company name and ensure company is not another's """
+        print("Company name validation method called!!")
+        if company.data != current_user.company:
+            user = storage.get_by_attribute("comapny", company.data)
+            if user is not None:
+                raise ValidationError(
+                    'Company name "{}" is invalid'.format(
+                        company.data)
+                )
