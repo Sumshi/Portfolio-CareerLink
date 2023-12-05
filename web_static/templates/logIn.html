@@ -41,6 +41,15 @@
 
   <!--body begins-->
   <body>
+    <!-- Flash message container -->
+    <!-- {% with messages = get_flashed_messages() %} {% if messages %}
+    <div id="flash-messages">
+      {% for message in messages %}
+      <div class="flash-message">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %} -->
+
     <div class="header-container">
       <nav>
         <a href="{{ url_for('home') }}"
