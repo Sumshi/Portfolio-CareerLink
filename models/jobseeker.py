@@ -26,7 +26,7 @@ class Jobseeker(BaseModel, UserMixin, Base):
     profile_pic = Column(String(200), nullable=True)
     about = Column(String(600), nullable=True)
     resume = Column(String(200), nullable=True)
-    application = relationship('Application', backref='my_jobs')
+    application = relationship('Applications', backref='my_jobs')
     token = Column(String(32), index=True, unique=True)
     token_expiration = Column(DateTime)
 
@@ -37,9 +37,9 @@ class Jobseeker(BaseModel, UserMixin, Base):
     @staticmethod
     def check_token(token):
         """
-        static method that takes a token as input and returns the user this token
-        belongs to as a response. If the token is invalid or expired,
-        the method returns None
+        static method that takes a token as input and returns the user
+        this token belongs to as a response. If the token is invalid or
+        expired, the method returns None
         """
         from models import storage
         jobseeker = storage.get_by_token(token=token)

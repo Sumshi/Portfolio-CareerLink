@@ -26,7 +26,7 @@ class Jobs(BaseModel, Base):
     skills_required = Column(String(200), default="No skills needed")
     recruiter = relationship('Recruiter', backref=backref(
         'job_listings', cascade="all, delete"))
-    job_seeker = relationship('Application', backref='applicants')
+    job_seeker = relationship('Applications', backref='applicants')
 
     def __init__(self, *args, **kwargs):
         """initializes Jobs"""

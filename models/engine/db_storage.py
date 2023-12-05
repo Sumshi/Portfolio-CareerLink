@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ A module that dedines the database storage """
 
-from models.applications import Application
+from models.applications import Applications
 from models.base_model import BaseModel, Base
 from models.job_history import JobHistory
 from models.jobseeker import Jobseeker
@@ -15,7 +15,7 @@ import models
 from werkzeug.security import generate_password_hash
 
 
-classes = {"Application": Application, "BaseModel": BaseModel, "Jobs": Jobs,
+classes = {"Applications": Applications, "BaseModel": BaseModel, "Jobs": Jobs,
            "JobHistory": JobHistory, "Jobseeker": Jobseeker,
            "Recruiter": Recruiter}
 
@@ -46,7 +46,7 @@ class DBStorage():
         if cls:
             res = self.__session.query(cls).all()
         else:
-            res = self.__session.query(Application).all()
+            res = self.__session.query(Applications).all()
             res.extend(self.__session.query(JobHistory).all())
             res.extend(self.__session.query(Jobseeker).all())
             res.extend(self.__session.query(Jobs).all())
@@ -60,14 +60,14 @@ class DBStorage():
         """
         if (isinstance(obj, Recruiter) or isinstance(obj, Jobseeker)) and \
                 obj.password:
-            print("hashing the password{}".format(obj.password))
+            # print("hashing the password{}".format(obj.password))
             obj.password = self.hash_password(obj.password)
 
         self.__session.add(obj)
 
     def save(self):
         """ Commits all changes to current database session """
-        print("session commit called!!")
+        # print("session commit called!!")
         # self.__session.commit()
         try:
             self.__session.commit()
@@ -126,7 +126,8 @@ class DBStorage():
 
     def search_by_attribute(self, cls, attribute, value):
         """
-        Returns a list of objects of class `cls` that match the given attribute and value
+        Returns a list of objects of class `cls` that match the
+        given attribute and value
         """
         if not hasattr(cls, attribute):
             return []  # Attribute doesn't exist in the class

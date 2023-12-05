@@ -4,7 +4,7 @@
 import cmd
 from datetime import datetime
 import models
-from models.applications import Application
+from models.applications import Applications
 from models.base_model import BaseModel
 from models.job_history import JobHistory
 from models.jobs import Jobs
@@ -13,7 +13,7 @@ from models.recruiters import Recruiter
 import re
 import shlex  # for splitting the line along spaces except in double quotes
 
-classes = {"Application": Application, "BaseModel": BaseModel, "Jobs": Jobs,
+classes = {"Application": Applications, "BaseModel": BaseModel, "Jobs": Jobs,
            "JobHistory": JobHistory, "Jobseeker": Jobseeker,
            "Recruiter": Recruiter}
 
