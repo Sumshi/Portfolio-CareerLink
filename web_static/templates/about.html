@@ -1,37 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CareerLink</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/testimonials.css') }}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
-  <!--font awesome link for icons-->
-  <!--font awesome link for icons must include this kit to prevent blank icons-->
-  <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerLink</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/footer.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/testimonials.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+      integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm"
+      crossorigin="anonymous"
+    />
+    <!--font awesome link for icons-->
+    <!--font awesome link for icons must include this kit to prevent blank icons-->
+    <script
+      src="https://kit.fontawesome.com/d7accf2a63.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
-
+  <body>
     <div class="header-container">
-    <nav>
-      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/careerlogo.png') }}" alt="logo"></a>
-      <div class="nav-links" id="navLinks">
-        <svg xmlns="http://www.w3.org/2000/svg" onclick="hideMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        <ul>
-          <li><a href="{{ url_for('home') }}">HOME</a></li>
-          <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-          <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-          <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-          <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
-        </ul>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" onclick="showMenu()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </nav>
-  </div>
-<div class="testimonials">
+      <nav>
+        <a href="{{ url_for('home') }}"
+          ><img
+            src="{{ url_for('static', filename='images/careerlogo.png') }}"
+            alt="logo"
+        /></a>
+        <div class="nav-links" id="navLinks">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            onclick="hideMenu()"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          <ul>
+            <li><a href="{{ url_for('home') }}">HOME</a></li>
+            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
+            <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
+          </ul>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          onclick="showMenu()"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </nav>
+    </div>
+
+    <!-- Flash message container -->
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div id="flash-messages">
+      {% for message in messages %}
+      <div class="flash-message">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <div class="testimonials">
       <div class="inner">
         <h1>Why CareerLink?</h1>
         <div class="border"></div>
@@ -44,7 +103,9 @@
                 <i class="fa-solid fa-globe"></i>
               </div>
               <p>
-                Our platform is designed with accessibility in mind, ensuring that everyone, regardless of abilities or disabilities, can easily navigate and utilize the features
+                Our platform is designed with accessibility in mind, ensuring
+                that everyone, regardless of abilities or disabilities, can
+                easily navigate and utilize the features
               </p>
             </div>
           </div>
@@ -55,9 +116,11 @@
               <div class="stars">
                 <i class="fa-solid fa-users"></i>
               </div>
-               <p>
-                Experience unparalleled support from our dedicated team, ready to assist you with any inquiries, technical issues, or guidance you may need during your journey.
-               </p>
+              <p>
+                Experience unparalleled support from our dedicated team, ready
+                to assist you with any inquiries, technical issues, or guidance
+                you may need during your journey.
+              </p>
             </div>
           </div>
 
@@ -72,7 +135,9 @@
                 <i class="fas fa-star"></i>
               </div>
               <p>
-                We actively seek your feedback to enhance and improve our platform continually. Your input matters in shaping the future of CareerLink
+                We actively seek your feedback to enhance and improve our
+                platform continually. Your input matters in shaping the future
+                of CareerLink
               </p>
             </div>
           </div>
@@ -80,30 +145,34 @@
       </div>
     </div>
 
-  <section class="about-us">
-    <div class="row">
-      <div class="about-col">
-        <h1>About CareerLink</h1>
-        <p>
-          At CareerLink, our motivation is clear - to offer job seekers and recruiters a platform where 
-          they can connect and build meaningful professional relationships. We believe that every user 
-          deserves more than just a job search or hiring process; they deserve an experience. Our motive 
-          is to provide a space where individuals and companies can connect, celebrate achievements, 
-          and build successful careers. We're inspired by the idea that using our platform can be a transformative 
-          journey, filled with moments of career growth and fulfillment. 
-          Our mission is to create a haven of opportunity and genuine connections, where each user feels 
-          valued, and every interaction becomes a chapter in a successful story of career advancement.
-        </p>
-        <!-- <a href="{{ url_for('home') }}" class="hero-job">Back to home</a> -->
-      </div>
+    <section class="about-us">
+      <div class="row">
+        <div class="about-col">
+          <h1>About CareerLink</h1>
+          <p>
+            At CareerLink, our motivation is clear - to offer job seekers and
+            recruiters a platform where they can connect and build meaningful
+            professional relationships. We believe that every user deserves more
+            than just a job search or hiring process; they deserve an
+            experience. Our motive is to provide a space where individuals and
+            companies can connect, celebrate achievements, and build successful
+            careers. We're inspired by the idea that using our platform can be a
+            transformative journey, filled with moments of career growth and
+            fulfillment. Our mission is to create a haven of opportunity and
+            genuine connections, where each user feels valued, and every
+            interaction becomes a chapter in a successful story of career
+            advancement.
+          </p>
+          <!-- <a href="{{ url_for('home') }}" class="hero-job">Back to home</a> -->
+        </div>
 
-      <!-- <div class="about-col">
+        <!-- <div class="about-col">
         <img src="{{ url_for('static', filename='images/home.jpg') }}" alt="">
       </div> -->
-    </div>
-  </section>
+      </div>
+    </section>
 
-<div class="testimonials">
+    <div class="testimonials">
       <div class="inner">
         <h1>CareerLink Developers</h1>
         <div class="border"></div>
@@ -111,52 +180,90 @@
         <div class="row">
           <div class="col">
             <div class="testimonial">
-              <img src="{{ url_for('static', filename='images/eric.jpg') }}" alt="">
+              <img
+                src="{{ url_for('static', filename='images/eric.jpg') }}"
+                alt=""
+              />
               <div class="name">ERIC UBAGA</div>
               <p>Backend developer</p>
               <p>
-                "
-                As a backend developer, my focus is on building the robust infrastructure that powers CareerLink. I work on designing and implementing the server-side logic, databases, and APIs that make the platform dynamic and responsive. It's all about creating a reliable foundation that supports the user experience.
-                "
+                " As a backend developer, my focus is on building the robust
+                infrastructure that powers CareerLink. I work on designing and
+                implementing the server-side logic, databases, and APIs that
+                make the platform dynamic and responsive. It's all about
+                creating a reliable foundation that supports the user
+                experience. "
               </p>
               <div class="social-links">
-                <a href="https://github.com/Bulimo"><i class="fa-brands fa-github"></i></a>
-                <a href="https://twitter.com/EricBSteve"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/eric-ubaga/"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/Bulimo"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+                <a href="https://twitter.com/EricBSteve"
+                  ><i class="fa-brands fa-x-twitter"></i
+                ></a>
+                <a href="https://www.linkedin.com/in/eric-ubaga/"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="testimonial">
-              <img src="{{ url_for('static', filename='images/sumayapic.jpg') }}" alt="">
+              <img
+                src="{{ url_for('static', filename='images/sumayapic.jpg') }}"
+                alt=""
+              />
               <div class="name">SUMAYA AHMED</div>
               <p>Frontend developer</p>
               <p>
-                "Throughout the development process, I've poured my energy into crafting a user-friendly interface, ensuring that both job seekers and recruiters have an intuitive and enjoyable experience. I wanted to showcase not only my technical skills but also my commitment to creating something that adds value to the professional world."
+                "Throughout the development process, I've poured my energy into
+                crafting a user-friendly interface, ensuring that both job
+                seekers and recruiters have an intuitive and enjoyable
+                experience. I wanted to showcase not only my technical skills
+                but also my commitment to creating something that adds value to
+                the professional world."
               </p>
-                <div class="social-links">
-                <a href="https://github.com/Sumshi"><i class="fa-brands fa-github"></i></a>
-                <a href="https://twitter.com/Ibnatumaya"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/sumaya-somow-76b182255/"><i class="fa-brands fa-linkedin"></i></a>
+              <div class="social-links">
+                <a href="https://github.com/Sumshi"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+                <a href="https://twitter.com/Ibnatumaya"
+                  ><i class="fa-brands fa-x-twitter"></i
+                ></a>
+                <a href="https://www.linkedin.com/in/sumaya-somow-76b182255/"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
               </div>
             </div>
           </div>
 
           <div class="col">
             <div class="testimonial">
-              <img src="{{ url_for('static', filename='images/leo.jpg') }}" alt="">
+              <img
+                src="{{ url_for('static', filename='images/leo.jpg') }}"
+                alt=""
+              />
               <div class="name">ONABOWALE SIMEON</div>
               <p>Backend developer</p>
               <p>
-                "
-                Hey there, I'm Leo, and I had the pleasure of working alongside Eric on the backend development of CareerLink. It's been an exciting journey contributing to a project that aims to redefine the way job seekers and recruiters connect in the professional world.
-                We implemented robust measures making CareerLink a secure space"
-                </p>
-                <div class="social-links">
-                <a href="https://github.com/XimeonLeo"><i class="fa-brands fa-github"></i></a>
-                <a href="https://twitter.com/XymeonLeo"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/ximeonleo"><i class="fa-brands fa-linkedin"></i></a>
+                " Hey there, I'm Leo, and I had the pleasure of working
+                alongside Eric on the backend development of CareerLink. It's
+                been an exciting journey contributing to a project that aims to
+                redefine the way job seekers and recruiters connect in the
+                professional world. We implemented robust measures making
+                CareerLink a secure space"
+              </p>
+              <div class="social-links">
+                <a href="https://github.com/XimeonLeo"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+                <a href="https://twitter.com/XymeonLeo"
+                  ><i class="fa-brands fa-x-twitter"></i
+                ></a>
+                <a href="https://www.linkedin.com/in/ximeonleo"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
               </div>
             </div>
           </div>
@@ -164,57 +271,56 @@
       </div>
     </div>
 
-<!--footer section, end of page-->
-<!--footer section-->
-<footer class="footer">
-  	 <div class="container">
-  	 	<div class="row">
-  	 		<div class="footer-col">
-  	 			<h4>company</h4>
-  	 			<ul>
-  	 				<li><a href="#">Cookie Policy</a></li>
-  	 				<li><a href="#">Terms of Use</a></li>
-  	 				<li><a href="#">privacy policy</a></li>
-  	 				<li><a href="#">affiliate program</a></li>
-            <li><a href="#">Accessibility</a></li>
-  	 			</ul>
-  	 		</div>
-  	 		<div class="footer-col">
-  	 			<h4>get help</h4>
-  	 			<ul>
-  	 				<li><a href="#">FAQ</a></li>
-  	 				<li><a href="#">Terms and Conditions</a></li>
-  	 				<li><a href="#">locate a service provider</a></li>
-  	 				<li><a href="#">Help</a></li>
-  	 				<li><a href="#">Report a problem</a></li>
-  	 			</ul>
-  	 		</div>
+    <!--footer section, end of page-->
+    <!--footer section-->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>company</h4>
+            <ul>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">privacy policy</a></li>
+              <li><a href="#">affiliate program</a></li>
+              <li><a href="#">Accessibility</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>get help</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Terms and Conditions</a></li>
+              <li><a href="#">locate a service provider</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Report a problem</a></li>
+            </ul>
+          </div>
 
-  	 		<div class="footer-col">
-  	 			<h4>follow us</h4>
-  	 			<div class="social-links">
-  	 				<a href="#"><i class="fa-brands fa-facebook"></i></a>
-  	 				<a href="#"><i class="fa-brands fa-instagram"></i></a>
-  	 				<a href="#"><i class="fa-brands fa-twitter"></i></a>
-  	 				<a href="#"><i class="fa-brands fa-pinterest"></i></a>
-  	 			</div>
-  	 		</div>
-  	 	</div>
-  	 </div>
-     <hr>
-    <p class="copyright">© CareerLink 2023. All rights reserved</p>
-  </footer>
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <p class="copyright">© CareerLink 2023. All rights reserved</p>
+    </footer>
 
-  <!--javascript code for the clicking, toggling of the menu icon-->
-  <script>
-    var navLinks = document.getElementById("navLinks");
-    function showMenu(){
-      navLinks.style.right = "0";
-    }
-    function hideMenu(){
-      navLinks.style.right = "-200px";
-    }
-  </script>
-
-</body>
+    <!--javascript code for the clicking, toggling of the menu icon-->
+    <script>
+      var navLinks = document.getElementById("navLinks");
+      function showMenu() {
+        navLinks.style.right = "0";
+      }
+      function hideMenu() {
+        navLinks.style.right = "-200px";
+      }
+    </script>
+  </body>
 </html>
