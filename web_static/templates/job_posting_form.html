@@ -1,44 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Posting Form</title>
     <!-- <link rel="stylesheet" href="../static/styles/job_posting_form.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/job_posting_form.css') }}">
-</head>
-<body>
-
-<div class="form-container">
-    <h2>Job Posting Form</h2>
-    <form action="/submit_job_posting" method="post">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/job_posting_form.css') }}"
+    />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Job Posting Form</h2>
+      <form
+        action="{{ url_for('jobPosting' )}}"
+        method="post"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        {{ form.hidden_tag() }} {{ form.csrf_token }}
         <!-- Job Information -->
-        <label for="job_title">Job Title:</label>
-        <input type="text" id="job_title" name="job_title" required>
+        <div class="title">
+          <p>{{ form.title.label }}</p>
+          {{ form.title() }} <br />
+          {% for error in form.title.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="description">
+          <p>{{ form.description.label }}</p>
+          {{ form.description() }} <br />
+          {% for error in form.description.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="type">
+          <p>{{ form.type.label }}</p>
+          {{ form.type(class_="form-control") }} <br />
+          {% for error in form.type.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="application">
+          <p>{{ form.application.label }}</p>
+          {{ form.application() }} <br />
+          {% for error in form.application.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="company">
+          <p>{{ form.company.label }}</p>
+          {{ form.company() }} <br />
+          {% for error in form.company.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="contact">
+          <p>{{ form.contact.label }}</p>
+          {{ form.contact() }} <br />
+          {% for error in form.contact.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="deadline">
+          <p>{{ form.deadline.label }}</p>
+          {{ form.deadline() }} <br />
+          {% for error in form.deadline.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="country">
+          <p>{{ form.country.label }}</p>
+          {{ form.country() }} <br />
+          {% for error in form.country.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="town">
+          <p>{{ form.town.label }}</p>
+          {{ form.town() }} <br />
+          {% for error in form.town.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="salary">
+          <p>{{ form.salary.label }}</p>
+          {{ form.salary() }} <br />
+          {% for error in form.salary.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="open_position">
+          <p>{{ form.open_position.label }}</p>
+          {{ form.open_position() }}<br />
+          {% for error in form.open_position.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <p>Enter comma separated list of not more than ten skills</p>
+        <div class="skills_required">
+          <p>{{ form.skills_required.label }}</p>
+          {{ form.skills_required() }}<br />
+          {% for error in form.skills_required.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <!-- <label for="job_title">Job Title:</label>
+        <input type="text" id="job_title" name="job_title" required />
 
         <label for="company_name">Company Name:</label>
-        <input type="text" id="company_name" name="company_name" required>
+        <input type="text" id="company_name" name="company_name" required />
 
         <label for="job_description">Job Description:</label>
-        <textarea id="job_description" name="job_description" rows="5" required></textarea>
+        <textarea
+          id="job_description"
+          name="job_description"
+          rows="5"
+          required
+        ></textarea>
 
         <label for="employment_type">Employment Type:</label>
         <select id="employment_type" name="employment_type" required>
-            <option value="full_time">Full-time</option>
-            <option value="part_time">Part-time</option>
-            <option value="contract">Contract</option>
+          <option value="full_time">Full-time</option>
+          <option value="part_time">Part-time</option>
+          <option value="contract">Contract</option>
         </select>
 
         <label for="company_size">Company Size:</label>
-        <input type="text" id="company_size" name="company_size" required>
+        <input type="text" id="company_size" name="company_size" required />
 
         <label for="skills_required">Skills Required:</label>
-        <input type="text" id="skills_required" name="skills_required" required>
+        <input
+          type="text"
+          id="skills_required"
+          name="skills_required"
+          required
+        /> -->
 
         <!-- Submit Button -->
-        <button type="submit">Submit Job Posting</button>
-    </form>
-</div>
-
-</body>
+        <button type="submit" class="sign-btn">Submit Job Posting</button>
+      </form>
+    </div>
+  </body>
 </html>

@@ -1,10 +1,16 @@
+"""
+Module app
+Starts the Flask application
+"""
+from datetime import date
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_login import login_required
 from models import storage, Recruiter, Jobseeker, Application
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
-from web_static.forms import RecruiterEditProfileForm, JobseekerEditProfileForm
+from web_static.forms import RecruiterEditProfileForm
+from web_static.forms import JobseekerEditProfileForm, PostJob
 from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
@@ -232,7 +238,10 @@ def jobseeker_signup():
             resume.save(filepath)
             user.resume = filepath
         # user.set_password(form.password.data)
-        user.save()
+        if user is not None:
+            user.save()
+        else:
+            return redirect(url_for('jobseeker_signup'))
         if storage.get_by_username(user.username):
             flash('Congratulations, {} for registering!!'.format(user.username))
             return redirect(url_for('login'))
@@ -388,6 +397,10 @@ def userDashboard():
 def applicationForm(id):
     """ To apply for a job """
     job = storage.get(Jobs, id)
+    today = date.today()
+
+    # Apply on if the job exists or the deadline is not yet passed
+    # if job and today <= job.deadline:
     if job:
         print("job object available")
         if request.method == 'POST':
@@ -420,8 +433,9 @@ def applicationForm(id):
                 cover_letter_name = secure_filename(cover_letter.filename)
                 file_path = os.path.join(
                     COVER_LETTER_FOLDER, cover_letter_name)
+                save_file_path = os.path.join('web_static/', file_path)
                 print("cover_letter file path = {}".format(file_path))
-                cover_letter.save(file_path)
+                cover_letter.save(save_file_path)
                 application.cover_letter = file_path
             else:
                 flash('Cover letter is required')
@@ -429,9 +443,13 @@ def applicationForm(id):
 
             # Save the application if cover letter exists or has content
             if getattr(application, 'cover_letter', None):
-                application.save()
-                flash("job application submitted")
-                return redirect(url_for('joblists'))
+                if application is not None:
+                    application.save()
+                    flash("job application submitted")
+                    return redirect(url_for('joblists'))
+                else:
+                    flash("Application submitted with errors. Apply again")
+                    return redirect(url_for('applicationForm', id=id))
             else:
                 flash('Cover letter is required')
                 return redirect(url_for('applicationForm', id=id))
@@ -444,6 +462,7 @@ def applicationForm(id):
 @login_required
 def jobHistory():
     """ Route to display Job seeker's history """
+
     return render_template('job_history.html')
 
 
@@ -451,7 +470,31 @@ def jobHistory():
 @login_required
 def jobPosting():
     """ Route to post a new job by recruiter """
-    return render_template('job_posting_form.html')
+    form = PostJob()
+    recruiter = storage.get_by_id(current_user.id)
+    if form.validate_on_submit():
+        # Extract the information and create a Job instance
+        job = Jobs(
+            recruiters_id=recruiter.id,
+            title=form.title.data,
+            description=form.description.data,
+            type=form.type.data,
+            application=form.application.data,
+            company=form.company.data,
+            contact=form.contact.data,
+            deadline=form.deadline.data,
+            country=form.country.data,
+            town=form.town.data,
+            salary=form.salary.data,
+            open_position=form.open_position.data,
+            skills_required=form.skills_required.data
+        )
+        if job is not None:
+            job.save()
+            return redirect(url_for('job_details', id=job.id))
+
+    return render_template('job_posting_form.html',
+                           form=form)
 
 
 @app.route('/recruiterDashboard', methods=['GET'])
