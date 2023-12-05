@@ -4,9 +4,10 @@ Starts the Flask application
 """
 from datetime import date
 from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import jsonify
 from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_login import login_required
-from models import storage, Recruiter, Jobseeker, Application
+from models import storage, Recruiter, Jobseeker, Applications
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
 from web_static.forms import RecruiterEditProfileForm
@@ -65,7 +66,11 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or urlparse(next_page).netloc != '':
-            next_page = url_for('joblists')
+            if isinstance(current_user, Jobseeker):
+                next_page = url_for('joblists')
+            else:
+                # next_page = url_for('my_posted_jobs')
+                next_page = url_for('recruiterDashboard')
         return redirect(next_page)
     return render_template('logIn.html',
                            pageTitle='log In',
@@ -412,7 +417,7 @@ def applicationForm(id):
                 flash('All fields are required')
                 return redirect(url_for('applicationForm', id=id))
             user = storage.get_by_id(current_user.id)
-            application = Application(
+            application = Applications(
                 job_seeker_id=user.id,
                 job_id=job.id,
                 first_name=request.form['first_name'],
@@ -470,12 +475,16 @@ def jobHistory():
 @login_required
 def jobPosting():
     """ Route to post a new job by recruiter """
+    print('jobPosting method called!!')
     form = PostJob()
-    recruiter = storage.get_by_id(current_user.id)
+    user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Recruiter):
+        flash("Not allowed to post a jod")
+        return redirect(url_for('joblists'))
     if form.validate_on_submit():
         # Extract the information and create a Job instance
         job = Jobs(
-            recruiters_id=recruiter.id,
+            recruiters_id=user.id,
             title=form.title.data,
             description=form.description.data,
             type=form.type.data,

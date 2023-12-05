@@ -6,7 +6,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Date, DateTime
 from sqlalchemy.orm import relationship, backref
 
 
-class Application(BaseModel, Base):
+class Applications(BaseModel, Base):
     """ Represents a job application """
     __tablename__ = 'applications'
     job_seeker_id = Column(String(60), ForeignKey(

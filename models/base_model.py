@@ -94,7 +94,8 @@ class BaseModel:
         from models import storage
         now = datetime.utcnow()
         if hasattr(self, 'token') and hasattr(self, 'token_expiration'):
-            if self.token and self.token_expiration > now + timedelta(seconds=60):
+            if self.token and self.token_expiration > now +\
+                    timedelta(seconds=60):
                 return self.token
             token = base64.b64encode(urandom(24)).decode('utf-8')
             token_expiration = now + timedelta(seconds=expires_in)
