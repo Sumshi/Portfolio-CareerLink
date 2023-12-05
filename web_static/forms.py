@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module to implement forms to pass data to application """
 from collections.abc import Mapping, Sequence
+from datetime import date
 from typing import Any
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -248,3 +249,20 @@ class PostJob(FlaskForm):
                     'Company name "{}" is invalid'.format(
                         company.data)
                 )
+
+# A class to implement job history posting
+
+
+class PostJobHistory(FlaskForm):
+    """ Implements form to post a job history """
+    company_name = StringField('Company Name', validators=[DataRequired()])
+    start_date = DateField('From', validators=[DataRequired()])
+    end_date = DateField('To', default=date.today(),
+                         validators=[DataRequired()])
+    job_title = StringField('Job Title', validators=[DataRequired()])
+    job_description = TextAreaField(
+        'Job Description', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired()])
+    state = StringField('City/State/Town', validators=[DataRequired()])
+    salary = StringField('Salary', validators=[DataRequired()])
+    submit = SubmitField('Add Previous Job')

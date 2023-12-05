@@ -1,183 +1,204 @@
-<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>User Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/userDashboard.css') }}">
-   <link rel="stylesheet" href="{{ url_for('static', filename='styles/joblists.css') }}">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/userDashboard.css') }}"> -->
-  <script src="https://kit.fontawesome.com/d7accf2a63.js" crossorigin="anonymous"></script>
-  <!-- Font Awesome Cdn Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-</head>
-<body>
-  <div class="container">
-    <nav>
-      <div class="navbar">
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/user0.jpg') }}" alt="">
-          <h1>jobs</h1>
-          <!-- <p>Mike's dashboard</p> -->
-        </div>
-        <ul>
-          <li><a href="{{ url_for('userDashboard') }}">
-            <i class="fas fa-user"></i>
-            <span class="nav-item">Dashboard</span>
-          </a>
-          </li>
-          <li><a href="{{ url_for('joblists') }}">
-            <i class="fas fa-chart-bar"></i>
-            <span class="nav-item">Jobs</span>
-          </a>
-          </li>
-          <li><a href="{{ url_for('joblists') }}">
-            <i class="fas fa-tasks"></i>
-            <span class="nav-item">Jobs Board</span>
-          </a>
-          </li>
-          <li><a href="{{ url_for('jobseekerProfile') }}">
-            <i class="fa-solid fa-file"></i>
-            <span class="nav-item">Resume</span>
-          </a>
-          </li>
-    
-          <li><a href="#">
-            <i class="fas fa-question-circle"></i>
-            <span class="nav-item">Help</span>
-          </a>
-          </li>
-         <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
-        </ul>
-      </div>
-    </nav>
+<span style="font-family: verdana, geneva, sans-serif"
+  ><!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>User Dashboard</title>
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/userDashboard.css') }}"
+      />
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/joblists.css') }}"
+      />
+      <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/userDashboard.css') }}"> -->
+      <script
+        src="https://kit.fontawesome.com/d7accf2a63.js"
+        crossorigin="anonymous"
+      ></script>
+      <!-- Font Awesome Cdn Link -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      />
+    </head>
+    <body>
+      <div class="container">
+        <nav>
+          <div class="navbar">
+            <div class="logo">
+              <img
+                src="{{ url_for('static', filename='images/user0.jpg') }}"
+                alt=""
+              />
+              <h1>jobs</h1>
+              <!-- <p>Mike's dashboard</p> -->
+            </div>
+            <ul>
+              <li>
+                <a href="{{ url_for('update_jobseeker_profile') }}">
+                  <i class="fas fa-user"></i>
+                  <span class="nav-item">My Profile</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('my_applied_jobs') }}">
+                  <i class="fas fa-chart-bar"></i>
+                  <span class="nav-item">Applied Jobs</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('joblists') }}">
+                  <i class="fas fa-tasks"></i>
+                  <span class="nav-item">Jobs Board</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('jobHistory') }}">
+                  <i class="fa-solid fa-file"></i>
+                  <span class="nav-item">Add Job History</span>
+                </a>
+              </li>
 
-    <section class="main">
-      <div class="main-top">
-        <p>Explore available Jobs!</p>
-      </div>
-      <div class="main-body">
-        <h1>Recent Jobs</h1>
-      
-      <div class="search_bar">
-        <input type="search" placeholder="Search job here...">
-        <select name="" id="">
-          <option>Category</option>
-          <option>Web Design</option>
-          <option>App Design</option>
-          <option>App Development</option>
-        </select>
-        <select class="filter">
-          <option>Filter</option>
-        </select>
-      </div>
+              <li>
+                <a href="#">
+                  <i class="fas fa-question-circle"></i>
+                  <span class="nav-item">Help</span>
+                </a>
+              </li>
+              <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            </ul>
+          </div>
+        </nav>
 
-      <div class="tags_bar">
-        <div class="tag">
-          <i class="fas fa-times"></i>
-          <span>Programming</span>
-        </div>
-        <div class="tag">
-          <i class="fas fa-times"></i>
-          <span>Design</span>
-        </div>
-        <div class="tag">
-          <i class="fas fa-times"></i>
-          <span>Medical</span>
-        </div>
-        <div class="tag">
-          <i class="fas fa-times"></i>
-          <span>Engineering</span>
-        </div>
-      </div>
+        <section class="main">
+          <div class="main-top">
+            <p>Explore available Jobs!</p>
+          </div>
+          <div class="main-body">
+            <h1>Recent Jobs</h1>
 
-      <div class="row">
-        <p>There are more than <span>400</span> Jobs</p>
-        <a href="#">See all</a>
-      </div>
+            <div class="search_bar">
+              <input type="search" placeholder="Search job here..." />
+              <select name="" id="">
+                <option>Category</option>
+                <option>Web Design</option>
+                <option>App Design</option>
+                <option>App Development</option>
+              </select>
+              <select class="filter">
+                <option>Filter</option>
+              </select>
+            </div>
 
-      <div class="job_card">
-        <div class="job_details">
-          <div class="img">
-            <!-- <i class="fab fa-google-drive"></i> -->
-            <i class="fa-brands fa-square-instagram"></i>
-            <img src="" alt="">
-          </div>
-          <div class="text">
-            <h2>UX Designer</h2>
-            <span>Instagram - Junior Post</span>
-          </div>
-        </div>
-        <div class="job_salary">
-          <h4>50,000ksh - 120,000ksh /yr</h4>
-          <span>24hrs ago</span>
-        </div>
-      </div>
-      
-      <div class="job_card">
-        <div class="job_details">
-          <div class="img">
-            <i class="fa-brands fa-linkedin"></i>
-          </div>
-          <div class="text">
-            <h2>JavaScript Developer</h2>
-            <span>linkedin - Senior Post</span>
-          </div>
-        </div>
-        <div class="job_salary">
-            <h4>60,000ksh - 100,000ksh /yr</h4>
-          <span>2 days ago</span>
-        </div>
-      </div>
+            <div class="tags_bar">
+              <div class="tag">
+                <i class="fas fa-times"></i>
+                <span>Programming</span>
+              </div>
+              <div class="tag">
+                <i class="fas fa-times"></i>
+                <span>Design</span>
+              </div>
+              <div class="tag">
+                <i class="fas fa-times"></i>
+                <span>Medical</span>
+              </div>
+              <div class="tag">
+                <i class="fas fa-times"></i>
+                <span>Engineering</span>
+              </div>
+            </div>
 
-      <div class="job_card">
-        <div class="job_details">
-          <div class="img">
-            <i class="fab fa-facebook"></i>
-          </div>
-          <div class="text">
-            <h2>Product Developer</h2>
-            <span>Facbook - Manager Post</span>
-          </div>
-        </div>
-        <div class="job_salary">
-            <h4>80,000ksh - 120,000ksh /yr</h4>
-          <span>2 days ago</span>
-        </div>
-      </div>
+            <div class="row">
+              <p>There are more than <span>400</span> Jobs</p>
+              <a href="#">See all</a>
+            </div>
 
-      <div class="job_card">
-        <div class="job_details">
-          <div class="img">
-            <i class="fab fa-git-alt"></i>
-          </div>
-          <div class="text">
-            <h2>Programmer</h2>
-            <span>Github - Juni Post</span>
-          </div>
-        </div>
-        <div class="job_salary">
-            <h4>90,000ksh - 110,000ksh /yr</h4>
-          <span>3 days ago</span>
-        </div>
-      </div>
+            <div class="job_card">
+              <div class="job_details">
+                <div class="img">
+                  <!-- <i class="fab fa-google-drive"></i> -->
+                  <i class="fa-brands fa-square-instagram"></i>
+                  <img src="" alt="" />
+                </div>
+                <div class="text">
+                  <h2>UX Designer</h2>
+                  <span>Instagram - Junior Post</span>
+                </div>
+              </div>
+              <div class="job_salary">
+                <h4>50,000ksh - 120,000ksh /yr</h4>
+                <span>24hrs ago</span>
+              </div>
+            </div>
 
-      <div class="job_card">
-        <div class="job_details">
-          <div class="img">
-            <i class="fab fa-youtube"></i>
-          </div>
-          <div class="text">
-            <h2>React.js Expert</h2>
-            <span>Youtube - VIP</span>
-          </div>
-        </div>
-        <div class="job_salary">
-            <h4>45,000ksh - 125,000ksh /yr</h4>
-          <span>4 days ago</span>
-        </div>
-      </div>
-    </div>
-    </section>
-  </div>
+            <div class="job_card">
+              <div class="job_details">
+                <div class="img">
+                  <i class="fa-brands fa-linkedin"></i>
+                </div>
+                <div class="text">
+                  <h2>JavaScript Developer</h2>
+                  <span>linkedin - Senior Post</span>
+                </div>
+              </div>
+              <div class="job_salary">
+                <h4>60,000ksh - 100,000ksh /yr</h4>
+                <span>2 days ago</span>
+              </div>
+            </div>
 
-</body>
-</html></span>
+            <div class="job_card">
+              <div class="job_details">
+                <div class="img">
+                  <i class="fab fa-facebook"></i>
+                </div>
+                <div class="text">
+                  <h2>Product Developer</h2>
+                  <span>Facbook - Manager Post</span>
+                </div>
+              </div>
+              <div class="job_salary">
+                <h4>80,000ksh - 120,000ksh /yr</h4>
+                <span>2 days ago</span>
+              </div>
+            </div>
+
+            <div class="job_card">
+              <div class="job_details">
+                <div class="img">
+                  <i class="fab fa-git-alt"></i>
+                </div>
+                <div class="text">
+                  <h2>Programmer</h2>
+                  <span>Github - Juni Post</span>
+                </div>
+              </div>
+              <div class="job_salary">
+                <h4>90,000ksh - 110,000ksh /yr</h4>
+                <span>3 days ago</span>
+              </div>
+            </div>
+
+            <div class="job_card">
+              <div class="job_details">
+                <div class="img">
+                  <i class="fab fa-youtube"></i>
+                </div>
+                <div class="text">
+                  <h2>React.js Expert</h2>
+                  <span>Youtube - VIP</span>
+                </div>
+              </div>
+              <div class="job_salary">
+                <h4>45,000ksh - 125,000ksh /yr</h4>
+                <span>4 days ago</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </body>
+  </html></span
+>

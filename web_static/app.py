@@ -11,7 +11,7 @@ from models import storage, Recruiter, Jobseeker, Applications
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
 from web_static.forms import RecruiterEditProfileForm
-from web_static.forms import JobseekerEditProfileForm, PostJob
+from web_static.forms import JobseekerEditProfileForm, PostJob, PostJobHistory
 from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
@@ -463,12 +463,36 @@ def applicationForm(id):
                            job=job)
 
 
-@app.route('/jobHistory', methods=['GET'])
+@app.route('/jobHistory', methods=['GET', 'POST'])
 @login_required
 def jobHistory():
     """ Route to display Job seeker's history """
+    form = PostJobHistory()
+    user = storage.get_by_id(current_user.id)
+    if user is not None:
+        if not isinstance(user, Jobseeker):
+            flash('Not allowed to post a job history')
+            return redirect(url_for('recruiterDashboard'))
 
-    return render_template('job_history.html')
+        if form.validate_on_submit():
+            history = JobHistory(
+                job_seeker_id=user.id,
+                company_name=form.company_name.data,
+                start_date=form.start_date.data,
+                end_date=form.end_date.data,
+                job_title=form.job_title.data,
+                job_description=form.job_description.data,
+                country=form.country.data,
+                state=form.state.data,
+                salary=form.salary.data
+            )
+            if history is not None:
+                history.save()
+                return redirect(url_for('update_jobseeker_profile'))
+            else:
+                return redirect(url_for('jobHistory'))
+
+    return render_template('job_history.html', form=form)
 
 
 @app.route('/jobPosting', methods=['GET', 'POST'])

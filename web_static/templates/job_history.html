@@ -1,50 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job History Form</title>
     <!-- <link rel="stylesheet" href="../static/styles/job_history.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/job_history.css') }}">
-</head>
-<body>
-
-<div class="form-container">
-    <h2>Job History Form</h2>
-    <form action="/submit_job_history" method="post">
-        <!-- Job Seeker Information -->
-        <label for="job_seeker_id">Job Seeker ID:</label>
-        <input type="text" id="job_seeker_id" name="job_seeker_id" required>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/job_history.css') }}"
+    />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Job History Form</h2>
+      <form
+        action="{{ url_for('jobHistory') }}"
+        method="post"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        {{ form.hidden_tag() }} {{ form.csrf_token }}
 
         <!-- Job History Information -->
-        <label for="company_name">Company Name:</label>
-        <input type="text" id="company_name" name="company_name" required>
+        <div class="title">
+          <p>{{ form.job_title.label }}</p>
+          {{ form.job_title() }} <br />
+          {% for error in form.job_title.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="company_name">
+          <p>{{ form.company_name.label }}</p>
+          {{ form.company_name() }} <br />
+          {% for error in form.company_name.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="start_date">
+          <p>{{ form.start_date.label }}</p>
+          {{ form.start_date() }} <br />
+          {% for error in form.start_date.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="end_date">
+          <p>{{ form.end_date.label }}</p>
+          {{ form.end_date() }} <br />
+          {% for error in form.end_date.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="job_description">
+          <p>{{ form.job_description.label }}</p>
+          {{ form.job_description() }} <br />
+          {% for error in form.job_description.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="country">
+          <p>{{ form.country.label }}</p>
+          {{ form.country() }} <br />
+          {% for error in form.country.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="state">
+          <p>{{ form.state.label }}</p>
+          {{ form.state() }} <br />
+          {% for error in form.state.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="salary">
+          <p>{{ form.salary.label }}</p>
+          {{ form.salary() }} <br />
+          {% for error in form.salary.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <!-- <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required />
 
         <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" required>
+        <input type="date" id="start_date" name="start_date" required />
 
         <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date">
+        <input type="date" id="end_date" name="end_date" />
 
         <label for="job_title">Job Title:</label>
-        <input type="text" id="job_title" name="job_title" required>
+        <input type="text" id="job_title" name="job_title" required />
 
         <label for="job_description">Job Description:</label>
-        <textarea id="job_description" name="job_description" rows="5" required></textarea>
+        <textarea
+          id="job_description"
+          name="job_description"
+          rows="5"
+          required
+        ></textarea>
 
         <label for="country">Country:</label>
-        <input type="text" id="country" name="country" required>
+        <input type="text" id="country" name="country" required />
 
         <label for="state">State:</label>
-        <input type="text" id="state" name="state" required>
+        <input type="text" id="state" name="state" required />
 
         <label for="salary">Salary:</label>
-        <input type="number" id="salary" name="salary">
+        <input type="number" id="salary" name="salary" /> -->
 
         <!-- Submit Button -->
         <button type="submit">Submit Job History</button>
-    </form>
-</div>
-
-</body>
+      </form>
+    </div>
+  </body>
 </html>
