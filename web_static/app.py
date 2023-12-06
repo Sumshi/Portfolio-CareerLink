@@ -148,6 +148,8 @@ def recruiter_signup():
 def update_recruiter_profile():
     """ Updates the profile of a recruiter """
     user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Recruiter):
+        return render_template('403.html')
     jobs = user.job_listings
     form = RecruiterEditProfileForm()
 
@@ -273,6 +275,8 @@ def jobseeker_signup():
 def update_jobseeker_profile():
     """ Updates the profile of a jobseeker """
     user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Jobseeker):
+        return render_template('403.html')
     job_history = user.prev_jobs
     form = JobseekerEditProfileForm()
 
@@ -405,7 +409,14 @@ def contact():
 @app.route('/userDashboard', methods=['GET'])
 @login_required
 def userDashboard():
-    return render_template('userDashboard.html')
+    """ Display the dashboard of the Jobseeker """
+    user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Jobseeker):
+        return render_template('403.html')
+    jobs = []
+    for job in storage.all(Jobs, order='date_posted').values():
+        jobs.append(job.to_dict())
+    return render_template('userDashboard.html', jobs=jobs[:10], user=user)
 
 
 @app.route('/applicationForm/<string:id>', methods=['GET', 'POST'])
@@ -545,11 +556,13 @@ def jobPosting():
 @login_required
 def recruiterDashboard():
     """ Route to display dashboard for a recruiter page """
-    recruiter = storage.get_by_id(current_user.id)
-    my_jobs = recruiter.job_listings
+    user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Recruiter):
+        return render_template('403.html')
+    my_jobs = user.job_listings
     return render_template('recruiterDashboard.html',
                            my_jobs=my_jobs,
-                           recruiter=recruiter)
+                           user=user)
 
 
 @app.route('/joblists', methods=['GET'])
