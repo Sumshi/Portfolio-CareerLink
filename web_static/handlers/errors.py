@@ -15,6 +15,12 @@ def not_found_error(error):
     return render_template('404.html'), 404
 
 
+@bp.app_errorhandler(403)
+def not_found_error(error):
+    print("403 error handler called")
+    return render_template('403.html'), 404
+
+
 @bp.app_errorhandler(500)
 def internal_error(error):
     print("500 error handler called")
