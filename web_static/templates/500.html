@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Details</title>
+    <title>500 Internal Server Error</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/style.css') }}"
@@ -55,7 +55,7 @@
             <li><a href="{{ url_for('about') }}">ABOUT</a></li>
             <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
             <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-            <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
+            <a href="{{ url_for('logout') }}" class="hero-job">Post a job</a>
           </ul>
         </div>
         <svg
@@ -77,79 +77,9 @@
       </nav>
     </div>
 
-    <div class="testing">
-      <section class="job-details-container">
-        <h1>{{ job.title }}</h1>
-        <p>Company: {{ job.company }}.</p>
-        <p>Location: {{ job.town }}, {{ job.country }}</p>
-        <div class="job-description">
-          <h2>Job Description</h2>
-          <p>{{ job.description }}</p>
-
-          <h2>Job Details</h2>
-          <ul>
-            <li>Employment Type: {{ job.type }}</li>
-            <li>Open Positions: {{ job.open_position }}</li>
-            <li>Contact: {{ job.contact }}</li>
-            <li>Application deadline: {{ job.deadline }}</li>
-            <li>Date Posted: {{ job.date_posted }}</li>
-            {% if job.salary %}
-            <li>Salary: {{ job.salary }}</li>
-            {% endif %}
-          </ul>
-
-          <h2>How to Apply</h2>
-          <p>{{ job.application }}</p>
-
-          {% if is_recruiter %}
-          <a href="{{ url_for ('my_posted_jobs') }}" class="apply-button"
-            >My Jobs</a
-          >
-          {% else %}
-          <a
-            href="{{ url_for('applicationForm', id=job['id']) }}"
-            class="apply-button"
-            >Apply Now</a
-          >
-          {% endif %}
-        </div>
-      </section>
-    </div>
-
-    <!-- <div class="job-details-container">
-      <h1>UX/UI Designer</h1>
-      <p class="company">Creative Designs Co.</p>
-      <p class="location">Nairobi, Kenya</p>
-
-      <div class="job-description">
-        <h2>Job Description</h2>
-        <p>
-          Creative Designs Co. is looking for a talented UX/UI designer to
-          create visually appealing and user-friendly interfaces. If you have a
-          passion for design and a keen eye for detail, we want to hear from
-          you.
-        </p>
-
-        <h2>Job Details</h2>
-        <ul>
-          <li>Position: UX/UI Designer</li>
-          <li>Company: Creative Designs Co.</li>
-          <li>Location: Nairobi, Kenya</li>
-          <li>Employment Type: Full-time</li>
-          <li>Company Size: 501-1,000 employees</li>
-          <li>Industry: Financial Services</li>
-          <li>Skills: User interface, user design</li>
-        </ul>
-
-        <h2>How to Apply</h2>
-        <p>
-          To apply for this position, please click the "Apply Now" button below
-          and submit your resume and cover letter.
-        </p>
-
-        <a href="application_form.html" class="apply-button">Apply Now</a>
-      </div>
-    </div> -->
+    <h1>An unexpected error has occurred</h1>
+    <p>The administrator has been notified. Sorry for the inconvenience!</p>
+    <p><a href="{{ url_for('home') }}">Back</a></p>
 
     <footer class="footer">
       <div class="container">

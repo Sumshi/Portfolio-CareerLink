@@ -27,18 +27,15 @@
         <nav>
           <div class="navbar">
             <div class="logo">
-              <img
-                src="{{ url_for('static', filename='images/user1.jpg') }}"
-                alt=""
-              />
+              <img src="{{ user.profile_pic  }}" alt="" />
               <h1>jobs<br />Posted</h1>
               <!-- <p>Mike's dashboard</p> -->
             </div>
             <ul>
               <li>
-                <a href="{{ url_for('userDashboard') }}">
+                <a href="{{ url_for('update_recruiter_profile') }}">
                   <i class="fas fa-user"></i>
-                  <span class="nav-item">Dashboard</span>
+                  <span class="nav-item">My Profile</span>
                 </a>
               </li>
               <li>
@@ -136,7 +133,7 @@
             {% endfor %} {% else %}
             <div class="row">
               <!-- <p>There are more than <span>400</span> Jobs</p> -->
-              <a href="">Post a job</a>
+              <a href="{{ url_for('jobPosting') }}">Post a job</a>
             </div>
             {% endif %}
 

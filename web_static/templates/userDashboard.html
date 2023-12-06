@@ -27,10 +27,7 @@
         <nav>
           <div class="navbar">
             <div class="logo">
-              <img
-                src="{{ url_for('static', filename='images/user0.jpg') }}"
-                alt=""
-              />
+              <img src="{{ user.profile_pic }}" alt="" />
               <h1>jobs</h1>
               <!-- <p>Mike's dashboard</p> -->
             </div>
@@ -111,27 +108,31 @@
             </div>
 
             <div class="row">
-              <p>There are more than <span>400</span> Jobs</p>
-              <a href="#">See all</a>
+              <p>
+                There are more than <span>400</span> Jobs
+                <a href="{{ url_for('joblists') }}"> See all</a>
+              </p>
             </div>
-
+            {% if jobs %} {% for job in jobs%}
             <div class="job_card">
               <div class="job_details">
                 <div class="img">
                   <!-- <i class="fab fa-google-drive"></i> -->
-                  <i class="fa-brands fa-square-instagram"></i>
-                  <img src="" alt="" />
+                  <!-- <i class="fa-brands fa-square-instagram"></i>
+                  <img src="" alt="" /> -->
                 </div>
                 <div class="text">
-                  <h2>UX Designer</h2>
-                  <span>Instagram - Junior Post</span>
+                  <h2>{{ job.title }}</h2>
+                  <span>{{ job.company }}</span>
                 </div>
               </div>
               <div class="job_salary">
-                <h4>50,000ksh - 120,000ksh /yr</h4>
-                <span>24hrs ago</span>
+                <h4>{{ job.salary }}Ksh/yr</h4>
+                <span>posted: {{ job.date_posted }}</span>
               </div>
+              <a href="{{ url_for('job_details', id=job['id']) }}"></a>
             </div>
+            {% endfor %} {% endif %}
 
             <div class="job_card">
               <div class="job_details">

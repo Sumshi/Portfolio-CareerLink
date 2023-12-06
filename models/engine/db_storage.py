@@ -41,10 +41,10 @@ class DBStorage():
         if _env == 'test':
             Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None):
+    def all(self, cls=None, order=None):
         """ Query the database session """
         if cls:
-            res = self.__session.query(cls).all()
+            res = self.__session.query(cls).order_by(order).all()
         else:
             res = self.__session.query(Applications).all()
             res.extend(self.__session.query(JobHistory).all())
@@ -74,6 +74,10 @@ class DBStorage():
         except Exception as e:
             self.__session.rollback()
             raise e
+
+    def roll_back(self):
+        """ Rollback in case of any database errors """
+        self.__session.rollback()
 
     def delete(self, obj=None):
         """ Delete obj from the current database session if ! None
@@ -124,7 +128,7 @@ class DBStorage():
         else:
             return len(self.all(cls))
 
-    def search_by_attribute(self, cls, attribute, value):
+    def search_by_attribute(self, cls, attribute, value, order=None):
         """
         Returns a list of objects of class `cls` that match the
         given attribute and value
@@ -133,7 +137,7 @@ class DBStorage():
             return []  # Attribute doesn't exist in the class
 
         query = self.__session.query(cls).filter(
-            getattr(cls, attribute) == value).all()
+            getattr(cls, attribute) == value).order_by(order).all()
         return query
 
     def get_by_attribute(self, attribute, value):
