@@ -13,7 +13,8 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(45deg, #a889f7, #322d24);
+    /* background: linear-gradient(45deg, #a889f7, #322d24); */
+    background: linear-gradient(45deg, #a889f7, #696866);
 }
 
 h2 {

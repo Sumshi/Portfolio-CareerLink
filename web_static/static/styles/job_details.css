@@ -18,7 +18,9 @@
     align-items: center;
     height: 180vh;
     margin-top: -140px;
-    background: linear-gradient(45deg, #a889f7, #322d24);
+    /* background: linear-gradient(45deg, #a889f7, #322d24); */
+    /* background: linear-gradient(45deg, #d5cbed, #efece7); */
+    background: linear-gradient(45deg, #a889f7, #696866);
 }
 
 
@@ -32,7 +34,6 @@
     padding-top: 100px;
     /* border-radius: 90px; */
     /* padding-top: 100px; */
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 h1 {
