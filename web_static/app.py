@@ -2,11 +2,15 @@
 Module app
 Starts the Flask application
 """
+from web_static import app, PROFILES_FOLDER, COVER_LETTER_FOLDER
+from web_static import RESUMES_FOLDER
 from datetime import date
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask import jsonify
 from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_login import login_required
+# Import the errors file with error handlers
+# from web_static.handlers import errors
 from models import storage, Recruiter, Jobseeker, Applications
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
@@ -16,22 +20,26 @@ from urllib.parse import urlparse, urljoin
 import os
 from werkzeug.utils import secure_filename
 
-PROFILES_FOLDER = 'static/images/profile_pics'
-RESUMES_FOLDER = 'static/resumes'
-COVER_LETTER_FOLDER = 'static/cover_letters'
-# PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
+# PROFILES_FOLDER = 'static/images/profile_pics'
+# RESUMES_FOLDER = 'static/resumes'
+# COVER_LETTER_FOLDER = 'static/cover_letters'
+# # PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get(
-    'SECRET_KEY') or 'this is a trial web app project'
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-app.config['PROFILES_FOLDER'] = os.environ.get(
-    'PROFILES_FOLDER') or PROFILES_FOLDER
-app.config['RESUMES_FOLDER'] = os.environ.get(
-    'RESUMES_FOLDER') or RESUMES_FOLDER
-app.config['COVER_LETTER_FOLDER'] = os.environ.get(
-    'COVER_LETTER_FOLDER') or COVER_LETTER_FOLDER
+# app.config['SECRET_KEY'] = os.environ.get(
+#     'SECRET_KEY') or 'this is a trial web app project'
+# app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+# app.config['PROFILES_FOLDER'] = os.environ.get(
+#     'PROFILES_FOLDER') or PROFILES_FOLDER
+# app.config['RESUMES_FOLDER'] = os.environ.get(
+#     'RESUMES_FOLDER') or RESUMES_FOLDER
+# app.config['COVER_LETTER_FOLDER'] = os.environ.get(
+#     'COVER_LETTER_FOLDER') or COVER_LETTER_FOLDER
+
+# # Import the errors file with error handlers
+# from web_static.handlers import bp as errors_bp
+# app.register_blueprint(errors_bp)
 
 login = LoginManager(app)
 login.login_view = 'login'
@@ -53,16 +61,19 @@ def login():
     Provides the logic to log in a user
     """
     if current_user.is_authenticated:
-        redirect(url_for('joblists'))
-        # redirect(url_for('home'))
+        print('current user {} is authenticated'.format(current_user.username))
+        if isinstance(current_user, Jobseeker):
+            return redirect(url_for('joblists'))
+        else:
+            return redirect(url_for('recruiterDashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = storage.get_by_username(form.username.data)
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
-        # register the user as logged in i.e any future pages the user navigates to
-        # will have the current_user variable set to that user.
+        # register the user as logged in i.e any future pages the user
+        # navigates to will have the current_user variable set to that user.
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or urlparse(next_page).netloc != '':

@@ -75,6 +75,10 @@ class DBStorage():
             self.__session.rollback()
             raise e
 
+    def roll_back(self):
+        """ Rollback in case of any database errors """
+        self.__session.rollback()
+
     def delete(self, obj=None):
         """ Delete obj from the current database session if ! None
         """
