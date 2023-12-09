@@ -174,8 +174,8 @@ CareerLink
 </p>
 <p>
     <ol>
-        <li>Collaborator, <a href="https://github.com/Bulimo">Eric Ubaga</a>,
-        <li>Collaborator, <a href="https://github.com/XimeonLeo">Simeon Leo</a>,
+        <li>Collaborator, <a href="https://github.com/Bulimo">Eric Ubaga</a>
+        <li>Collaborator, <a href="https://github.com/XimeonLeo">Simeon Leo</a>
     </ol>
 </p>
 <p><em><i class="fa-solid fa-heart"></i>Thank You all</p></em>
