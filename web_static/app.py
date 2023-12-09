@@ -95,10 +95,11 @@ def login():
 def home():
     """ Route to display the home page """
     is_recruiter = False
-    user = storage.get_by_id(current_user.id)
-    if isinstance(user, Recruiter):
-        is_recruiter = True
-    return render_template('index.html', is_recruiter=is_recruiter)
+    # user = storage.get_by_id(current_user.id)
+    # if isinstance(user, Recruiter):
+    #     is_recruiter = True
+    # return render_template('index.html', is_recruiter=is_recruiter)
+    return render_template('index.html')
 
 
 @app.route('/logout')
