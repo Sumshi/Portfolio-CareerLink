@@ -3,15 +3,21 @@ body {
     padding: 0;
     font-family: 'Times New Roman', Times, serif;
     /* background: #999; */
+    background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(../images/form.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
 }
 
 .sign-up-form {
     width: 300px;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3); */
     text-align: center;
     padding: 20px;
     margin: 8% auto 0;
-    background: #fff;
+    /* background: #fff; */
+    border-radius: 50px;
 }
 
 .sign-up-form h1 {

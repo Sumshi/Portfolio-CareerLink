@@ -6,14 +6,15 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(../images/form.jpg);
 }
 
 .form-container {
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding-top: 600px;
+    padding-top: 250px;
 }
 
 h2 {
