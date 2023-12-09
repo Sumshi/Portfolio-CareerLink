@@ -175,15 +175,14 @@ CareerLink
 <h4>Individuals: </h4>
 <p>
     <ol>
-        
-        <li>Collaborator, <a href="https://github.com/Bulimo">Eric Ubaga</a>
+        <li>Collaborator, <a href="https://github.com/Bulimo">Eric Ubaga</a>,
             played a pivotal role in the backend development, contributing to server setup, providing crucial support, and offering valuable corrections. I extend my heartfelt gratitude for his guidance and expertise, which were instrumental in overcoming challenges and enhancing the overall success of the CareerLink project.</li>
-        <li>Collaborator, <a href="https://github.com/XimeonLeo">Simeon Leo</a>
-            specialized in MySQL integration and presentation design. His expertise in these areas significantly contributed to the project's success.
+        <li>Collaborator, <a href="https://github.com/XimeonLeo">Simeon Leo</a>,
+            specialized in MySQL integration and presentation design. His expertise in these areas significantly contributed to the project's success.</li>
         <li>I want to acknowledge the <a href="https://www.alxafrica.com/">ALX</a>
-        community and the wider community of developers and contributors whose open-source projects, discussions, and code snippets served as a source of inspiration and learning.</li>
+            community and the wider community of developers and contributors whose open-source projects, discussions, and code snippets served as a source of inspiration and learning.</li>
     </ol>
 </p>
-<p>
+
             Thank you all
 </p>
