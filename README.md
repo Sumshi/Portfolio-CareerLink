@@ -4,7 +4,7 @@
 <hr>
 CareerLink
 
-![Home Picture](https://github.com/Sumshi/Portfolio-CareerLink/web_static/static/images/homepic.PNG)
+![Home Picture](https://github.com/Sumshi/Portfolio-CareerLink/blob/master/web_static/static/images/homepic.PNG)
 <hr>
 <h3>Introduction</h3>
 <p>
