@@ -162,11 +162,11 @@ CareerLink
 <p>
     <ol>
         <li><a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">The Flask Mega Tutorial</a></li>
-        <li><a href="https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-22-04">Digital Ocean Gunicorn installation</a></li>
+        <li><a href="https://javascript.info">JavaScript Tutorial</a></li>
         <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04">Digital Ocean Nginx installation</a></li>
         <li><a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04">Digital Ocean Server setup</a></li>
         <li><a href="https://flask.palletsprojects.com/en/3.0.x/">Flask Documentation</a></li>
-        <li>https://javascript.info/</li>
+        <li><a href="https://javascript.info">JavaScript Tutorial</a></li>
     </ol>
 </p>
 <p>
@@ -176,7 +176,6 @@ CareerLink
     <ol>
         <li>Collaborator, <a href="https://github.com/Bulimo">Eric Ubaga</a>,
         <li>Collaborator, <a href="https://github.com/XimeonLeo">Simeon Leo</a>,
-        <li>I want to acknowledge the <a href="https://www.alxafrica.com/">ALX</a>
     </ol>
 </p>
 <p><em><i class="fa-solid fa-heart"></i>Thank You all</p></em>
