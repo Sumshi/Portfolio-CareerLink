@@ -13,7 +13,7 @@ CareerLink
 <p>
     CareerLink offers a user-friendly experience, allowing individuals to explore job listings, apply for positions, and stay informed about the latest career trends and opportunities. Users can dive into a dynamic and engaging community, sharing insights and experiences to foster professional growth.
 </p>
-<h3>Technology Stack</h3>
+<h3>Technologies Used</h3>
 <p>
     <h4>Frontend: </h4>
         <ul>
