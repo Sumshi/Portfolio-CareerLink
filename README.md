@@ -172,7 +172,6 @@ CareerLink
 <p>
     I want to express my gratitude to the following individuals who greatly contributed to the development of the CareerLink project:
 </p>
-<h4>Individuals: </h4>
 <p>
     <ol>
         <li>Collaborator, <a href="https://github.com/Bulimo">Eric Ubaga</a>,
@@ -183,6 +182,5 @@ CareerLink
             community and the wider community of developers and contributors whose open-source projects, discussions, and code snippets served as a source of inspiration and learning.</li>
     </ol>
 </p>
-
-            Thank you all
+<p><em><i class="fa-solid fa-heart"></i>Thank You all</p></em>
 </p>
