@@ -157,7 +157,6 @@ CareerLink
         <li>Visit your domain</li>        
     </ol>
 </p>
-<h3>Acknowledgments</h3>
 <h4>Resources: </h4>
 <p>
     <ol>
@@ -166,7 +165,8 @@ CareerLink
         <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04">Digital Ocean Nginx installation</a></li>
         <li><a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04">Digital Ocean Server setup</a></li>
         <li><a href="https://flask.palletsprojects.com/en/3.0.x/">Flask Documentation</a></li>
-        <li>chatGPT</li>
+        <li>https://javascript.info/</li>
+        
     </ol>
 </p>
 <p>
