@@ -1,6 +1,12 @@
 /*---------------------------------JOB SEEKER PROFILE-------------------------------------------*/
 body {
     /* background: linear-gradient(45deg, #d5cbed, #efece7); */
+    background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(../images/form.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    /* background-color: #f4f4f4; */
 }
 
 h1 {
@@ -10,11 +16,11 @@ h1 {
 .profile-container {
     max-width: 800px;
     margin: 20px auto;
-    background: linear-gradient(45deg, #a889f7, #696866);
     padding: 20px;
     border-radius: 100px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     align-items: center;
+    /* color: rgb(199, 34, 34); */
 }
 
 button {

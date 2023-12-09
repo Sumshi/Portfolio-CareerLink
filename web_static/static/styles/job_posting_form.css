@@ -1,20 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(../images/form.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
 }
 
 .form-container {
-    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding-top: 1000px;
-    background: linear-gradient(45deg, #a889f7, #696866);
+    /* background: linear-gradient(45deg, #a889f7, #696866); */
 }
 
 h2 {
