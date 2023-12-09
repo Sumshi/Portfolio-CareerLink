@@ -4,6 +4,8 @@
 <hr>
 CareerLink
 
+![image](https://github.com/terryyufei/echoes/assets/123143795/ca3548e8-4e88-44e0-b2c8-5ec5f237af94)
+![Home Picture](https://github.com/Sumshi/Portfolio-CareerLink/homepic.PNG)
 <hr>
 <h3>Introduction</h3>
 <p>
