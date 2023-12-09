@@ -62,15 +62,17 @@
           <ul>
             <li><a href="{{ url_for('home') }}">HOME</a></li>
             <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
             {% if is_recruiter %}
             <li><a href="{{ url_for('my_posted_jobs') }}">JOBS</a></li>
-            {% else %}
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            {% endif %}
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
             <a href="{{ url_for('jobPosting') }}" class="hero-job"
               >Post a job</a
             >
+            {% else %} {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
+            {% endif %} {% endif %} {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            {% endif %}
           </ul>
         </div>
         <svg
@@ -134,11 +136,13 @@
         <br />
         <br />
         <br />
-
+        {% if not current_user.is_authenticated %}
         <a href="{{ url_for('login') }}" class="hero-btn">Log In</a>
+        {% endif %}
       </div>
     </section>
 
+    {% if not current_user.is_authenticated %}
     <div class="button-container">
       <div class="button-box">
         <p>For Job Seekers</p>
@@ -149,6 +153,7 @@
         <a href="{{ url_for('recruiter_signup') }}" class="hero-btn">Sign Up</a>
       </div>
     </div>
+    {% endif %}
 
     <!--br to create space, u can also us nbsp-->
     <br />
