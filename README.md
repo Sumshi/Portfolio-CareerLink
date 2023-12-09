@@ -166,7 +166,6 @@ CareerLink
         <li><a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04">Digital Ocean Server setup</a></li>
         <li><a href="https://flask.palletsprojects.com/en/3.0.x/">Flask Documentation</a></li>
         <li>https://javascript.info/</li>
-        
     </ol>
 </p>
 <p>
