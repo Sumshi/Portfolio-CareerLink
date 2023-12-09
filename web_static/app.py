@@ -9,8 +9,6 @@ from flask import Flask, render_template, redirect, url_for, flash, request
 from flask import jsonify
 from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_login import login_required
-# Import the errors file with error handlers
-# from web_static.handlers import errors
 from models import storage, Recruiter, Jobseeker, Applications
 from models import Jobs, JobHistory
 from web_static.forms import LoginForm, RecruiterSignUp, JobseekerSignUp
@@ -96,7 +94,11 @@ def login():
 # @login_required
 def home():
     """ Route to display the home page """
-    return render_template('index.html')
+    is_recruiter = False
+    user = storage.get_by_id(current_user.id)
+    if isinstance(user, Recruiter):
+        is_recruiter = True
+    return render_template('index.html', is_recruiter=is_recruiter)
 
 
 @app.route('/logout')
@@ -423,6 +425,9 @@ def userDashboard():
 @login_required
 def applicationForm(id):
     """ To apply for a job """
+    user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Jobseeker):
+        return render_template('403.html')
     job = storage.get(Jobs, id)
     today = date.today()
 
@@ -493,8 +498,7 @@ def jobHistory():
     user = storage.get_by_id(current_user.id)
     if user is not None:
         if not isinstance(user, Jobseeker):
-            flash('Not allowed to post a job history')
-            return redirect(url_for('recruiterDashboard'))
+            return render_template('403.html')
 
         if form.validate_on_submit():
             history = JobHistory(
@@ -521,12 +525,11 @@ def jobHistory():
 @login_required
 def jobPosting():
     """ Route to post a new job by recruiter """
-    print('jobPosting method called!!')
-    form = PostJob()
+    # print('jobPosting method called!!')
     user = storage.get_by_id(current_user.id)
     if not isinstance(user, Recruiter):
-        flash("Not allowed to post a jod")
-        return redirect(url_for('joblists'))
+        return render_template('403.html')
+    form = PostJob()
     if form.validate_on_submit():
         # Extract the information and create a Job instance
         job = Jobs(
@@ -569,6 +572,9 @@ def recruiterDashboard():
 @login_required
 def joblists():
     """ Route to display all the jobs posted """
+    user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Jobseeker):
+        return render_template('403.html')
     jobs = []
     for job in storage.all(Jobs).values():
         jobs.append(job.to_dict())
@@ -580,11 +586,13 @@ def joblists():
 @login_required
 def my_posted_jobs():
     """ Route to retrieve a recruiter's posted jobs """
-    recruiter = storage.get_by_id(current_user.id)
-    my_jobs = recruiter.job_listings
+    user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Recruiter):
+        return render_template('403.html')
+    my_jobs = user.job_listings
     return render_template('posted_jobs.html',
                            my_jobs=my_jobs,
-                           recruiter=recruiter)
+                           recruiter=user)
 
 # jobseeker
 
@@ -594,6 +602,8 @@ def my_posted_jobs():
 def my_applied_jobs():
     """ Route to retrieve a jobseeker's applied jobs """
     user = storage.get_by_id(current_user.id)
+    if not isinstance(user, Jobseeker):
+        return render_template('403.html')
     applications = user.application
     jobs = []
     for aplic in applications:

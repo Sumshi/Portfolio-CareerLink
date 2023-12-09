@@ -62,7 +62,11 @@
           <ul>
             <li><a href="{{ url_for('home') }}">HOME</a></li>
             <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+            {% if is_recruiter %}
+            <li><a href="{{ url_for('my_posted_jobs') }}">JOBS</a></li>
+            {% else %}
             <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
+            {% endif %}
             <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
             <a href="{{ url_for('jobPosting') }}" class="hero-job"
               >Post a job</a
