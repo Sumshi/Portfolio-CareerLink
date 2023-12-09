@@ -94,11 +94,12 @@ def login():
 # @login_required
 def home():
     """ Route to display the home page """
-    is_recruiter = False
-    # user = storage.get_by_id(current_user.id)
-    # if isinstance(user, Recruiter):
-    #     is_recruiter = True
-    # return render_template('index.html', is_recruiter=is_recruiter)
+    if current_user.is_authenticated:
+        is_recruiter = False
+        user = storage.get_by_id(current_user.id)
+        if isinstance(user, Recruiter):
+            is_recruiter = True
+        return render_template('index.html', is_recruiter=is_recruiter)
     return render_template('index.html')
 
 
