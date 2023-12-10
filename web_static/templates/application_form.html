@@ -9,8 +9,61 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/application_form.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
   </head>
   <body>
+    <!-- <div class="header-container">
+      <nav>
+        <a href="{{ url_for('home') }}"
+          ><img
+            src="{{ url_for('static', filename='images/careerlogo.png') }}"
+            alt="logo"
+        /></a>
+        <div class="nav-links" id="navLinks">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            onclick="hideMenu()"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          <ul>
+            <li><a href="{{ url_for('home') }}">HOME</a></li>
+            <li><a href="{{ url_for('userDashboard') }}">DASHBOARD</a></li>
+            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('my_applied_jobs') }}">APPLIED JOBS</a></li>
+            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+          </ul>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          onclick="showMenu()"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </nav>
+    </div> -->
     <div class="form-container">
       <h2>Job Application Form</h2>
       <form
