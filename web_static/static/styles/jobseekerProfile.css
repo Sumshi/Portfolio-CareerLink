@@ -93,4 +93,8 @@ button {
     margin-right: 500px;
 }
 
-/*---------------------------------------queries---------------------------------------------*/
+@media only screen and (max-width: 768px) {
+    #smaller-screen {
+        margin-right: 200px;
+    }
+}

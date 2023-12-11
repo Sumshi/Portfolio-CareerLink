@@ -41,7 +41,10 @@ button {
 }
 
 .test {
-    margin-right: 150px;
+    /* margin-left: 140px; */
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 h1,

@@ -41,7 +41,7 @@
       width: 130px;
       padding: 10px;
       text-align: center;
-      margin-left: 15px;
+      margin-right: 350px;
       color: white;
     }
  
@@ -337,10 +337,9 @@
 <br>
 <br>
       <!-- Add Job History section here -->
-       <h3>Job History</h3>
+       <!-- <h3>Job History</h3>
        <br>
-      <div class="job-history-section">
-        <!-- <h3>Job History</h3> -->
+      <div class="job-history-section" id="smaller-screen">
         <ul>
           {% if job_history %} {% for job in job_history %}
           <li>
@@ -354,13 +353,12 @@
             {% if job.salary %}
             <p><b>Salary:</b> {{ job.salary }}</p>
             {%endif%}
-            <!-- Add more job details as needed -->
           </li>
           {% endfor %} {% else %}
           <p>No job history available. Please update.</p>
           {% endif %}
         </ul>
-      </div>
+      </div> -->
 
       <!-- <br>
          <a href="{{ url_for('login') }}" class="hero-job">Update Profile</a> -->
