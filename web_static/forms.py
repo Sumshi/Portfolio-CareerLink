@@ -202,6 +202,9 @@ class JobseekerSignUp(SignUp, FlaskForm):
             FileAllowed(['pdf']), FileSize(max_size=(2 * 1024 * 1024))
         ]
     )
+    about = TextAreaField(
+        ('About Me'), validators=[Length(min=0, max=300)]
+    )
 
 
 class JobseekerEditProfileForm(EditProfileForm, FlaskForm):
@@ -215,7 +218,9 @@ class JobseekerEditProfileForm(EditProfileForm, FlaskForm):
             FileAllowed(['pdf']), FileSize(max_size=(2 * 1024 * 1024))
         ]
     )
-
+    about = TextAreaField(
+        ('About Me'), validators=[Length(min=0, max=300)]
+    )
 
 # class to implement job posting
 class PostJob(FlaskForm):
