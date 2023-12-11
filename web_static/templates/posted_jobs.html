@@ -59,9 +59,11 @@
           </svg>
           <ul>
             <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('userDashboard') }}">DASHBOARD</a></li>
-            <li><a href="{{ url_for('update_jobseeker_profile') }}">PROFILE</a></li>
-           <li><a href="{{ url_for('jobPosting') }}">POST A JOB</a></li>
+            <li><a href="{{ url_for('recruiterDashboard') }}">DASHBOARD</a></li>
+            <li>
+              <a href="{{ url_for('update_recruiter_profile') }}">PROFILE</a>
+            </li>
+            <li><a href="{{ url_for('jobPosting') }}">POST A JOB</a></li>
             <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
