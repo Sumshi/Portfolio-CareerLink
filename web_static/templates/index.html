@@ -65,9 +65,6 @@
             <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
             {% if is_recruiter %}
             <li><a href="{{ url_for('my_posted_jobs') }}">JOBS</a></li>
-            <a href="{{ url_for('jobPosting') }}" class="hero-job"
-              >Post a job</a
-            >
             {% else %} {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
             {% endif %} {% endif %} {% if current_user.is_authenticated %}
@@ -138,6 +135,10 @@
         <br />
         {% if not current_user.is_authenticated %}
         <a href="{{ url_for('login') }}" class="hero-btn">Log In</a>
+        {% else %}
+        {% if is_recruiter %}
+        <a href="{{ url_for('jobPosting') }}" class="hero-btn">Post a Job</a>
+        {% endif %}
         {% endif %}
       </div>
     </section>

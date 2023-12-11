@@ -37,6 +37,13 @@
       text-align: center;
 
     }
+    #apply-btn{
+      width: 130px;
+      padding: 10px;
+      text-align: center;
+      margin-left: 15px;
+      color: white;
+    }
  
   </style>
   </head>
@@ -148,7 +155,7 @@
       <br />
       <div class="job-seekers-section">
         <form
-          id="profileUpdateForm"
+          id="profileUpdateForm" class="formHeader"
           action="{{ url_for('update_jobseeker_profile') }}"
           method="POST"
           enctype="multipart/form-data"
@@ -156,9 +163,10 @@
         >
           {{ form.hidden_tag() }}
           <!-- Resume upload form -->
-          <h2>Resume</h2>
+          <h2 style="color: white">Resume</h2>
           <h4>Post your resume - Start your new career</h4>
-          <div class="input-container">
+          <br>
+          <div class="input-container" id="profile_label">
             {{ form.resume.label }} {{ form.resume }} <br />
             {% for error in form.resume.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -167,11 +175,11 @@
           <br />
           <a href="{{ user.resume }}" target="_blank">View Resume</a>
           <!-- Update Profile -->
-          <h2>Update Profile</h2>
+          <h2 style="color: white">Update Profile</h2>
           <h4>Keep your information up to date</h4>
-
+          <br>
           <!-- Profile update form -->
-          <div class="input-container">
+          <div class="input-container" id="profile_label">
             {{ form.profile_pic.label }} {{ form.profile_pic }} <br />
             {% for error in form.profile_pic.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -179,7 +187,7 @@
           </div>
           <br />
 
-          <div class="first_name">
+          <div class="form_label">
             {{ form.first_name.label }} {{ form.first_name(size=32) }} <br />
             {% for error in form.first_name.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -187,7 +195,7 @@
           </div>
           <br />
 
-          <div class="middle_name">
+          <div class="form_label">
             {{ form.middle_name.label }} {{ form.middle_name(size=32) }} <br />
             {% for error in form.middle_name.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -195,7 +203,7 @@
           </div>
           <br />
 
-          <div class="last_name">
+          <div class="form_label">
             {{ form.last_name.label }} {{ form.last_name(size=32) }} <br />
             {% for error in form.last_name.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -203,14 +211,14 @@
           </div>
           <br />
 
-          <div class="username">
+          <div class="form_label">
             {{ form.username.label }} {{ form.username(size=32) }} <br />
             {% for error in form.username.errors %}
             <span style="color: red">[{{ error }}]</span>
             {% endfor %}
           </div>
           <br />
-          <div class="email">
+          <div class="form_label">
             {{ form.email.label }} {{ form.email(size=32) }} <br />
             {% for error in form.email.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -218,7 +226,7 @@
           </div>
           <br />
 
-          <div class="phone">
+          <div class="form_label">
             {{ form.phone_number.label }} {{ form.phone_number(size=32) }}
             <br />
             {% for error in form.phone_number.errors %}
@@ -227,7 +235,7 @@
           </div>
           <br />
 
-          <div class="country">
+          <div class="form_label">
             {{ form.country.label }} {{ form.country(size=32) }} <br />
             {% for error in form.country.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -235,7 +243,7 @@
           </div>
           <br />
 
-          <div class="state">
+          <div class="form_label">
             {{ form.state.label }} {{ form.state(size=32) }} <br />
             {% for error in form.state.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -243,7 +251,7 @@
           </div>
           <br />
 
-          <div class="address">
+          <div class="form_label">
             {{ form.address.label }} {{ form.address(size=32) }} <br />
             {% for error in form.address.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -251,7 +259,7 @@
           </div>
           <br />
 
-          <div class="zip_code">
+          <div class="form_label">
             {{ form.zip_code.label }} {{ form.zip_code(size=32) }} <br />
             {% for error in form.zip_code.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -259,7 +267,7 @@
           </div>
           <br />
 
-          <div class="street">
+          <div class="form_label">
             {{ form.street.label }} {{ form.street(size=32) }} <br />
             {% for error in form.street.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -267,7 +275,7 @@
           </div>
           <br />
 
-          <div class="about">
+          <div class="form_label">
             {{ form.about.label }} {{ form.about }} <br />
             {% for error in form.about.errors %}
             <span style="color: red">[{{ error }}]</span>
@@ -322,14 +330,17 @@
         </form>
       </div>
       <div class="job-history-section">
-        <a href="{{ url_for('my_applied_jobs') }}" class="hero-job"
+        <a href="{{ url_for('my_applied_jobs') }}" class="hero-job" id="apply-btn"
           >My Applications</a
         >
       </div>
-
+<br>
+<br>
       <!-- Add Job History section here -->
+       <h3>Job History</h3>
+       <br>
       <div class="job-history-section">
-        <h3>Job History</h3>
+        <!-- <h3>Job History</h3> -->
         <ul>
           {% if job_history %} {% for job in job_history %}
           <li>

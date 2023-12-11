@@ -25,6 +25,13 @@ h1 {
     align-items: center;
 }
 
+.profile-container h1 {
+    color: white;
+}
+
+/* .formHeader h2 {
+    color: white;
+} */
 
 button {
     padding: 10px;
@@ -35,10 +42,6 @@ button {
     margin-right: 150px;
 }
 
-h1,
-h2 {
-    color: #333;
-}
 
 /* .profile-info {
     display: flex;
@@ -68,5 +71,26 @@ h2 {
 }
 
 .input-container {
-    margin-left: 90px;
+    margin-left: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.job-history-section {
+    padding-left: 310px;
+}
+
+.form_label label {
+    color: white;
+}
+
+#profile_label label {
+    color: white;
+}
+
+#profile_label fieldset {
+    margin-right: 500px;
+}
+
+/*---------------------------------------queries---------------------------------------------*/

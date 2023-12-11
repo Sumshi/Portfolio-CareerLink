@@ -13,6 +13,18 @@ h1 {
     text-align: center;
 }
 
+.profile-container h1 {
+    color: white;
+}
+
+#profile_label label {
+    color: white;
+}
+
+.form_label label {
+    color: white;
+}
+
 .profile-container {
     max-width: 800px;
     margin: 20px auto;
@@ -20,7 +32,7 @@ h1 {
     border-radius: 100px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     align-items: center;
-    /* color: rgb(199, 34, 34); */
+    /* margin-left: 300px; */
 }
 
 button {
@@ -64,6 +76,12 @@ h2 {
     margin-top: 20px;
 }
 
-.input-container {
+/* .input-container {
     margin-left: 90px;
+} */
+.input-container {
+    margin-left: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

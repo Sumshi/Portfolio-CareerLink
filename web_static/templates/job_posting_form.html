@@ -3,14 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Posting Form</title>
-    <!-- <link rel="stylesheet" href="../static/styles/job_posting_form.css"> -->
+    <title>{{ pageTitle }}</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles/job_posting_form.css') }}"
+      href="{{ url_for('static', filename='styles/style.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/application_form.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/footer.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/testimonials.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/jobseeker_signup.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+      integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm"
+      crossorigin="anonymous"
+    />
+    <!--include this kit to use font awesome icons-->
+    <script
+      src="https://kit.fontawesome.com/d7accf2a63.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/swiper-bundle.min.css') }}"
+    />
+    <style>
+      #btn{
+        width: 200px;
+        height: 40px;
+      }
+    </style>
   </head>
+
   <body>
+    <div class="header-container">
+      <nav>
+        <a href="{{ url_for('home') }}"
+          ><img
+            src="{{ url_for('static', filename='images/careerlogo.png') }}"
+            alt="logo"
+        /></a>
+        <div class="nav-links" id="navLinks">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            onclick="hideMenu()"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          <ul>
+            <li><a href="{{ url_for('home') }}">HOME</a></li>
+             <li><a href="{{ url_for('update_recruiter_profile') }}">PROFILE</a></li>
+            <!-- <li><a href="{{ url_for('joblists') }}">JOBS</a></li> -->
+            <li><a href="{{ url_for('recruiterDashboard') }}">DASHBOARD</a></li>
+            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+          </ul>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          onclick="showMenu()"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </nav>
+    </div>
+
+<body>
     <div class="form-container">
       <h2>Job Posting Form</h2>
       <form
@@ -129,42 +218,58 @@
           {% endfor %}
         </div>
         <br />
-
-        <!-- <label for="job_title">Job Title:</label>
-        <input type="text" id="job_title" name="job_title" required />
-
-        <label for="company_name">Company Name:</label>
-        <input type="text" id="company_name" name="company_name" required />
-
-        <label for="job_description">Job Description:</label>
-        <textarea
-          id="job_description"
-          name="job_description"
-          rows="5"
-          required
-        ></textarea>
-
-        <label for="employment_type">Employment Type:</label>
-        <select id="employment_type" name="employment_type" required>
-          <option value="full_time">Full-time</option>
-          <option value="part_time">Part-time</option>
-          <option value="contract">Contract</option>
-        </select>
-
-        <label for="company_size">Company Size:</label>
-        <input type="text" id="company_size" name="company_size" required />
-
-        <label for="skills_required">Skills Required:</label>
-        <input
-          type="text"
-          id="skills_required"
-          name="skills_required"
-          required
-        /> -->
-
-        <!-- Submit Button -->
-        <button type="submit" class="sign-btn">Submit Job Posting</button>
+        <button type="submit" class="sign-btn" id="btn">Submit Job Posting</button>
       </form>
     </div>
+      <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>company</h4>
+            <ul>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">privacy policy</a></li>
+              <li><a href="#">affiliate program</a></li>
+              <li><a href="#">Accessibility</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>get help</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Terms and Conditions</a></li>
+              <li><a href="#">locate a service provider</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Report a problem</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <p class="copyright">© CareerLink 2023. All rights reserved</p>
+    </footer>
+
+    <!--javascript code for the clicking, toggling of the menu icon-->
+    <script>
+      var navLinks = document.getElementById("navLinks");
+      function showMenu() {
+        navLinks.style.right = "0";
+      }
+      function hideMenu() {
+        navLinks.style.right = "-200px";
+      }
+    </script>
   </body>
+
 </html>
