@@ -1,11 +1,10 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
     margin: 0;
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100vh; */
     background-image: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)), url(../images/form.jpg);
     background-position: center;
     background-size: cover;
@@ -26,6 +25,9 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
+    /* margin-right: 500px;
+    margin-left: 500px; */
+    align-items: center;
 }
 
 label {
@@ -48,6 +50,8 @@ button {
     border-radius: 40px;
     cursor: pointer;
 }
+
+
 
 button:hover {
     background-color: #45a049;
