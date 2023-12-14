@@ -51,7 +51,7 @@
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -73,11 +73,10 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-             <li><a href="{{ url_for('update_recruiter_profile') }}">PROFILE</a></li>
-            <!-- <li><a href="{{ url_for('joblists') }}">JOBS</a></li> -->
-            <li><a href="{{ url_for('recruiterDashboard') }}">DASHBOARD</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+             <li><a href="{{ url_for('views.update_recruiter_profile') }}">PROFILE</a></li>
+            <li><a href="{{ url_for('views.recruiterDashboard') }}">DASHBOARD</a></li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
         <svg
@@ -103,7 +102,7 @@
     <div class="form-container">
       <h2>Job Posting Form</h2>
       <form
-        action="{{ url_for('jobPosting' )}}"
+        action="{{ url_for('views.jobPosting' )}}"
         method="post"
         enctype="multipart/form-data"
         novalidate

@@ -41,7 +41,7 @@
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -63,11 +63,13 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-            <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
+            <a href="{{ url_for('views.login') }}" class="hero-job"
+              >Post a job</a
+            >
           </ul>
         </div>
         <svg
@@ -92,7 +94,11 @@
     <div class="sign-up-form">
       <i class="fa-solid fa-user"></i>
       <h1>{{ pageTitle }}</h1>
-      <form action="{{ url_for('jobseeker_signup') }}" method="post" novalidate>
+      <form
+        action="{{ url_for('views.jobseeker_signup') }}"
+        method="post"
+        novalidate
+      >
         {{ form.hidden_tag() }}
         <p>
           {{ form.first_name.label }}<br />
@@ -187,30 +193,6 @@
         <br />
         <br />
         <section class="job-seekers-section">
-          <!-- <h2>Resume</h2>
-        <p>Post your resume - Start your new career</p> -->
-
-          <!-- Resume upload form -->
-          <!-- Resume upload form -->
-          <!-- <form
-            id="resumeUploadForm"
-            action="url_for('jobseeker_signup')"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <label for="resume">Choose a profile picture:</label>
-            <input
-              type="file"
-              id="resume"
-              name="resume"
-              accept=".pdf, .doc, .docx"
-              required
-            /> -->
-          <!-- <button type="submit">Upload Resume</button> -->
-          <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
-            >Upload Resume</a
-          > -->
-
           <!-- </form> -->
           <p>
             {{ form.profile_pic.label }}<br />

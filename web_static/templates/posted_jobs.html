@@ -36,7 +36,7 @@
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -58,13 +58,17 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('recruiterDashboard') }}">DASHBOARD</a></li>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
             <li>
-              <a href="{{ url_for('update_recruiter_profile') }}">PROFILE</a>
+              <a href="{{ url_for('views.recruiterDashboard') }}">DASHBOARD</a>
             </li>
-            <li><a href="{{ url_for('jobPosting') }}">POST A JOB</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <li>
+              <a href="{{ url_for('views.update_recruiter_profile') }}"
+                >PROFILE</a
+              >
+            </li>
+            <li><a href="{{ url_for('views.jobPosting') }}">POST A JOB</a></li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
         <svg
@@ -169,7 +173,7 @@
           </ul>
         </div>
         <a
-          href="{{ url_for('job_details', id=job['id']) }}"
+          href="{{ url_for('views.job_details', id=job['id']) }}"
           class="apply-button"
           >More Details</a
         >

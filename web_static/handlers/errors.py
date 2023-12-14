@@ -4,7 +4,7 @@ Errors modules
 Custom templates for error handling
 """
 
-from flask import render_template
+from flask import render_template, url_for
 from models import storage
 from web_static.handlers import bp
 
@@ -12,6 +12,8 @@ from web_static.handlers import bp
 @bp.app_errorhandler(404)
 def not_found_error(error):
     print("404 error handler called")
+    url = url_for('views.home')
+    print("url_for('home') is : {}".format(url))
     return render_template('404.html'), 404
 
 
