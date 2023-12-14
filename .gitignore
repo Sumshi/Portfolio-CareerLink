@@ -17,3 +17,4 @@ alembic/__pycache__/*
 alembic/versions/__pycache__/*
 web_static/__pycache__/*
 web_static/handlers/__pycache__/*
+web_static/routes/__pycache__/*

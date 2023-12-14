@@ -29,7 +29,7 @@
   <body>
     <div class="header-container" id="header">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -51,11 +51,11 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
         <svg
@@ -103,12 +103,12 @@
           <p>{{ job.application }}</p>
 
           {% if is_recruiter %}
-          <a href="{{ url_for ('my_posted_jobs') }}" class="apply-button"
+          <a href="{{ url_for ('views.my_posted_jobs') }}" class="apply-button"
             >My Jobs</a
           >
           {% else %}
           <a
-            href="{{ url_for('applicationForm', id=job['id']) }}"
+            href="{{ url_for('views.applicationForm', id=job['id']) }}"
             class="apply-button"
             >Apply Now</a
           >

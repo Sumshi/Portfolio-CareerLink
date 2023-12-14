@@ -33,37 +33,39 @@
             </div>
             <ul>
               <li>
-                <a href="{{ url_for('update_jobseeker_profile') }}">
+                <a href="{{ url_for('views.update_jobseeker_profile') }}">
                   <i class="fas fa-user"></i>
                   <span class="nav-item">My Profile</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('my_applied_jobs') }}">
+                <a href="{{ url_for('views.my_applied_jobs') }}">
                   <i class="fas fa-chart-bar"></i>
                   <span class="nav-item">Applied Jobs</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('joblists') }}">
+                <a href="{{ url_for('views.joblists') }}">
                   <i class="fas fa-tasks"></i>
                   <span class="nav-item">Jobs Board</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('jobHistory') }}">
+                <a href="{{ url_for('views.jobHistory') }}">
                   <i class="fa-solid fa-file"></i>
                   <span class="nav-item">Add Job History</span>
                 </a>
               </li>
 
               <li>
-                <a href="{{ url_for('home') }}">
+                <a href="{{ url_for('views.home') }}">
                   <i class="fas fa-home"></i>
                   <span class="nav-item">Home</span>
                 </a>
               </li>
-              <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+              <a href="{{ url_for('views.logout') }}" class="hero-job"
+                >Log Out</a
+              >
             </ul>
           </div>
         </nav>
@@ -110,7 +112,7 @@
             <div class="row">
               <p>
                 There are more than <span>400</span> Jobs
-                <a href="{{ url_for('joblists') }}"> See all</a>
+                <a href="{{ url_for('views.joblists') }}"> See all</a>
               </p>
             </div>
             {% if jobs %} {% for job in jobs%}
@@ -130,7 +132,7 @@
                 <h4>{{ job.salary }}Ksh/yr</h4>
                 <span>posted: {{ job.date_posted }}</span>
               </div>
-              <a href="{{ url_for('job_details', id=job['id']) }}"></a>
+              <a href="{{ url_for('views.job_details', id=job['id']) }}"></a>
             </div>
             {% endfor %} {% endif %}
 

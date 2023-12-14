@@ -36,7 +36,7 @@
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -58,11 +58,11 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('userDashboard') }}">DASHBOARD</a></li>
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            <li><a href="{{ url_for('update_jobseeker_profile') }}">PROFILE</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.userDashboard') }}">DASHBOARD</a></li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.update_jobseeker_profile') }}">PROFILE</a></li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
         <svg
@@ -171,12 +171,12 @@
             {% endfor %}
           </ul> -->
         </div>
-        <a href="{{ url_for('job_details', id=job['id']) }}" class="apply-button">More Details</a>
+        <a href="{{ url_for('views.job_details', id=job['id']) }}" class="apply-button">More Details</a>
 
       </div>
       {% endfor %} {% else %}
       <p>
-        You can apply for a job <a href="{{ url_for('joblists') }}">here</a>
+        You can apply for a job <a href="{{ url_for('views.joblists') }}">here</a>
       </p>
       {% endif %}
     </div>

@@ -33,31 +33,33 @@
             </div>
             <ul>
               <li>
-                <a href="{{ url_for('update_recruiter_profile') }}">
+                <a href="{{ url_for('views.update_recruiter_profile') }}">
                   <i class="fas fa-user"></i>
                   <span class="nav-item">My Profile</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('my_posted_jobs') }}">
+                <a href="{{ url_for('views.my_posted_jobs') }}">
                   <i class="fas fa-tasks"></i>
                   <span class="nav-item">jobs posted</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('jobPosting') }}">
+                <a href="{{ url_for('views.jobPosting') }}">
                   <i class="fa-solid fa-file"></i>
                   <span class="nav-item">Post New Job</span>
                 </a>
               </li>
 
               <li>
-                <a href="{{ url_for('home') }}">
+                <a href="{{ url_for('views.home') }}">
                   <i class="fas fa-home"></i>
                   <span class="nav-item">Home</span>
                 </a>
               </li>
-              <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+              <a href="{{ url_for('views.logout') }}" class="hero-job"
+                >Log Out</a
+              >
             </ul>
           </div>
         </nav>
@@ -127,7 +129,7 @@
             {% endfor %} {% else %}
             <div class="row">
               <!-- <p>There are more than <span>400</span> Jobs</p> -->
-              <a href="{{ url_for('jobPosting') }}">Post a job</a>
+              <a href="{{ url_for('views.jobPosting') }}">Post a job</a>
             </div>
             {% endif %}
 

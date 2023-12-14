@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/style.css') }}"
     />
-     <link
+    <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/jobseekerProfile.css') }}"
     />
@@ -31,27 +31,25 @@
       crossorigin="anonymous"
     ></script>
     <style>
-    #btn {
-      width: 150px;
-      padding: 10px;
-      text-align: center;
-
-    }
-  #text {
-      text-align: center;
-      color: white;
-      align-items: center;
-    justify-content: center;
-    display: flex;
-    }
- 
-  </style>
+      #btn {
+        width: 150px;
+        padding: 10px;
+        text-align: center;
+      }
+      #text {
+        text-align: center;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+    </style>
   </head>
 
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -73,11 +71,15 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('userDashboard') }}">DASHBOARD</a></li>
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            <li><a href="{{ url_for('my_applied_jobs') }}">APPLIED JOBS</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li>
+              <a href="{{ url_for('views.userDashboard') }}">DASHBOARD</a>
+            </li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            <li>
+              <a href="{{ url_for('views.my_applied_jobs') }}">APPLIED JOBS</a>
+            </li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
         <svg
@@ -108,7 +110,10 @@
 
       <div class="profile-info">
         <div class="profile-pic">
-          <img src="{{ user.profile_pic }}" alt="" />
+          <img
+            src="{{ url_for('static', filename=user['profile_pic']) }}"
+            alt=""
+          />
         </div>
 
         <!-- <div class="user-details">
@@ -146,7 +151,7 @@
             required
           />
           <button type="submit">Upload Resume</button> -->
-      <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
+      <!-- <a href="{{ url_for('views.update_jobseeker_profile') }}" class="hero-job"
             >Upload Resume</a
           > -->
       <!-- </form>
@@ -155,8 +160,9 @@
       <br />
       <div class="job-seekers-section">
         <form
-          id="profileUpdateForm" class="formHeader"
-          action="{{ url_for('update_jobseeker_profile') }}"
+          id="profileUpdateForm"
+          class="formHeader"
+          action="{{ url_for('views.update_jobseeker_profile') }}"
           method="POST"
           enctype="multipart/form-data"
           novalidate
@@ -165,7 +171,7 @@
           <!-- Resume upload form -->
           <h2 style="color: white">Resume</h2>
           <h4>Post your resume - Start your new career</h4>
-          <br>
+          <br />
           <div class="input-container" id="profile_label">
             {{ form.resume.label }} {{ form.resume }} <br />
             {% for error in form.resume.errors %}
@@ -177,7 +183,7 @@
           <!-- Update Profile -->
           <h2 style="color: white">Update Profile</h2>
           <h4>Keep your information up to date</h4>
-          <br>
+          <br />
           <!-- Profile update form -->
           <div class="input-container" id="profile_label">
             {{ form.profile_pic.label }} {{ form.profile_pic }} <br />
@@ -284,60 +290,17 @@
           <br />
           <br />
           <button type="submit" id="btn">Update Profile</button>
-          <!-- <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value="{% if form %}{{ form.email.data }}{% endif %}"
-          />
-          <br />
-
-          <label for="phone">Phone:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            required
-            value="{% if form %}{{ form.phone_number.data }}{% endif %}"
-          />
-          <br />
-
-          <label for="location">Location:</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value="{% if form %}{{ form.country.data }}{% endif %}"
-          />
-          <br />
-
-          <label for="address">Address:</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value="{% if form %}{{ form.address.data }}{% endif %}"
-          />
-          <br />
-          <br />
-          <br />
-          <button type="submit">Update Profile</button> -->
-          <!-- <a href="{{ url_for('update_jobseeker_profile') }}" class="hero-job"
-            >Update Profile</a
-          > -->
         </form>
       </div>
       <div class="job-history-section">
-        <a href="{{ url_for('jobHistory') }}" class="hero-job" id="text"
+        <a href="{{ url_for('views.jobHistory') }}" class="hero-job" id="text"
           >Job History</a
         >
       </div>
-<br>
-<br>
+      <br />
+      <br />
       <!-- Add Job History section here -->
-       <!-- <h3>Job History</h3>
+      <!-- <h3>Job History</h3>
        <br>
       <div class="job-history-section" id="smaller-screen">
         <ul>
@@ -361,7 +324,7 @@
       </div> -->
 
       <!-- <br>
-         <a href="{{ url_for('login') }}" class="hero-job">Update Profile</a> -->
+         <a href="{{ url_for('views.login') }}" class="hero-job">Update Profile</a> -->
     </div>
     <br />
     <br />
