@@ -94,7 +94,12 @@
     <div class="sign-up-form">
       <i class="fa-solid fa-user"></i>
       <h1>{{ pageTitle }}</h1>
-      <form action="" method="post" novalidate>
+      <form
+        action="{{ url_for('views.recruiter_signup') }}"
+        method="post"
+        enctype="multipart/form-data"
+        novalidate
+      >
         {{ form.hidden_tag() }}
         <p>
           {{ form.company.label }}<br />

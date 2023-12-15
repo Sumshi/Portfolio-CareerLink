@@ -45,7 +45,9 @@ class SignUp(FlaskForm):
     street = StringField('Street')
     zip_code = StringField('Zip Code')
     about = TextAreaField(
-        ('About Company'), validators=[Length(min=0, max=300)]
+        ('About Company'),
+        render_kw={"rows": 6, "cols": 35},
+        validators=[Length(min=0, max=600)]
     )
     submit = SubmitField('Sign Up')
 
@@ -105,7 +107,9 @@ class EditProfileForm(FlaskForm):
     street = StringField('Street')
     zip_code = StringField('Zip Code')
     about = TextAreaField(
-        ('About Company'), validators=[Length(min=0, max=300)]
+        ('About Company'),
+        render_kw={"rows": 6, "cols": 35},
+        validators=[Length(min=0, max=600)]
     )
     submit = SubmitField('Update Profile')
 
@@ -203,7 +207,9 @@ class JobseekerSignUp(SignUp, FlaskForm):
         ]
     )
     about = TextAreaField(
-        ('About Me'), validators=[Length(min=0, max=300)]
+        ('About Me'),
+        render_kw={"rows": 6, "cols": 35},
+        validators=[Length(min=0, max=600)]
     )
 
 
@@ -219,19 +225,29 @@ class JobseekerEditProfileForm(EditProfileForm, FlaskForm):
         ]
     )
     about = TextAreaField(
-        ('About Me'), validators=[Length(min=0, max=300)]
+        ('About Me'),
+        render_kw={"rows": 6, "cols": 35},
+        validators=[Length(min=0, max=600)]
     )
 
 # class to implement job posting
+
+
 class PostJob(FlaskForm):
     """ Implements job posting form """
     title = StringField('Job Title', validators=[DataRequired()])
-    description = TextAreaField("Job Description", validators=[
-                                DataRequired(), Length(max=1000)])
+    description = TextAreaField(
+        "Job Description",
+        render_kw={"rows": 6, "cols": 35},
+        validators=[DataRequired(), Length(max=1000)]
+    )
     type = SelectField('Job Type', choices=[
                        'Full Time', 'Part Time', 'Contract', 'Remote Work'])
-    application = TextAreaField('Application Instruction', validators=[
-                                DataRequired(), Length(max=500)])
+    application = TextAreaField(
+        'Application Instruction',
+        render_kw={"rows": 4, "cols": 35},
+        validators=[DataRequired(), Length(max=500)]
+    )
     company = StringField('Company Name', validators=[DataRequired()])
     contact = StringField('Contact Info', validators=[DataRequired()])
     deadline = DateField('Application Deadline', validators=[DataRequired()])
@@ -266,7 +282,10 @@ class PostJobHistory(FlaskForm):
                          validators=[DataRequired()])
     job_title = StringField('Job Title', validators=[DataRequired()])
     job_description = TextAreaField(
-        'Job Description', validators=[DataRequired()])
+        'Job Description',
+        render_kw={"rows": 6, "cols": 35},
+        validators=[DataRequired()]
+    )
     country = StringField('Country', validators=[DataRequired()])
     state = StringField('City/State/Town', validators=[DataRequired()])
     salary = StringField('Salary', validators=[DataRequired()])
