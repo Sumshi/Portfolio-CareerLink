@@ -12,7 +12,7 @@ class Jobs(BaseModel, Base):
     recruiters_id = Column(String(60), ForeignKey(
         'recruiters.id'), nullable=False)
     title = Column(String(128), nullable=False)
-    description = Column(String(1000), nullable=False)
+    description = Column(String(4000), nullable=False)
     type = Column(String(128), default='fulltime')
     application = Column(String(1000), nullable=False)
     company = Column(String(128), nullable=False)
