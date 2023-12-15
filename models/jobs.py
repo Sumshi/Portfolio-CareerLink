@@ -12,7 +12,8 @@ class Jobs(BaseModel, Base):
     recruiters_id = Column(String(60), ForeignKey(
         'recruiters.id'), nullable=False)
     title = Column(String(128), nullable=False)
-    description = Column(String(4000), nullable=False)
+    role = Column(String(4000), nullable=False)
+    responsibility = Column(String(4000), nullable=False)
     type = Column(String(128), default='fulltime')
     application = Column(String(1000), nullable=False)
     company = Column(String(128), nullable=False)
@@ -23,7 +24,7 @@ class Jobs(BaseModel, Base):
     salary = Column(String(32), nullable=True)
     open_position = Column(String(32), default='1', nullable=True)
     date_posted = Column(Date, default=date.today())
-    skills_required = Column(String(200), default="No skills needed")
+    skills_required = Column(String(4000), default="No skills needed")
     recruiter = relationship('Recruiter', backref=backref(
         'job_listings', cascade="all, delete"))
     job_seeker = relationship('Applications', backref='applicants')

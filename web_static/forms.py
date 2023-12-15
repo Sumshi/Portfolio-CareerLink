@@ -236,10 +236,15 @@ class JobseekerEditProfileForm(EditProfileForm, FlaskForm):
 class PostJob(FlaskForm):
     """ Implements job posting form """
     title = StringField('Job Title', validators=[DataRequired()])
-    description = TextAreaField(
-        "Job Description",
+    role = TextAreaField(
+        "Role Description",
         render_kw={"rows": 6, "cols": 35},
-        validators=[DataRequired(), Length(max=6000)]
+        validators=[DataRequired(), Length(max=4000)]
+    )
+    responsibility = TextAreaField(
+        "Job Responsibility",
+        render_kw={"rows": 6, "cols": 35},
+        validators=[DataRequired(), Length(max=4000)]
     )
     type = SelectField('Job Type', choices=[
                        'Full Time', 'Part Time', 'Contract', 'Remote Work'])
@@ -256,7 +261,9 @@ class PostJob(FlaskForm):
     open_position = StringField(
         'Open Positions', default='1', validators=[DataRequired()])
     skills_required = TextAreaField(
-        'Skills Needed', default="No skillls needed", validators=[DataRequired()])
+        'Job Skill Requirements',
+        render_kw={"rows": 6, "cols": 35},
+        validators=[DataRequired(), Length(max=4000)])
     submit = SubmitField('Post Job')
 
 

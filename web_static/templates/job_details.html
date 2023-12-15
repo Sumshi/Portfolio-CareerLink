@@ -92,7 +92,20 @@
         <p>Location: {{ job.town }}, {{ job.country }}</p>
         <div class="job-description">
           <h2>Job Description</h2>
-          <p>{{ job.description }}</p>
+          <ul>
+            <li>
+              <h4>Role:</h4>
+              <p>{{ job.role }}</p>
+            </li>
+            <li>
+              <h4>Role:</h4>
+              <p>{{ job.responsibility }}</p>
+            </li>
+            <li>
+              <h4>Role:</h4>
+              <p>{{ job.skills_required }}</p>
+            </li>
+          </ul>
 
           <h2>Job Details</h2>
           <ul>
@@ -101,7 +114,6 @@
             <li>Contact: {{ job.contact }}</li>
             <li>Application deadline: {{ job.deadline }}</li>
             <li>Date Posted: {{ job.date_posted }}</li>
-            <li>Skills: {{ job.skills_required }}</li>
             {% if job.salary %}
             <li>Salary: {{ job.salary }}</li>
             {% endif %}
