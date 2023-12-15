@@ -2,9 +2,6 @@
 """ Import os environment variables """
 import os
 
-# PROFILES_FOLDER = 'static/images/profile_pics'
-# RESUMES_FOLDER = 'static/resumes'
-# COVER_LETTER_FOLDER = 'static/cover_letters'
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'this is a trial web app project'
 JSONIFY_PRETTYPRINT_REGULAR = True
 PROFILES_FOLDER = os.environ.get(
