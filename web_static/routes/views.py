@@ -65,7 +65,7 @@ def login():
 # @login_required
 def home():
     """ Route to display the home page """
-    print("home route called")
+    # print("home route called")
     if current_user.is_authenticated:
         is_recruiter = False
         user = storage.get_by_id(current_user.id)
@@ -452,7 +452,13 @@ def update_jobseeker_profile():
 
 @bp.route('/about')
 def about():
-    return render_template('about.html')
+    is_recruiter = False
+    if current_user.is_authenticated:
+        user = storage.get_by_id(current_user.id)
+        if isinstance(user, Recruiter):
+            is_recruiter = True
+        return render_template('about.html', is_recruiter=is_recruiter)
+    return render_template('about.html', is_recruiter=is_recruiter)
 
 
 # @app.route('/discover')
@@ -463,7 +469,13 @@ def about():
 @bp.route('/contact')
 def contact():
     """ Implements the contact route """
-    return render_template('contact.html')
+    is_recruiter = False
+    if current_user.is_authenticated:
+        user = storage.get_by_id(current_user.id)
+        if isinstance(user, Recruiter):
+            is_recruiter = True
+        return render_template('contact.html', is_recruiter=is_recruiter)
+    return render_template('contact.html', is_recruiter=is_recruiter)
 
 
 # @app.route('/jobseekerProfile', methods=['GET'])
@@ -629,7 +641,6 @@ def jobPosting():
             description=form.description.data,
             type=form.type.data,
             application=form.application.data,
-            company=form.company.data,
             contact=form.contact.data,
             deadline=form.deadline.data,
             country=form.country.data,
@@ -638,6 +649,7 @@ def jobPosting():
             open_position=form.open_position.data,
             skills_required=form.skills_required.data
         )
+        job.company = user.company
         if job is not None:
             job.save()
             return redirect(url_for('views.job_details', id=job.id))
