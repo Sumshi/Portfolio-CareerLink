@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CareerLink</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/style.css') }}"
@@ -38,7 +41,7 @@
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -60,15 +63,15 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
             {% if is_recruiter %}
-            <li><a href="{{ url_for('my_posted_jobs') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.my_posted_jobs') }}">JOBS</a></li>
             {% else %} {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
             {% endif %} {% endif %} {% if current_user.is_authenticated %}
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
             {% endif %}
           </ul>
         </div>
@@ -91,23 +94,6 @@
       </nav>
     </div>
 
-    <!-- <section class="header">
-    <div class="text-box">
-      <h1>Discover Exciting Opportunities</h1>
-      <p>
-        Absolutely delighted to welcome you to CareerLink your gateway to a world of exciting opportunities!
-        As you navigate through our platform, you're not just exploring a place to find a job;
-        you're entering a dynamic realm where career paths unfold and possibilities abound.
-        Tap into our Talent Pool
-      </p>
-      <a href="{{ url_for('recruiter_signup') }}" class="hero-btn">Sign Up</a>
-      <br>
-      <br>
-      <br>
-      <a href="{{ url_for('login') }}" class="hero-btn">Log In</a>
-    </div>
-  </section> -->
-
     <section class="header">
       <div class="text-box">
         <h1>Discover Exciting Opportunities</h1>
@@ -119,27 +105,16 @@
           into our Talent Pool
         </p>
 
-        <!-- <div class="button-container">
-            <div class="button-box">
-                <p>For Job Seekers</p>
-                <a href="{{ url_for('jobseeker_signup') }}" class="hero-btn">Sign Up</a>
-            </div>
-            <div class="button-box">
-                <p>For Recruiters</p>
-                <a href="{{ url_for('recruiter_signup') }}" class="hero-btn">Sign Up</a>
-            </div>
-        </div> -->
-
         <br />
         <br />
         <br />
         {% if not current_user.is_authenticated %}
-        <a href="{{ url_for('login') }}" class="hero-btn">Log In</a>
-        {% else %}
-        {% if is_recruiter %}
-        <a href="{{ url_for('jobPosting') }}" class="hero-btn">Post a Job</a>
-        {% endif %}
-        {% endif %}
+        <a href="{{ url_for('views.login') }}" class="hero-btn">Log In</a>
+        {% else %} {% if is_recruiter %}
+        <a href="{{ url_for('views.jobPosting') }}" class="hero-btn"
+          >Post a Job</a
+        >
+        {% endif %} {% endif %}
       </div>
     </section>
 
@@ -147,11 +122,15 @@
     <div class="button-container">
       <div class="button-box">
         <p>For Job Seekers</p>
-        <a href="{{ url_for('jobseeker_signup') }}" class="hero-btn">Sign Up</a>
+        <a href="{{ url_for('views.jobseeker_signup') }}" class="hero-btn"
+          >Sign Up</a
+        >
       </div>
       <div class="button-box">
         <p>For Recruiters</p>
-        <a href="{{ url_for('recruiter_signup') }}" class="hero-btn">Sign Up</a>
+        <a href="{{ url_for('views.recruiter_signup') }}" class="hero-btn"
+          >Sign Up</a
+        >
       </div>
     </div>
     {% endif %}

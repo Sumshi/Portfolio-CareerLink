@@ -15,7 +15,7 @@ class JobHistory(BaseModel, Base):
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, default=date.today())
     job_title = Column(String(128), nullable=False)
-    job_description = Column(String(1000), nullable=False)
+    job_description = Column(String(4000), nullable=False)
     country = Column(String(60), nullable=False)
     state = Column(String(128), nullable=False)
     salary = Column(Integer, nullable=True)

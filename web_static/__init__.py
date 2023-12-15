@@ -1,27 +1,46 @@
 #!/usr/bin/python3
 """
-Initialize the Flask application
+Create the Flask application
 """
 from flask import Flask
-import os
+from flask_login import LoginManager
+from models import storage
+# from web_static.routes import auth, logout, about, application
+# from web_static.routes import applied_jobs, contact, job_details, job_history
+# from web_static.routes import jobs, jobseeker_dashboard, jobseeker_profile
+# from web_static.routes import jobseeker_signup, post_job, posted_jobs
+# from web_static.routes import recruiter_dashboard, recruiter_profile
+# from web_static.routes import recruiter_signup
+# from web_static.routes.index import home_bp
 
-PROFILES_FOLDER = 'static/images/profile_pics'
-RESUMES_FOLDER = 'static/resumes'
-COVER_LETTER_FOLDER = 'static/cover_letters'
-# PROFILES_EXTENSIONS = {'png', 'jpg', 'jpeg', }
 
-app = Flask(__name__)
+def create_app():
+    """ Initialize and create the Flask app """
+    app = Flask(__name__)
+    app.config.from_pyfile('config.py')
+    # Disable strict slashes
+    app.url_map.strict_slashes = False
 
-app.config['SECRET_KEY'] = os.environ.get(
-    'SECRET_KEY') or 'this is a trial web app project'
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-app.config['PROFILES_FOLDER'] = os.environ.get(
-    'PROFILES_FOLDER') or PROFILES_FOLDER
-app.config['RESUMES_FOLDER'] = os.environ.get(
-    'RESUMES_FOLDER') or RESUMES_FOLDER
-app.config['COVER_LETTER_FOLDER'] = os.environ.get(
-    'COVER_LETTER_FOLDER') or COVER_LETTER_FOLDER
+    # Import the errors file with error handlers
+    from web_static.handlers import bp as errors_bp
+    app.register_blueprint(errors_bp)
 
-# Import the errors file with error handlers
-from web_static.handlers import bp as errors_bp
-app.register_blueprint(errors_bp)
+    # Register blueprints for routes
+    from web_static.routes import bp as views_bp
+    app.register_blueprint(views_bp)
+
+    # @app.teardown_appcontext
+    # def teardown_session(exception=None):
+    #     """
+    #     Terminate an SQLAlchemy session
+    #     """
+    #     storage.close()
+
+    # login = LoginManager(app)
+    # login.login_view = 'login'
+
+    # @login.user_loader
+    # def load_user(id):
+    #     return storage.get_by_id(id)
+
+    return app

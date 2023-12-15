@@ -27,26 +27,25 @@
       crossorigin="anonymous"
     ></script>
     <style>
-    #btn {
-      width: 150px;
-      padding: 10px;
-      text-align: center;
-
-    }
-    #text {
-      text-align: center;
-      color: white;
-      align-items: center;
-    justify-content: center;
-    display: flex;
-    }
-  </style>
+      #btn {
+        width: 150px;
+        padding: 10px;
+        text-align: center;
+      }
+      #text {
+        text-align: center;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+    </style>
   </head>
 
   <body>
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -68,11 +67,11 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('my_posted_jobs') }}">JOBS</a></li>
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Log Out</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('views.my_posted_jobs') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
         <svg
@@ -104,18 +103,8 @@
 
         <div class="profile-info">
           <div class="profile-pic">
-            <img src="{{ user.profile_pic }}" alt="" />
+            <img src="{{ url_for('static', filename=user['profile_pic']) }}" alt="" />
           </div>
-
-          <!-- <div class="user-details">
-          <p><b>Name</b>: {{ name }}</p>
-          <p><b>Company Name</b>: {{ user.company }}</p>
-          <p><b>Email</b>: {{ user.email }}</p>
-          <p><b>Phone</b>: {{ user.phone_number }}</p>
-          <p><b>Country</b>: {{ user.country }}</p>
-          <p><b>State</b>: {{ user.state }}</p>
-          <p><b>Address</b>: {{ user.address }}</p>
-        </div> -->
         </div>
         <br />
         <br />
@@ -124,10 +113,13 @@
 
         <div class="test">
           <div class="job-seekers-section">
-            <p><h4>Keep your information up to date</h4></p>
+            <p>
+            <h4>Keep your information up to date</h4>
+            </p>
+
             <form
               id="profileUpdateForm"
-              action="{{ url_for('update_recruiter_profile') }}"
+              action="{{ url_for('views.update_recruiter_profile') }}"
               method="POST"
               enctype="multipart/form-data"
               novalidate
@@ -220,7 +212,7 @@
               </div>
               <br />
               <br />
-              <!-- <a href="{{ url_for('update_recruiter_profile') }}" class="hero-job"
+              <!-- <a href="{{ url_for('views.update_recruiter_profile') }}" class="hero-job"
             >Update Profile</a -->
               <button type="submit" id="btn">Update Profile</button>
             </form>
@@ -228,7 +220,12 @@
         </div>
         <!-- Point to the posted_jobs page -->
         <div class="job-history-section">
-           <a href="{{ url_for('my_posted_jobs') }}" class="hero-job" id="text">My Posted Jobs</a>
+          <a
+            href="{{ url_for('views.my_posted_jobs') }}"
+            class="hero-job"
+            id="text"
+            >My Posted Jobs</a
+          >
         </div>
       </div>
     </div>

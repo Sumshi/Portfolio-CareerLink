@@ -52,7 +52,7 @@
 
     <div class="header-container">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -74,11 +74,13 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-            <a href="{{ url_for('login') }}" class="hero-job">Post a job</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
+            <a href="{{ url_for('views.login') }}" class="hero-job"
+              >Post a job</a
+            >
           </ul>
         </div>
         <svg

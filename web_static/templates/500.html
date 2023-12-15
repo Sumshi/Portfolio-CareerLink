@@ -29,7 +29,7 @@
   <body>
     <div class="header-container" id="header">
       <nav>
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('views.home') }}"
           ><img
             src="{{ url_for('static', filename='images/careerlogo.png') }}"
             alt="logo"
@@ -51,11 +51,13 @@
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <ul>
-            <li><a href="{{ url_for('home') }}">HOME</a></li>
-            <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('joblists') }}">JOBS</a></li>
-            <li><a href="{{ url_for('contact') }}">CONTACT</a></li>
-            <a href="{{ url_for('logout') }}" class="hero-job">Post a job</a>
+            <li><a href="{{ url_for('views.home') }}">HOME</a></li>
+            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
+            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
+            <a href="{{ url_for('views.logout') }}" class="hero-job"
+              >Post a job</a
+            >
           </ul>
         </div>
         <svg
@@ -79,7 +81,7 @@
 
     <h1>An unexpected error has occurred</h1>
     <p>The administrator has been notified. Sorry for the inconvenience!</p>
-    <p><a href="{{ url_for('home') }}">Back</a></p>
+    <p><a href="{{ url_for('views.home') }}">Back</a></p>
 
     <footer class="footer">
       <div class="container">
