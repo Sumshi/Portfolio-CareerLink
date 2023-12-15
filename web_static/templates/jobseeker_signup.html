@@ -97,6 +97,7 @@
       <form
         action="{{ url_for('views.jobseeker_signup') }}"
         method="post"
+        enctype="multipart/form-data"
         novalidate
       >
         {{ form.hidden_tag() }}
@@ -196,7 +197,9 @@
           <!-- </form> -->
           <p>
             {{ form.profile_pic.label }}<br />
-            {{ form.profile_pic }}
+            {{ form.profile_pic }} {% for error in form.profile_pic.errors %}
+            <span style="color: red">[{{ error }}]</span>
+            {% endfor %}
           </p>
         </section>
         <button type="submit" class="sign-btn">{{ submitButtonText }}</button>

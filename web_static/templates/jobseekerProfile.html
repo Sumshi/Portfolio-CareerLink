@@ -106,14 +106,18 @@
     <br />
     <br />
     <div class="profile-container">
-      <h1>{{ name }}`s Profile</h1>
+      <h1>{{ user.username }}`s Profile</h1>
 
       <div class="profile-info">
         <div class="profile-pic">
+          {% if user['profile_pic'] %}
           <img
             src="{{ url_for('static', filename=user['profile_pic']) }}"
             alt=""
           />
+          {% else %}
+          <p>No profile picture available</p>
+          {% endif %}
         </div>
 
         <!-- <div class="user-details">

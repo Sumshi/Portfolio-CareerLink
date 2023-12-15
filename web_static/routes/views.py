@@ -107,10 +107,14 @@ def recruiter_signup():
             )
             if form.profile_pic.data:
                 try:
+                    # Retrieve the uploaded file object from form field
                     pic = form.profile_pic.data
-                    filename = secure_filename(pic.filename)
+                    # Ensure the filename is secure
+                    filename = user.id + '_' + \
+                        secure_filename(pic.filename)
                     filepath = os.path.join(
                         app.config['PROFILES_FOLDER'], filename)
+                    # save the uploaded picture to the server's file system
                     save_filepath = os.path.join(
                         'web_static/static/', filepath)
                     pic.save(save_filepath)
@@ -174,11 +178,15 @@ def update_recruiter_profile():
                     save_filepath = os.path.join(
                         'web_static/static/', filepath)
                     # print("new file path = {}".format(filepath))
-                    # print('old profile pic path = {}'.format(old_profile_pic))
+                    # print('old profile pic path = {}'.format(
+                    #     old_profile_pic))
                     profile_pic.save(save_filepath)
                     if os.path.exists(save_filepath):
-                        # print('rem profile pic path = {}'.format(rem_profile_pic))
-                        if old_profile_pic and os.path.exists(rem_profile_pic) and save_filepath != rem_profile_pic:
+                        # print('rem profile pic path = {}'.format(
+                        #     rem_profile_pic))
+                        if old_profile_pic and os.path.exists(
+                            rem_profile_pic) and save_filepath !=\
+                                rem_profile_pic:
                             os.remove(rem_profile_pic)
                         if os.path.exists(rem_profile_pic):
                             pass
@@ -188,13 +196,15 @@ def update_recruiter_profile():
                             current_user.profile_pic = filepath
                 except Exception as e:
                     flash('unexpected error')
-                    return redirect(url_for('views.update_recruiter_profile'))
+                    return redirect(url_for('views.update_recruiter_profile',
+                                            user=user))
             storage.save()
             print('POST HTTPS request called')
         except Exception as e:
             flash('unexpected error')
         # Redirect to profile page after update
-        return redirect(url_for('views.update_recruiter_profile'))
+        return redirect(url_for('views.update_recruiter_profile',
+                                user=user))
     elif request.method == 'GET':
         # Fetch the current user's profile data from the database
         # Assuming current_user is from Flask-Login
@@ -214,7 +224,6 @@ def update_recruiter_profile():
 
     return render_template('recruiterProfile.html',
                            user=user,
-                           name=user.username,
                            form=form,
                            jobs=jobs)
 
@@ -244,36 +253,28 @@ def jobseeker_signup():
                 zip_code=form.zip_code.data,
                 about=form.about.data
             )
-
+            # print('now we process the profile pic')
             # process the profile pic
-            # if form.profile_pic.data:
-            #     try:
-            #         profile_pic = form.profile_pic.data
-            #         filename = secure_filename(profile_pic.filename)
-            #         filepath = os.path.join(
-            #             app.config['PROFILES_FOLDER'], filename)
-            #         save_filepath = os.path.join(
-            #             'web_static/static/', filepath)
-            #         profile_pic.save(save_filepath)
-            #         if os.path.exists(save_filepath):
-            #             profile_pic = filepath
-            #     except Exception as e:
-            #         flash('Unexpected error occured')
-            #         return redirect(url_for('views.recruiter_signup'))
             if form.profile_pic.data:
                 try:
                     # Retrieve the uploaded file object from form field
+                    # print("data in profile pic")
                     pic = form.profile_pic.data
                     # Ensure the filename is secure
-                    filename = secure_filename(pic.filename)
+                    filename = user.id + '_' + \
+                        secure_filename(pic.filename)
                     filepath = os.path.join(
                         app.config['PROFILES_FOLDER'], filename)
                     # save the uploaded picture to the server's file system
                     save_filepath = os.path.join(
                         'web_static/static/', filepath)
+                    # print("new file path = {}".format(filepath))
+                    # print("save file path = {}".format(save_filepath))
                     pic.save(save_filepath)
                     if os.path.exists(save_filepath):
                         user.profile_pic = filepath
+                        # print("user profile pic saved as: {}".format(
+                        #     user.profile_pic))
                 except Exception as e:
                     flash('Unexpected error has occured')
                     return redirect(url_for('views.jobseeker_signup'))
@@ -298,6 +299,8 @@ def jobseeker_signup():
                     return redirect(url_for('views.jobseeker_signup'))
             # user.set_password(form.password.data)
             if user is not None:
+                print('user profile_pic saved in: {}'.format(
+                    user.profile_pic))
                 user.save()
             else:
                 return redirect(url_for('views.jobseeker_signup'))
@@ -349,7 +352,7 @@ def update_jobseeker_profile():
             # process the profile picture
             if form.profile_pic.data:
                 try:
-                    print("data in profile pic")
+                    # print("data in profile pic")
                     old_profile_pic = current_user.profile_pic if\
                         current_user.profile_pic else 'none'
                     rem_profile_pic = 'web_static/static/' + old_profile_pic
@@ -365,7 +368,9 @@ def update_jobseeker_profile():
                     profile_pic.save(save_filepath)
                     if os.path.exists(save_filepath):
                         # print('rem profile pic path = {}'.format(rem_profile_pic))
-                        if old_profile_pic and os.path.exists(rem_profile_pic) and save_filepath != rem_profile_pic:
+                        if old_profile_pic and os.path.exists(
+                            rem_profile_pic) and save_filepath !=\
+                                rem_profile_pic:
                             os.remove(rem_profile_pic)
                         if os.path.exists(rem_profile_pic):
                             pass
@@ -375,7 +380,8 @@ def update_jobseeker_profile():
                             current_user.profile_pic = filepath
                 except Exception as e:
                     flash('unexpected error')
-                    return redirect(url_for('views.update_jobseeker_profile'))
+                    return redirect(url_for('views.update_jobseeker_profile',
+                                            user=user))
 
             # process the resume
             if form.resume.data:
@@ -399,10 +405,13 @@ def update_jobseeker_profile():
                     else:
                         resume.save(rem_old_resume)
                         flash('unexpected error')
-                        return redirect(url_for('views.update_jobseeker_profile'))
+                        return redirect(url_for(
+                            'views.update_jobseeker_profile',
+                            user=user))
                 except Exception as e:
                     flash('unexpected error')
-                    return redirect(url_for('views.update_jobseeker_profile'))
+                    return redirect(url_for('views.update_jobseeker_profile',
+                                            user=user))
 
             # save the new information in database
             storage.save()
@@ -410,7 +419,8 @@ def update_jobseeker_profile():
         except Exception as e:
             flash('unexpected error')
         # Redirect to profile page after update
-        return redirect(url_for('views.update_jobseeker_profile'))
+        return redirect(url_for('views.update_jobseeker_profile',
+                                user=user))
     elif request.method == 'GET':
         # Fetch the current user's profile data from the database
         # Assuming current_user is from Flask-Login
@@ -431,7 +441,6 @@ def update_jobseeker_profile():
         form.about.data = current_user.about
 
     return render_template('jobseekerProfile.html',
-                           name=user.username,
                            user=user,
                            job_history=job_history,
                            form=form)
@@ -595,7 +604,8 @@ def jobHistory():
             )
             if history is not None:
                 history.save()
-                return redirect(url_for('views.update_jobseeker_profile'))
+                return redirect(url_for('views.update_jobseeker_profile',
+                                        user=user))
             else:
                 return redirect(url_for('views.jobHistory'))
 
