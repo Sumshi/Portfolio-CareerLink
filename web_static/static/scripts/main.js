@@ -109,6 +109,7 @@ function mainJSFunction(jobs) {
                 let details = document.createElement("div");
                 details.innerHTML = job.role;
                 details.classList.add("details");
+                console.log('Added job.role')
 
                 let detailsBtn = document.createElement("a");
                 detailsBtn.href = `/job/${job.id}`;
