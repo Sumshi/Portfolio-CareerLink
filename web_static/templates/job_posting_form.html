@@ -145,15 +145,6 @@
         </div>
         <br />
 
-        <div class="company">
-          <p>{{ form.company.label }}</p>
-          {{ form.company() }} <br />
-          {% for error in form.company.errors %}
-          <span style="color: red">[{{ error }}]</span>
-          {% endfor %}
-        </div>
-        <br />
-
         <div class="contact">
           <p>{{ form.contact.label }}</p>
           {{ form.contact() }} <br />

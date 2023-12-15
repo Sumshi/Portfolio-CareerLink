@@ -52,8 +52,16 @@
           </svg>
           <ul>
             <li><a href="{{ url_for('views.home') }}">HOME</a></li>
-            <li><a href="{{ url_for('views.about') }}">ABOUT</a></li>
-            <li><a href="{{ url_for('views.joblists') }}">JOBS</a></li>
+            {% if is_recruiter %}
+            <li>
+              <a href="{{ url_for('views.recruiterDashboard') }}">DASHBOARD</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{{ url_for('views.userDashboard') }}">DASHBOARD</a>
+            </li>
+            {% endif %}
+            <li><a href="{{ url_for('views.my_posted_jobs') }}">JOBS</a></li>
             <li><a href="{{ url_for('views.contact') }}">CONTACT</a></li>
             <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>

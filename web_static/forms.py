@@ -239,7 +239,7 @@ class PostJob(FlaskForm):
     description = TextAreaField(
         "Job Description",
         render_kw={"rows": 6, "cols": 35},
-        validators=[DataRequired(), Length(max=1000)]
+        validators=[DataRequired(), Length(max=6000)]
     )
     type = SelectField('Job Type', choices=[
                        'Full Time', 'Part Time', 'Contract', 'Remote Work'])
@@ -248,7 +248,6 @@ class PostJob(FlaskForm):
         render_kw={"rows": 4, "cols": 35},
         validators=[DataRequired(), Length(max=500)]
     )
-    company = StringField('Company Name', validators=[DataRequired()])
     contact = StringField('Contact Info', validators=[DataRequired()])
     deadline = DateField('Application Deadline', validators=[DataRequired()])
     country = StringField('Country', validators=[DataRequired()])
@@ -260,16 +259,6 @@ class PostJob(FlaskForm):
         'Skills Needed', default="No skillls needed", validators=[DataRequired()])
     submit = SubmitField('Post Job')
 
-    def validate_company(self, company):
-        """ Validate the company name and ensure company is not another's """
-        print("Company name validation method called!!")
-        if company.data != current_user.company:
-            user = storage.get_by_attribute("comapny", company.data)
-            if user is not None:
-                raise ValidationError(
-                    'Company name "{}" is invalid'.format(
-                        company.data)
-                )
 
 # A class to implement job history posting
 
