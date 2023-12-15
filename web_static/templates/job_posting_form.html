@@ -41,7 +41,7 @@
       href="{{ url_for('static', filename='styles/swiper-bundle.min.css') }}"
     />
     <style>
-      #btn{
+      #btn {
         width: 200px;
         height: 40px;
       }
@@ -74,8 +74,14 @@
           </svg>
           <ul>
             <li><a href="{{ url_for('views.home') }}">HOME</a></li>
-             <li><a href="{{ url_for('views.update_recruiter_profile') }}">PROFILE</a></li>
-            <li><a href="{{ url_for('views.recruiterDashboard') }}">DASHBOARD</a></li>
+            <li>
+              <a href="{{ url_for('views.update_recruiter_profile') }}"
+                >PROFILE</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('views.recruiterDashboard') }}">DASHBOARD</a>
+            </li>
             <a href="{{ url_for('views.logout') }}" class="hero-job">Log Out</a>
           </ul>
         </div>
@@ -98,7 +104,6 @@
       </nav>
     </div>
 
-<body>
     <div class="form-container">
       <h2>Job Posting Form</h2>
       <form
@@ -119,9 +124,27 @@
         <br />
 
         <div class="description">
-          <p>{{ form.description.label }}</p>
-          {{ form.description() }} <br />
-          {% for error in form.description.errors %}
+          <p>{{ form.role.label }}</p>
+          {{ form.role() }} <br />
+          {% for error in form.role.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="description">
+          <p>{{ form.responsibility.label }}</p>
+          {{ form.responsibility() }} <br />
+          {% for error in form.responsibility.errors %}
+          <span style="color: red">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+        <br />
+
+        <div class="skills_required">
+          <p>{{ form.skills_required.label }}</p>
+          {{ form.skills_required() }}<br />
+          {% for error in form.skills_required.errors %}
           <span style="color: red">[{{ error }}]</span>
           {% endfor %}
         </div>
@@ -198,20 +221,12 @@
           {% endfor %}
         </div>
         <br />
-
-        <p>Enter comma separated list of not more than ten skills</p>
-        <div class="skills_required">
-          <p>{{ form.skills_required.label }}</p>
-          {{ form.skills_required() }}<br />
-          {% for error in form.skills_required.errors %}
-          <span style="color: red">[{{ error }}]</span>
-          {% endfor %}
-        </div>
-        <br />
-        <button type="submit" class="sign-btn" id="btn">Submit Job Posting</button>
+        <button type="submit" class="sign-btn" id="btn">
+          Submit Job Posting
+        </button>
       </form>
     </div>
-      <footer class="footer">
+    <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="footer-col">
@@ -261,5 +276,4 @@
       }
     </script>
   </body>
-
 </html>

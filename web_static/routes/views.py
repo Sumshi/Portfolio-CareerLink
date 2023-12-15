@@ -638,7 +638,8 @@ def jobPosting():
         job = Jobs(
             recruiters_id=user.id,
             title=form.title.data,
-            description=form.description.data,
+            role=form.role.data,
+            responsibility=form.responsibility.data,
             type=form.type.data,
             application=form.application.data,
             contact=form.contact.data,

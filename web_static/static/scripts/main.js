@@ -107,7 +107,7 @@ function mainJSFunction(jobs) {
                 title.classList.add("job-title");
 
                 let details = document.createElement("div");
-                details.innerHTML = job.description;
+                details.innerHTML = job.role;
                 details.classList.add("details");
 
                 let detailsBtn = document.createElement("a");
