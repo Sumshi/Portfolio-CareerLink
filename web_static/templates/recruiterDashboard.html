@@ -120,7 +120,9 @@
                   <img src="" alt="" />
                 </div>
                 <div class="text">
-                  <h2>{{ job.title }}</h2>
+                  <a href="{{ url_for('views.job_details', id=job['id']) }}"
+                    ><h2>{{ job.title }}</h2></a
+                  >
                   <span>{{ job.company }}</span>
                 </div>
               </div>
