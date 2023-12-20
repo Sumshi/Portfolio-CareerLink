@@ -478,32 +478,6 @@ def contact():
     return render_template('contact.html', is_recruiter=is_recruiter)
 
 
-# @app.route('/jobseekerProfile', methods=['GET'])
-# @login_required
-# def jobseekerProfile():
-#     """ Display the current logged in User progile """
-#     user = storage.get_by_id(current_user.id)
-#     job_history = user.prev_jobs
-#     return render_template('jobseekerProfile.html',
-#                            name=user.username,
-#                            user=user,
-#                            job_history=job_history
-#                            )
-
-
-# @app.route('/recruiterProfile', methods=['GET'])
-# @login_required
-# def recruiterProfile():
-#     """ Display the current logged in User profile """
-#     user = storage.get_by_id(current_user.id)
-#     jobs = user.job_listings
-#     return render_template('recruiterProfile.html',
-#                            name=user.username,
-#                            user=user,
-#                            jobs=jobs
-#                            )
-
-
 @bp.route('/jobseeker/dashboard', methods=['GET'])
 @login_required
 def userDashboard():
