@@ -127,7 +127,9 @@
                   <img src="" alt="" /> -->
                 </div>
                 <div class="text">
-                  <h2>{{ job.title }}</h2>
+                  <a href="{{ url_for('views.job_details', id=job['id']) }}"
+                    ><h2>{{ job.title }}</h2></a
+                  >
                   <span>{{ job.company }}</span>
                 </div>
               </div>
@@ -135,7 +137,6 @@
                 <h4>{{ job.salary }}Ksh/yr</h4>
                 <span>posted: {{ job.date_posted }}</span>
               </div>
-              <a href="{{ url_for('views.job_details', id=job['id']) }}"></a>
             </div>
             {% endfor %} {% endif %}
 
