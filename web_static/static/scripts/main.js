@@ -107,9 +107,15 @@ function mainJSFunction(jobs) {
                 title.classList.add("job-title");
 
                 let details = document.createElement("div");
-                details.innerHTML = job.role;
-                details.classList.add("details");
-                console.log('Added job.role')
+                if (job.role) {
+                    details.innerHTML = job.role;
+                    details.classList.add("details");
+                    console.log("Added job.role")
+                } else {
+                    details.innerHTML = "Role information not available";
+                    details.classList.add("details");
+                    console.log('No role information available')
+                }
 
                 let detailsBtn = document.createElement("a");
                 detailsBtn.href = `/job/${job.id}`;
